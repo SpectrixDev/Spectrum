@@ -28,7 +28,7 @@ except ImportError:
 
     import apiai
 
-# And now for some useless code that's awfull
+# And now for some useless code that's awful
 
 bot = commands.Bot(command_prefix="$")
 bot.remove_command("help")
