@@ -15,8 +15,8 @@ class WhoPlays:
             return
 
         user = ctx.message.author
-        members = server.members
         server = ctx.message.server
+        members = server.members
         playing_game = ""
         count_playing = 0
 
