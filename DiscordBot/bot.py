@@ -125,7 +125,8 @@ async def ping():
     pingEmbed.add_field(name="Speed comment:", value=speedComment, inline=True)
     pingEmbed.add_field(name=">> Average speed: <<", value=">> {0}ms <<".format(speedAverage), inline=False)
     pingEmbed.set_footer(text="Estimated total time elapsed: {0}ms".format(speed1+speed2+speed3))
-    await bot.edit_message(ping1, embed=pingEmbed)
+    await bot.delete_message(ping1)
+    await bot.say(embed=pingEmbed)
 
 @bot.command(pass_context=True)
 async def ship(ctx, name1 : discord.User, name2 : discord.User):
