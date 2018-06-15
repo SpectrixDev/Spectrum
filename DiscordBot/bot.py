@@ -111,7 +111,7 @@ async def ping():
         speedComment = "Very poor"
     elif 55 < speedAverage < 89:
         speedComment = "Great!"
-    elif speedComment < 55:
+    elif speedAverage < 55:
         speedComment = "Very fast!"
     else:
         speedComment = "Idk lol"
