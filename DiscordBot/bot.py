@@ -15,14 +15,21 @@ import urllib.request
 from urllib.request import urlopen,Request
 from   os.path import splitext
 from   discord.ext import commands
+
 try:
+
     import apiai
+
 except ImportError:
+
     sys.path.append(
+
         os.path.join(
+
             os.path.dirname(os.path.realpath(__file__)),
             os.pardir,
             os.pardir
+
         )
     )
 
@@ -41,49 +48,59 @@ presenceGame = ":)"
 typeGame = "3"
 CLIENT_ACCESS_TOKEN = 'no_stop_looking'
 ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
+dbltoken = "no"
+
+startup_extensions = ['cogs.ownerCommands',
+                      'cogs.getInfo',
+                      'cogs.whosPlaying',
+                      'cogs.subredditFetcher',
+                      'cogs.spectrumPhone',
+                      'cogs.bigEmote']
 
 
 @bot.event
 async def on_ready():
+
+    # Startup
+
     print("=========\nConnected\n=========\n")
     print("Current servers: {}".format(len(bot.servers)))
     print("Time on start: {}".format(datetime.datetime.now()))
-    dbltoken = "no"
+
+    # DBL Publishing
     url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
-    headers = {"Authorization" : dbltoken}
-    await bot.change_presence(game=discord.Game(name=("$help on {0} servers!".format(len(bot.servers))), url=("https://go.twitch.tv/gdspectrix"), type=random.randint(0,3)))
-    payload = {"server_count"  : len(bot.servers)}
     async with aiohttp.ClientSession() as aioclient:
-            await aioclient.post(url, data=payload, headers=headers)
-    bot.load_extension("cogs.ownerCommands")
-    bot.load_extension("cogs.getInfo")
-    bot.load_extension("cogs.whosPlaying")
-    bot.load_extension("cogs.subredditFetcher")
-    bot.load_extension("cogs.SpectrumPhone")
-    bot.load_extension("cogs.bigEmote")
+        await aioclient.post(url, data={ "server_count": len(bot.servers) }, headers={"Authorization": dbltoken})
+        await bot.change_presence(game=discord.Game(name=("$help on {0} servers!".format(len(bot.servers))),
+                                                        url="https://go.twitch.tv/gdspectrix",
+                                                        type=random.randint(0, 3)))
+
     print("\nAll cogs loaded. Ready to use.\n")
+
 
 def is_owner(ctx):
         if ctx.message.author.id == "276707898091110400":
             return True
         return False
 
+
 async def on_server_join(server):
-    await bot.change_presence(game=discord.Game(name=("{0} | {1} servers!".format(presenceGame, len(bot.servers))), url=("https://go.twitch.tv/gdspectrix"), type=typeGame))
-    payload = {"server_count"  : len(bot.servers)}
     url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
-    headers = {"Authorization" : dbltoken}
     async with aiohttp.ClientSession() as aioclient:
-            await aioclient.post(url, data=payload, headers=headers)
-            await bot.change_presence(game=discord.Game(name=("$help on {0} servers!".format(len(bot.servers))), url=("https://go.twitch.tv/gdspectrix"), type=random.randint(0,3)))
+        await aioclient.post(url, data={"server_count": len(bot.servers)}, headers={"Authorization": dbltoken})
+        await bot.change_presence(game=discord.Game(name=("$help on {0} servers!".format(len(bot.servers))),
+                                                    url="https://go.twitch.tv/gdspectrix",
+                                                    type=random.randint(0, 3)))
+
 
 async def on_server_remove(server):
     url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
-    headers = {"Authorization" : dbltoken}
-    await bot.change_presence(game=discord.Game(name=("{0} | {1} servers!".format(presenceGame, len(bot.servers))), url=("https://go.twitch.tv/gdspectrix"), type=typeGame))
-    payload = {"server_count"  : len(bot.servers)}
     async with aiohttp.ClientSession() as aioclient:
-            await aioclient.post(url, data=payload, headers=headers)
+        await aioclient.post(url, data={"server_count": len(bot.servers)}, headers={"Authorization": dbltoken})
+        await bot.change_presence(game=discord.Game(name=("$help on {0} servers!".format(len(bot.servers))),
+                                                    url="https://go.twitch.tv/gdspectrix",
+                                                    type=random.randint(0, 3)))
+
 
 @bot.command(pass_context=True)
 async def ping():
@@ -127,6 +144,7 @@ async def ping():
     pingEmbed.set_footer(text="Estimated total time elapsed: {0}ms".format(speed1+speed2+speed3))
     await bot.delete_message(ping1)
     await bot.say(embed=pingEmbed)
+
 
 @bot.command(pass_context=True)
 async def ship(ctx, name1 : discord.User, name2 : discord.User):
@@ -205,6 +223,7 @@ async def ship(ctx, name1 : discord.User, name2 : discord.User):
         except TypeError:
             bot.say("oops idk what just happened lol")
 
+
 @bot.command(name="8ball", pass_context=True)
 async def _ball(ctx, *, _ballInput):
     """Ask the magic 8 ball any question!"""
@@ -232,6 +251,7 @@ async def _ball(ctx, *, _ballInput):
     except Exception as e:
         bot.say(errorMessage)
 
+
 @bot.command(name="database", pass_context=True)
 async def database(ctx, databaseType):
     """Current databases:\nroast"""
@@ -247,6 +267,7 @@ async def roast(ctx):
     roast = random.choice(open("RoastList.txt").readlines())
     await bot.say(roast)
 
+
 @bot.command(name="poll", pass_context=True)
 async def poll(ctx, *, pollInfo):
     """Creates a simple poll within the server"""
@@ -261,6 +282,7 @@ async def poll(ctx, *, pollInfo):
     await bot.add_reaction(pollMessage, "\N{THUMBS UP SIGN}")
     await bot.add_reaction(pollMessage, "\N{THUMBS DOWN SIGN}")
 
+
 @bot.command(name="presence", pass_context=True)
 async def presence(ctx, typeGame: int, presenceGame):
     """Changes the bot's presence"""
@@ -269,6 +291,7 @@ async def presence(ctx, typeGame: int, presenceGame):
         await bot.say("Done!")
     else:
         await bot.say("No. (Only Spectrix can do that)")
+
 
 @commands.has_permissions(manage_messages=True)
 @bot.command(name="clear", pass_context=True)
@@ -285,25 +308,30 @@ async def clear(ctx, number):
         except discord.Forbidden:
             await bot.say("```I seem to have missing permissions. I need the manage_message permission to preform this action.```")
 
+
 @bot.command(name="invite", pass_context=True)
 async def invite(ctx):
     await bot.send_message(ctx.message.author, "**https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
     await bot.say("**I sent you the invite link in your DMs :mailbox_with_mail:**")
+
 
 @bot.command(name="support", pass_context=True)
 async def support(ctx):
     await bot.send_message(ctx.message.author, "**https://discord.gg/ecXdjTD/**\n*Here's my official server! *")
     await bot.say("**I sent you the server invite in your DMs :mailbox_with_mail:**")
 
+
 @bot.command(name="server", pass_context=True)
 async def server(ctx):
     await bot.send_message(ctx.message.author, "**https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
     await bot.say("**I sent you the server invite in your DMs :mailbox_with_mail:**")
 
+
 @bot.command(name="help", pass_context=True)
 async def help(ctx):
     await bot.send_message(ctx.message.author, "**https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
     await bot.say("**I sent you help in your DMs :mailbox_with_mail:**")
+
 
 @bot.command(name="changelog", pass_context=True)
 async def whatsnew(ctx):
@@ -315,6 +343,7 @@ async def whatsnew(ctx):
     Removed stupid commands as well\n\n
     Also, rewritten the whole chatbot. It needs to learn a bit, so be patient :)\n
     And now I'm actually gonna work on the bot!```""")
+
 
 @bot.listen()
 async def on_message(message):
@@ -341,4 +370,10 @@ async def on_message(message):
         except KeyError:
             await bot.send_message(message.channel, "`Error: 'KeyError', make sure you gave not too little input and not too much ;)`")
 
-bot.run(token_here_stop_looking)
+
+if __name__ == '__main__':
+
+    for extension in startup_extensions:
+        bot.load_extension(extension)
+
+    bot.run('token')
