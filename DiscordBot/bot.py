@@ -75,7 +75,7 @@ async def on_ready():
                                                         url="https://go.twitch.tv/gdspectrix",
                                                         type=random.randint(0, 3)))
 
-    print("\nAll cogs loaded. Ready to use.\n")
+    print("\nStartup successful. Ready for use!\n")
 
 
 def is_owner(ctx):
@@ -101,6 +101,11 @@ async def on_server_remove(server):
                                                     url="https://go.twitch.tv/gdspectrix",
                                                     type=random.randint(0, 3)))
 
+async def on_command_error(discord.ext.commands.CommandNotFound, ctx):
+    if ctx.message.content == "iq"or"insult"or"gay-scanner"or"dog"or"cat"or"spectrumchallenge":
+        await bot.send_message(ctx.message.channel, "That command has been removed. Do $help to see the current commands ;)")
+    else:
+        pass
 
 @bot.command(pass_context=True)
 async def ping():
@@ -356,6 +361,7 @@ async def on_message(message):
                 user_message = message.content.replace(message.server.me.mention,'') if message.server else message.content
 
                 request = ai.text_request()
+                # will hopefully update to dialogflowV2 soon, not api.ai
                 request.query = user_message
 
                 response = json.loads(request.getresponse().read())
@@ -363,8 +369,13 @@ async def on_message(message):
                 result = response['result']
                 action = result.get('action')
                 actionIncomplete = result.get('actionIncomplete', False)
+                
+                if action == "user.requests.help":
+                    await bot.send_message(message.author, "**https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
+                    await bot.send_message(message.channel, "**I sent you help in your DMs :mailbox_with_mail:**")
+                else:
+                    await bot.send_message(message.channel, f"{message.author.mention} {response['result']['fulfillment']['speech']}")
 
-                await bot.send_message(message.channel, f"{message.author.mention} {response['result']['fulfillment']['speech']}")
                 print ("Chatted with a user on the server: {0}. Time: {1}".format((message.server.name), datetime.datetime.now().time()))
 
         except KeyError:
