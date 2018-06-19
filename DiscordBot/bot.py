@@ -40,10 +40,7 @@ except ImportError:
 bot = commands.Bot(command_prefix="$")
 bot.remove_command("help")
 commandUsage = "[None found owo]"
-errorMessage = ("```Error: Something went wrong\nCommand usage: {}```".format(commandUsage))
 roast_database = "241"
-amazon_database = "27"
-showerthought_database = "36"
 presenceGame = ":)"
 typeGame = "3"
 CLIENT_ACCESS_TOKEN = 'no_stop_looking'
