@@ -97,12 +97,6 @@ async def on_server_remove(server):
                                                     url="https://go.twitch.tv/gdspectrix",
                                                     type=random.randint(0, 3)))
 
-async def on_command_error(discord.ext.commands.CommandNotFound, ctx):
-    if ctx.message.content == "iq"or"insult"or"gay-scanner"or"dog"or"cat"or"spectrumchallenge":
-        await bot.send_message(ctx.message.channel, "That command has been removed. Do $help to see the current commands ;)")
-    else:
-        pass
-
 @bot.command(pass_context=True)
 async def ping():
     t1 = time.perf_counter()
