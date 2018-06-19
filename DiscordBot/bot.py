@@ -50,7 +50,7 @@ startup_extensions = ['cogs.ownerCommands',
                       'cogs.getInfo',
                       'cogs.whosPlaying',
                       'cogs.subredditFetcher',
-                      'cogs.spectrumPhone',
+                      'cogs.SpectrumPhone',
                       'cogs.bigEmote']
 
 
