@@ -39,7 +39,6 @@ except ImportError:
 
 bot = commands.Bot(command_prefix="$")
 bot.remove_command("help")
-commandUsage = "[None found owo]"
 roast_database = "241"
 presenceGame = ":)"
 typeGame = "3"
