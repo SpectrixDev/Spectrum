@@ -4,7 +4,7 @@
 
 <p align=center>
 <img src=https://img.shields.io/badge/discord-py-blue.svg>
-<img src=https://img.shields.io/badge/python-3.5-orange.svg>
+<img src=https://img.shields.io/badge/python-3.6-orange.svg>
 <img src=https://img.shields.io/badge/discord-bot-red.svg>
 </p>
 
