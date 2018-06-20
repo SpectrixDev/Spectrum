@@ -5,6 +5,7 @@
 <p align=center>
 <img src=https://img.shields.io/badge/discord-py-blue.svg>
 <img src=https://img.shields.io/badge/python-3.5-orange.svg>
+<img src=https://img.shields.io/badge/discord-bot-red.svg>
 </p>
 
 <a href="https://spectrix.pythonanywhere.com/spectrum">Website</a><br>
