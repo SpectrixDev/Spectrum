@@ -1,6 +1,7 @@
 import discord
 import asyncio
 import time
+from time import ctime
 import datetime
 import random
 import requests
@@ -35,16 +36,22 @@ except ImportError:
 
     import apiai
 
+# Tokens (changed for GitHub)
+bot_run_token = "not"
+CLIENT_ACCESS_TOKEN = 'for'
+dbltoken = "you"
+
 # And now for some useless code that's awful
 
 bot = commands.Bot(command_prefix="$")
 bot.remove_command("help")
+commandUsage = "[None found owo]"
 roast_database = "241"
+amazon_database = "27"
+showerthought_database = "36"
 presenceGame = ":)"
 typeGame = "3"
-CLIENT_ACCESS_TOKEN = 'no_stop_looking'
 ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
-dbltoken = "no"
 
 startup_extensions = ['cogs.ownerCommands',
                       'cogs.getInfo',
@@ -53,16 +60,12 @@ startup_extensions = ['cogs.ownerCommands',
                       'cogs.SpectrumPhone',
                       'cogs.bigEmote']
 
-
 @bot.event
 async def on_ready():
-
     # Startup
-
     print("=========\nConnected\n=========\n")
     print("Current servers: {}".format(len(bot.servers)))
     print("Time on start: {}".format(datetime.datetime.now()))
-
     # DBL Publishing
     url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
     async with aiohttp.ClientSession() as aioclient:
@@ -70,7 +73,6 @@ async def on_ready():
         await bot.change_presence(game=discord.Game(name=("$help on {0} servers!".format(len(bot.servers))),
                                                         url="https://go.twitch.tv/gdspectrix",
                                                         type=random.randint(0, 3)))
-
     print("\nStartup successful. Ready for use!\n")
 
 
@@ -79,7 +81,7 @@ def is_owner(ctx):
             return True
         return False
 
-
+@bot.event
 async def on_server_join(server):
     url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
     async with aiohttp.ClientSession() as aioclient:
@@ -88,7 +90,7 @@ async def on_server_join(server):
                                                     url="https://go.twitch.tv/gdspectrix",
                                                     type=random.randint(0, 3)))
 
-
+@bot.event
 async def on_server_remove(server):
     url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
     async with aiohttp.ClientSession() as aioclient:
@@ -96,6 +98,16 @@ async def on_server_remove(server):
         await bot.change_presence(game=discord.Game(name=("$help on {0} servers!".format(len(bot.servers))),
                                                     url="https://go.twitch.tv/gdspectrix",
                                                     type=random.randint(0, 3)))
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        pass
+    elif isinstance(error, commands.NoPrivateMessage):
+        try:
+            return await ctx.author.send(f'{ctx.command} can not be used in Private Messages.')
+        except:
+            pass
 
 @bot.command(pass_context=True)
 async def ping():
@@ -115,15 +127,15 @@ async def ping():
     speed = t2 - t1
     speed3 = round(speed * 1000)
     speedAverage = round((speed1+speed2+speed3)/3)
-    if 89 < speedAverage < 125:
+    if 89 < speedAverage <= 125:
         speedComment = "Good"
-    elif 125 < speedAverage < 175:
+    elif 125 < speedAverage <= 175:
         speedComment = "Poor"
     elif speedAverage > 175:
         speedComment = "Very poor"
-    elif 55 < speedAverage < 89:
+    elif 55 < speedAverage <= 89:
         speedComment = "Great!"
-    elif speedAverage < 55:
+    elif speedAverage <= 55:
         speedComment = "Very fast!"
     else:
         speedComment = "Idk lol"
@@ -145,60 +157,57 @@ async def ping():
 async def ship(ctx, name1 : discord.User, name2 : discord.User):
     """Test your love for another user/thing! Example: $ship [Spectrum] [Chocolate]"""
     shipnumber = random.randint(0,100)
-    if shipnumber == "101":
-        print("what")
-    else:
-        try:
-            if int("0") < shipnumber < int("10"):
-                    status = "Really low! {}".format(random.choice(["Friendzone ;(",
-                                                                   'Just "friends"',
-                                                                   '"Friends"',
-                                                                    "Little to no love ;(",
-                                                                    "There's barely any love ;("]))
-            elif 10 < shipnumber < 20:
-                status = "Low! {}".format(random.choice(["Still in the friendzone",
+    try:
+        if int("0") < shipnumber < int("10"):
+                status = "Really low! {}".format(random.choice(["Friendzone ;(",
+                                                                'Just "friends"',
+                                                                '"Friends"',
+                                                                 "Little to no love ;(",
+                                                                 "There's barely any love ;("]))
+        elif 10 < shipnumber < 20:
+            status = "Low! {}".format(random.choice(["Still in the friendzone",
                                                         "Still in that friendzone ;(",
                                                         "There's not a lot of love there... ;("]))
-            elif 20 < shipnumber < 30:
-                status = "Poor! {}".format(random.choice(["But there's a small sense of romance from one person!",
+        elif 20 < shipnumber < 30:
+            status = "Poor! {}".format(random.choice(["But there's a small sense of romance from one person!",
                                                         "But there's a small bit of love somewhere",
                                                         "I sense a small bit of love!",
                                                         "But someone has a bit of love for someone..."]))
-            elif 30 < shipnumber < 40:
-                status = "Fair! {}".format(random.choice(["There's a bit of love there!",
+        elif 30 < shipnumber < 40:
+            status = "Fair! {}".format(random.choice(["There's a bit of love there!",
                                             "There is a bit of love there...",
                                             "A small bit of love is in the air..."]))
-            elif 40 < shipnumber < 60:
-                status = "Moderate! {}".format(random.choice(["But it's very one-sided OwO",
+        elif 40 < shipnumber < 60:
+            status = "Moderate! {}".format(random.choice(["But it's very one-sided OwO",
                                                              "It appears one sided!",
                                                             "There's some potential!",
                                                              "I sense a bit of potential!",
                                                             "There's a bit of romance going on here!",
                                                             "I feel like there's some romance progressing!",
                                                             "The love is getting there..."]))
-            elif 60 < shipnumber < 70:
-                status = "Good! {}".format(random.choice(["I feel the romance progressing!",
+        elif 60 < shipnumber < 70:
+            status = "Good! {}".format(random.choice(["I feel the romance progressing!",
                                                         "There's some love in the air!",
                                                         "I'm starting to feel some love!"]))
-            elif 70 < shipnumber < 80:
-                status = "Great! {}".format(random.choice(["There is definitely love somewhere!",
+        elif 70 < shipnumber < 80:
+            status = "Great! {}".format(random.choice(["There is definitely love somewhere!",
                                                         "I can see the love is there! Somewhere...",
                                                         "I definitely can see that love is in the air"]))
-            elif 80 < shipnumber < 90:
-                status = "Over average! {}".format(random.choice(["Love is in the air!",
+        elif 80 < shipnumber < 90:
+            status = "Over average! {}".format(random.choice(["Love is in the air!",
                                                                 "I can definitely feel the love",
                                                                 "I feel the love! There's a sign of a match!",
                                                                 "There's a sign of a match!",
                                                                 "I sense a match!",
                                                                 "A few things can be imporved to make this a match made in heaven!"]))
-            elif 90 < shipnumber < 100:
-                status = "True love! {}".format(random.choice(["It's a match!",
+        elif 90 < shipnumber < 100:
+            status = "True love! {}".format(random.choice(["It's a match!",
                                                             "There's a match made in heaven!",
                                                             "It's definitely a match!",
                                                             "Love is truely in the air!",
                                                             "Love is most definitely in the air!"]))
 
-            emb = (discord.Embed(title="Love test for:", description="**{0}** and **{1}** {2}".format(name1.name, name2.name, random.choice([":sparkling_heart:",
+        emb = (discord.Embed(title="Love test for:", description="**{0}** and **{1}** {2}".format(name1.name, name2.name, random.choice([":sparkling_heart:",
                                                                                                                                                    ":heart_decoration:",
                                                                                                                                                    ":heart_exclamation:",
                                                                                                                                                    ":heartbeat:",
@@ -210,46 +219,39 @@ async def ship(ctx, name1 : discord.User, name2 : discord.User):
                                                                                                                                                    ":revolving_hearts:",
                                                                                                                                                    ":yellow_heart:",
                                                                                                                                                    ":two_hearts:"]), colour=0x3DF270)))
-            emb.add_field(name="Results:", value="{}%".format(shipnumber), inline=True)
-            emb.add_field(name="Status:", value=(status), inline=False)
-            emb.set_author(name="Shipping", icon_url="http://moziru.com/images/kopel-clipart-heart-6.png")
-            await bot.say(embed=emb)
+        emb.add_field(name="Results:", value="{}%".format(shipnumber), inline=True)
+        emb.add_field(name="Status:", value=(status), inline=False)
+        emb.set_author(name="Shipping", icon_url="http://moziru.com/images/kopel-clipart-heart-6.png")
+        await bot.say(embed=emb)
 
-        except TypeError:
-            bot.say("oops idk what just happened lol")
+    except discord.BadArgument:
+            bot.say("```Error: BadArgument```")
 
 
 @bot.command(name="8ball", pass_context=True)
 async def _ball(ctx, *, _ballInput):
     """Ask the magic 8 ball any question!"""
-    if _ballInput == ""or" ":
-        bot.say(errorMessage)
-        pass
     choiceType = random.choice(["(Affirmative)", "(Non-committal)", "(Negative)"])
-    try:
-        if choiceType == "(Affirmative)":
-            prediction = random.choice(["It is certain :8ball:", "It is decidedly so :8ball:", "Without a doubt :8ball:", "Yes, definitely :8ball:", "You may rely on it :8ball:", "As I see it, yes :8ball:","Most likely :8ball:", "Outlook good :8ball:", "Yes :8ball:", "Signs point to yes :8ball:"])
-            emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0x3be801, description=prediction))
-            emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
-            await bot.say(embed=emb)
-        elif choiceType == "(Non-committal)":
-            prediction = random.choice(["Reply hazy try again :8ball:", "Ask again later :8ball:", "Better not tell you now :8ball:", "Cannot predict now :8ball:", "Concentrate and ask again :8ball:"])
-            emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0xff6600, description=prediction))
-            emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
-            await bot.say(embed=emb)
-        elif choiceType == "(Negative)":
-            prediction = random.choice(["Don't count on it :8ball:", "My reply is no :8ball:", "My sources say no :8ball:", "Outlook not so good :8ball:", "Very doubtful :8ball:"])
-            emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0xE80303, description=prediction))
-            emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
-            await bot.say(embed=emb)
-
-    except Exception as e:
-        bot.say(errorMessage)
+    if choiceType == "(Affirmative)":
+        prediction = random.choice(["It is certain :8ball:", "It is decidedly so :8ball:", "Without a doubt :8ball:", "Yes, definitely :8ball:", "You may rely on it :8ball:", "As I see it, yes :8ball:","Most likely :8ball:", "Outlook good :8ball:", "Yes :8ball:", "Signs point to yes :8ball:"])
+        emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0x3be801, description=prediction))
+        emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
+        await bot.say(embed=emb)
+    elif choiceType == "(Non-committal)":
+        prediction = random.choice(["Reply hazy try again :8ball:", "Ask again later :8ball:", "Better not tell you now :8ball:", "Cannot predict now :8ball:", "Concentrate and ask again :8ball:"])
+        emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0xff6600, description=prediction))
+        emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
+        await bot.say(embed=emb)
+    elif choiceType == "(Negative)":
+        prediction = random.choice(["Don't count on it :8ball:", "My reply is no :8ball:", "My sources say no :8ball:", "Outlook not so good :8ball:", "Very doubtful :8ball:"])
+        emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0xE80303, description=prediction))
+        emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
+        await bot.say(embed=emb)
 
 
 @bot.command(name="database", pass_context=True)
 async def database(ctx, databaseType):
-    """Current databases:\nroast"""
+    """Current databases:\nroast""" # lol that's all
     if databaseType == "roast":
         await bot.say("**My roast database consists of `{0}` roasts**".format(roast_database))
     else:
@@ -279,7 +281,7 @@ async def poll(ctx, *, pollInfo):
 
 
 @bot.command(name="presence", pass_context=True)
-async def presence(ctx, typeGame: int, presenceGame):
+async def presence(ctx, typeGame: int, *, presenceGame):
     """Changes the bot's presence"""
     if ctx.message.author.id == "276707898091110400":
         await bot.change_presence(game=discord.Game(name=("{0} | {1} servers!".format(presenceGame, len(bot.servers))), url=("https://go.twitch.tv/gdspectrix"), type=typeGame))
@@ -359,10 +361,15 @@ async def on_message(message):
                 result = response['result']
                 action = result.get('action')
                 actionIncomplete = result.get('actionIncomplete', False)
-                
+
                 if action == "user.requests.help":
                     await bot.send_message(message.author, "**https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
-                    await bot.send_message(message.channel, "**I sent you help in your DMs :mailbox_with_mail:**")
+                    await bot.send_message(message.channel, f"** {message.author.mention} I sent you help in your DMs :mailbox_with_mail:**")
+                elif action == "name.user.get":
+                    await bot.send_message(message.channel, f"{message.author.mention} Your name is {message.author.name}.")
+                elif action == "bot.time":
+                    await bot.send_message(message.channel, f"{message.author.mention} The time for me is currently {ctime()}")
+
                 else:
                     await bot.send_message(message.channel, f"{message.author.mention} {response['result']['fulfillment']['speech']}")
 
@@ -377,4 +384,4 @@ if __name__ == '__main__':
     for extension in startup_extensions:
         bot.load_extension(extension)
 
-    bot.run('token')
+bot.run(bot_run_token)
