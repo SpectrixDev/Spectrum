@@ -199,8 +199,7 @@ async def presence(ctx, typeGame: int, *, presenceGame):
 @bot.command(name="clear", pass_context=True)
 async def clear(ctx, number):
         try:
-            number = int(number)
-            await bot.purge_from(ctx.message.channel, limit = number)
+            await bot.purge_from(ctx.message.channel, limit = (int(number) + 1))
             await asyncio.sleep(1)
             clearConfirmation = await bot.say("**Cleared `{}` messages from this channel**".format(number))
             await bot.add_reaction(clearConfirmation, "\N{OK HAND SIGN}")
