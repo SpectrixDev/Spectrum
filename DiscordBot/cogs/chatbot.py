@@ -5,7 +5,7 @@ import apiai
 import json
 from discord.ext import commands
 
-CLIENT_ACCESS_TOKEN = '74a84564d7cc44cdb58b210c46f48f28'
+CLIENT_ACCESS_TOKEN = 'no die'
 ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 
 class chatbot:
