@@ -4,46 +4,21 @@ import time
 from time import ctime
 import datetime
 import random
-import requests
 import os
 import sys
 import json
-import subprocess
-import inspect
 import aiohttp
-from collections import deque
-import urllib.request
-from urllib.request import urlopen,Request
-from   os.path import splitext
 from   discord.ext import commands
+import apiai
 
-try:
-
-    import apiai
-
-except ImportError:
-
-    sys.path.append(
-
-        os.path.join(
-
-            os.path.dirname(os.path.realpath(__file__)),
-            os.pardir,
-            os.pardir
-
-        )
-    )
-
-    import apiai
-
-# Tokens (changed for GitHub)
-bot_run_token = "the"
-CLIENT_ACCESS_TOKEN = 'big'
-dbltoken = "nono"
+# Tokens (changed for GitHub obviously, and if I'm stupid and leak any they WILL be regenerated immediatly...)
+bot_run_token = "secret"
+CLIENT_ACCESS_TOKEN = 'secret'
+dbltoken = "secret"
 
 bot = commands.Bot(command_prefix="$")
 bot.remove_command("help")
-roast_database = "241"
+roast_database = "225" # Current count of roasts in the database. Roast list not on GitHub due to people being able to copy my hard work :(
 presenceGame = ":)"
 typeGame = "3"
 ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
@@ -55,11 +30,11 @@ startup_extensions = ['cogs.ownerCommands',
                       'cogs.SpectrumPhone',
                       'cogs.bigEmote',
                       'cogs.fun',
-                      'cogs.chatbot']
+                      'cogs.chatbot',
+                      'cogs.dblUpdater']
 
 @bot.event
 async def on_ready():
-    # Startup
     print("=========\nConnected\n=========\n")
     print("Current servers: {}".format(len(bot.servers)))
     print("Time on start: {}".format(datetime.datetime.now()))
@@ -73,7 +48,7 @@ async def on_ready():
     print("\nStartup successful. Ready for use!\n")
 
 
-def is_owner(ctx):
+def is_owner(ctx): # Check if the command can be used by the bot owner [ Spectrix Pro Tip: We check with @commands.check(is_owner) ]
         if ctx.message.author.id == "276707898091110400":
             return True
         return False
