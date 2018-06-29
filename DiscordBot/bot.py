@@ -37,9 +37,9 @@ except ImportError:
     import apiai
 
 # Tokens (changed for GitHub)
-bot_run_token = "y"
-CLIENT_ACCESS_TOKEN = 'u'
-dbltoken = "lookin?"
+bot_run_token = "the"
+CLIENT_ACCESS_TOKEN = 'big'
+dbltoken = "nono"
 
 bot = commands.Bot(command_prefix="$")
 bot.remove_command("help")
@@ -54,7 +54,8 @@ startup_extensions = ['cogs.ownerCommands',
                       'cogs.subredditFetcher',
                       'cogs.SpectrumPhone',
                       'cogs.bigEmote',
-                      'cogs.fun']
+                      'cogs.fun',
+                      'cogs.chatbot']
 
 @bot.event
 async def on_ready():
@@ -102,11 +103,6 @@ async def on_command_error(ctx, error):
     elif isinstance(error, commands.NoPrivateMessage):
         try:
             return await ctx.author.send(f"```Error: NotPrivateMessage ({ctx.command} can not be used in Private Messages.)```")
-        except:
-            pass
-    elif isinstance(error, commands.BadArgument):
-        try:
-            return await ctx.author.send("```Error: BadArgument```")
         except:
             pass
 
@@ -250,7 +246,7 @@ async def whatsnew(ctx):
 async def on_message(message):
     if not message.author.bot and bot.user in message.mentions:
         try:
-            if message.content.startswith("$"):
+            if message.content.startswith("$" or "!" or "?" or "-" or "*" or "`" or "~" or "+" or "/" or ";" or "="): # a bunch of generic checks to see if we're being messaged something that wasn't meant for us
                 pass
             else:
                 await bot.send_typing(message.channel)
