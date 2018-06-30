@@ -11,9 +11,9 @@ import apiai
 import logging
 
 # Tokens (changed for GitHub obviously, and if I'm stupid and leak any they WILL be regenerated immediatly...)
-bot_run_token = "baths are"
-CLIENT_ACCESS_TOKEN = 'l i t e r a l l y'
-dbltoken = "reverse boats..."
+bot_run_token = "im"
+CLIENT_ACCESS_TOKEN = 'not'
+dbltoken = "funny"
 
 bot = commands.Bot(command_prefix="$")
 bot.remove_command("help")
@@ -47,23 +47,13 @@ def is_owner(ctx): # Check if the command can be used by the bot owner [ Spectri
             return True
         return False
 
-@bot.event
-async def on_command_error(ctx, error):
-    if isinstance(error, commands.CommandNotFound):
-        pass
-    elif isinstance(error, commands.NoPrivateMessage):
-        try:
-            return await ctx.author.send(f"```Error: NotPrivateMessage ({ctx.command} can not be used in Private Messages.)```")
-        except:
-            pass
-
 @bot.command(name="changelog", pass_context=True)
 async def whatsnew(ctx):
     await bot.say("""```Nothing big right now, do $help ;)```""")
-    print(f"Showed the changelog. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+    print(f"Showed the changelog. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 @bot.command(pass_context=True)
-async def ping():
+async def ping(ctx):
     t1 = time.perf_counter()
     ping1 = await bot.say("Pinging... 1/3")
     t2 = time.perf_counter()
@@ -104,14 +94,14 @@ async def ping():
     pingEmbed.set_footer(text=f"Estimated total time elapsed: {speed1+speed2+speed3}ms")
     await bot.delete_message(ping1)
     await bot.say(embed=pingEmbed)
-    print (f"Ponged with an average speed of {speedAverage}ms. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+    print (f"Ponged with an average speed of {speedAverage}ms. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 @bot.command(name="roast", pass_context=True)
 async def roast(ctx):
     """Insults picked and created by Spectrix specifically for the bot."""
     roast = random.choice(open("RoastList.txt").readlines())
     await bot.say(roast)
-    print(f'Roasted {ctx.message.author.name} with the roast, "{roast}". Server: {message.server.name}. Time: {datetime.datetime.now().time()}')
+    print(f'Roasted {ctx.message.author.name} with the roast, "{roast}". Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}')
 
 @bot.command(name="database", pass_context=True)
 async def database(ctx, databaseType):
@@ -120,7 +110,7 @@ async def database(ctx, databaseType):
         await bot.say(f"**My roast database consists of `{roast_database}` roasts**")
     else:
         await bot.say("```Incorrect input.\nCurrent databases:\nroast```")
-    print(f"Showed the {databaseType} database. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+    print(f"Showed the {databaseType} database. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 
 @bot.command(name="poll", pass_context=True)
@@ -136,7 +126,7 @@ async def poll(ctx, *, pollInfo):
     pollMessage = await bot.say(embed=emb)
     await bot.add_reaction(pollMessage, "\N{THUMBS UP SIGN}")
     await bot.add_reaction(pollMessage, "\N{THUMBS DOWN SIGN}")
-    print(f"Started a poll. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+    print(f"Started a poll. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 @bot.command(name="presence", pass_context=True)
 async def presence(ctx, typeGame: int, *, presenceGame):
@@ -157,7 +147,7 @@ async def clear(ctx, number):
             await bot.add_reaction(clearConfirmation, "\N{OK HAND SIGN}")
             await asyncio.sleep(4)
             await bot.delete_message(clearConfirmation)
-            print(f"Purged {number} messages. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+            print(f"Purged {number} messages. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
         except discord.Forbidden:
             await bot.say("```I seem to have missing permissions. I need the manage_message permission to preform this action.```")
@@ -168,7 +158,7 @@ async def invite(ctx):
     await bot.send_message(ctx.message.author, "**https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
     await bot.say("**I sent you the invite link in your DMs :mailbox_with_mail:**")
     await bot.add_reaction(clearConfirmation, "\N{OK HAND SIGN}")
-    print(f"Gave my invite link to {ctx.message.author.name}. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+    print(f"Gave my invite link to {ctx.message.author.name}. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 
 @bot.command(name="support", pass_context=True)
@@ -176,21 +166,21 @@ async def support(ctx):
     await bot.send_message(ctx.message.author, "**https://discord.gg/ecXdjTD/**\n*Here's my official server! *")
     await bot.say("**I sent you the server invite in your DMs :mailbox_with_mail:**")
     await bot.add_reaction(clearConfirmation, "\N{THUMBS UP SIGN}")
-    print(f"Gave my server invite to {ctx.message.author.name}. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+    print(f"Gave my server invite to {ctx.message.author.name}. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 @bot.command(name="server", pass_context=True)
 async def server(ctx):
     await bot.send_message(ctx.message.author, "**https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
     await bot.say("**I sent you the server invite in your DMs :mailbox_with_mail:**")
     await bot.add_reaction(clearConfirmation, "\N{THUMBS UP SIGN}")
-    print(f"Gave my server invite to {ctx.message.author.name}. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+    print(f"Gave my server invite to {ctx.message.author.name}. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 @bot.command(name="help", pass_context=True)
 async def help(ctx):
     await bot.send_message(ctx.message.author, "**https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
     await bot.say("**I sent you help in your DMs :mailbox_with_mail:**")
     await bot.add_reaction(clearConfirmation, "\N{OK HAND SIGN}")
-    print(f"Helped the user {ctx.message.author.name}. Server: {message.server.name}. Time: {datetime.datetime.now().time()}")
+    print(f"Helped the user {ctx.message.author.name}. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 
 @bot.listen()
