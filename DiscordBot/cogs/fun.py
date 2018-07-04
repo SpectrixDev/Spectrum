@@ -8,7 +8,14 @@ class fun:
 
     def __init__(self, bot):
         self.bot = bot
-
+    
+    @commands.command(pass_context=True)
+    async def combine(self, ctx, name1, name2):
+        name1letters = name1[:round(len(name1) / 2)]
+        name2letters = name2[round(len(name2) / 2):]
+        ship = "".join([name1letters, name2letters])
+        await bot.say(ship)
+    
     @commands.command(pass_context=True)
     async def ship(self, ctx, name1 : discord.User, name2 : discord.User):
         """Test your love for another user"""
