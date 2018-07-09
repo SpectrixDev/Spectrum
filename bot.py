@@ -9,7 +9,7 @@ with open("databases/token.txt") as f:
 def get_prefix(bot, message):
     """Gets a prefix from a server"""
 
-    default_prefix = "%"
+    default_prefix = "*$"
 
     # Default prefix
     if not os.path.exists(f"servers/{message.guild.id}/"):
@@ -26,7 +26,7 @@ desc = "spec gaey"
 bot = commands.Bot(command_prefix=get_prefix, description=desc, case_insensitive=True)
 
 bot.remove_command("help")
-presenceGame = ":)" # this shit is so that the bot doesn't die
+presenceGame = ":)"
 defaultColor = "0x36393e" # Basically a nice color that matches discord's bg in dark mode
 typeGame = random.randint(0,3)
 
@@ -41,31 +41,33 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
+    """Pings 3 times and gets the average speed to test out the bot"""
 
-    """Pings 5 times and gets the average speed to test out the bot"""
-
-    # prepare things
-    msg = await ctx.send("`Pinging...` ()")
+    # Prepare things
+    msg = await ctx.send("`Pinging...`")
     times = []
     counter = 0
 
-    # ping
-    for _ in range(5):
+    # Ping
+    for _ in range(3):
         counter += 1
         start = time.perf_counter()
-        await msg.edit(content=f"`Pinging...` {counter}/5")
+        await msg.edit(content=f"Pinging... {counter}/3")
         end = time.perf_counter()
         speed = end - start
         times.append(round(speed * 1000))
 
-    # make embed
-    embed = discord.Embed(description="Pinged 5 times and calculated the average.")
+    # Make embed
+    embed = discord.Embed(title="More information:", description="Pinged 3 times and calculated the average.", colour=discord.Colour(value=defaultColor))
+    embed.set_author(name="Pong!", icon_url="https://cdn.discordapp.com/avatars/320590882187247617/b918479c149c08f033fe0530931cd656.webp?size=1024")
     counter = 0
     for speed in times:
         counter += 1
-        embed.add_field(name=f"Round {counter}", value=f"`{speed}ms`", inline=True)
-    embed.add_field(name="Average", value=f"`{round(sum(times) / 5)}ms`")
-    await msg.edit(content=":ping_pong: **Ping results!**", embed=embed)
+        embed.add_field(name=f"Ping {counter}:", value=f"{speed}ms", inline=True)
+    embed.add_field(name="Average speed", value=f"{round(sum(times) / 3)}ms")
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif")
+    embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
+    await msg.edit(content=f":ping_pong: **{round(sum(times) / 3)}ms**", embed=embed)
 
 @bot.command()
 async def roast(ctx):
