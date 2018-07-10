@@ -14,7 +14,7 @@ class Fun:
         emb = (discord.Embed(color=defaultColor, description = f"{ship}"))
         emb.set_author(name=f"{name1} + {name2}", icon_url="https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif")
         await ctx.send(embed=emb)
-    
+
     @commands.command()
     async def ship(self, ctx, name1 : discord.User, name2 : discord.User):
         shipnumber = random.randint(0,100)
@@ -50,6 +50,23 @@ class Fun:
         emb.set_author(name="Shipping", icon_url="http://moziru.com/images/kopel-clipart-heart-6.png")
         await ctx.send(embed=emb)
         print(f"Shipped {name1} and {name2} and got a score of {shipnumber}%. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
+
+    @commands.command()
+    async def _ball(self, ctx, *, _ballInput):
+        """Ask the magic 8 ball any question!"""
+        choiceType = random.choice(["(Affirmative)", "(Non-committal)", "(Negative)"])
+        if choiceType == "(Affirmative)":
+            prediction = random.choice(["It is certain :8ball:", "It is decidedly so :8ball:", "Without a doubt :8ball:", "Yes, definitely :8ball:", "You may rely on it :8ball:", "As I see it, yes :8ball:","Most likely :8ball:", "Outlook good :8ball:", "Yes :8ball:", "Signs point to yes :8ball:"])
+            emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0x3be801, description=prediction))
+        elif choiceType == "(Non-committal)":
+            prediction = random.choice(["Reply hazy try again :8ball:", "Ask again later :8ball:", "Better not tell you now :8ball:", "Cannot predict now :8ball:", "Concentrate and ask again :8ball:"])
+            emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0xff6600, description=prediction))
+        elif choiceType == "(Negative)":
+            prediction = random.choice(["Don't count on it :8ball:", "My reply is no :8ball:", "My sources say no :8ball:", "Outlook not so good :8ball:", "Very doubtful :8ball:"])
+            emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0xE80303, description=prediction))
+        emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
+        await ctx.send(embed=emb)
+        print(f'The magic 8ball answered the question "{_ballInput}" with "{prediction}". Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}')
 
 def setup(bot):
     bot.add_cog(Fun(bot))

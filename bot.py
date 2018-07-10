@@ -9,7 +9,8 @@ typeGame = random.randint(0,3)
 
 startup_extensions = ["cogs.General",
                       "cogs.Moderation",
-                      "cogs.Fun"]
+                      "cogs.Fun",
+                      "cogs.GetInfo"]
 
 with open("databases/token.txt") as f:
     bottoken = f.read()
@@ -44,7 +45,6 @@ async def ping(ctx):
     msg = await ctx.send("`Pinging...`")
     times = []
     counter = 0
-
 
     # Ping
     for _ in range(3):
