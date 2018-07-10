@@ -2,7 +2,13 @@ import discord, asyncio, time, datetime, random, json, aiohttp, logging, os
 from discord.ext import commands
 from time import ctime
 
-bottoken = ""
+presenceGame = ":)"
+defaultColor = 0x36393e # Basically a nice color that matches discord's bg in dark mode
+typeGame = random.randint(0,3)
+
+startup_extensions = ["cogs.General",
+                      "cogs.Moderation"]
+
 with open("databases/token.txt") as f:
     bottoken = f.read()
 
@@ -21,18 +27,8 @@ def get_prefix(bot, message):
             with open(f"servers/{message.guild.id}/prefix.txt", "r") as f:
                 return f.read()
 
-
-desc = "spec gaey"
-bot = commands.Bot(command_prefix=get_prefix, description=desc, case_insensitive=True)
-
+bot = commands.Bot(command_prefix=get_prefix, description="no", case_insensitive=True)
 bot.remove_command("help")
-presenceGame = ":)"
-defaultColor = "0x36393e" # Basically a nice color that matches discord's bg in dark mode
-typeGame = random.randint(0,3)
-
-startup_extensions = [
-
-]
 
 @bot.event
 async def on_ready():
@@ -41,12 +37,12 @@ async def on_ready():
 
 @bot.command()
 async def ping(ctx):
-    """Pings 3 times and gets the average speed to test out the bot"""
-
+    """Pings the bot 3 times and calculates the average"""
     # Prepare things
     msg = await ctx.send("`Pinging...`")
     times = []
     counter = 0
+
 
     # Ping
     for _ in range(3):
@@ -68,13 +64,6 @@ async def ping(ctx):
     embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif")
     embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
     await msg.edit(content=f":ping_pong: **{round(sum(times) / 3)}ms**", embed=embed)
-
-@bot.command()
-async def roast(ctx):
-    """Insults users"""
-    roast = random.choice(open("RoastList.txt").readlines())
-    await ctx.send(roast)
-
 
 if __name__ == '__main__':
     for extension in startup_extensions:
