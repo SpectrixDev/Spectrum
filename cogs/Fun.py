@@ -49,10 +49,9 @@ class Fun:
         emb.add_field(name="Status:", value=(status), inline=False)
         emb.set_author(name="Shipping", icon_url="http://moziru.com/images/kopel-clipart-heart-6.png")
         await ctx.send(embed=emb)
-        print(f"Shipped {name1} and {name2} and got a score of {shipnumber}%. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
-
-    @commands.command()
-    async def _ball(self, ctx, *, _ballInput):
+        
+    @commands.command(aliases=['8ball'])
+    async def eightball(self, ctx, *, _ballInput):
         """Ask the magic 8 ball any question!"""
         choiceType = random.choice(["(Affirmative)", "(Non-committal)", "(Negative)"])
         if choiceType == "(Affirmative)":
@@ -66,7 +65,6 @@ class Fun:
             emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0xE80303, description=prediction))
         emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
         await ctx.send(embed=emb)
-        print(f'The magic 8ball answered the question "{_ballInput}" with "{prediction}". Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}')
 
 def setup(bot):
     bot.add_cog(Fun(bot))

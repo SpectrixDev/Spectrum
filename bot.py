@@ -36,7 +36,7 @@ bot.remove_command("help")
 @bot.event
 async def on_ready():
     print("=========\nConnected\n=========\n") # Confirmation is good
-    await bot.change_presence(activity=discord.Game(name=(f"{presenceGame} | {len(bot.guilds)} guilds!"), url=("https://twitch.tv/gdspectrix"), type=typeGame))
+    await bot.change_presence(activity=discord.Game(name=(f"{presenceGame} | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=typeGame))
 
 @bot.command()
 async def ping(ctx):
@@ -70,5 +70,4 @@ async def ping(ctx):
 if __name__ == '__main__':
     for extension in startup_extensions:
         bot.load_extension(extension)
-
     bot.run(bottoken)

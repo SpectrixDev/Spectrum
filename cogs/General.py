@@ -19,7 +19,6 @@ class General:
         except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
         await helpMsg.add_reaction("\N{OK HAND SIGN}")
-        print(f"Helped the user {ctx.message.author.name}. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
     @commands.command()
     async def invite(self, ctx):
@@ -29,18 +28,15 @@ class General:
         except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
         await helpMsg.add_reaction("\N{OK HAND SIGN}")
-        print(f"Gave my invite link to {ctx.message.author.name}. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
-    @commands.command()
+    @commands.command(aliases=['support'])
     async def server(self, ctx):
         try:
             await ctx.author.send("**https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
             helpMsg = await ctx.send("**I sent you my server invite in your DMs :mailbox_with_mail:**")
         except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
-        await helpMsg.add_reaction("\N{OK HAND SIGN}")
-        print(f"Gave my server invite to {ctx.message.author.name}. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
-            
+        await helpMsg.add_reaction("\N{OK HAND SIGN}")        
 
     @commands.command()
     async def poll(self, ctx, *, pollInfo):
@@ -53,7 +49,6 @@ class General:
         pollMessage = await ctx.send(embed=emb)
         await pollMessage.add_reaction("\N{THUMBS UP SIGN}")
         await pollMessage.add_reaction("\N{THUMBS DOWN SIGN}")
-        print(f"Started a poll. Server: {ctx.message.server.name}. Time: {datetime.datetime.now().time()}")
 
 def setup(bot):
     bot.add_cog(General(bot))
