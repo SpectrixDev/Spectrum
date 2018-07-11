@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 import operator
-
+defaultColour = 0x36393e
 
 class WhosPlaying:
     def __init__(self, bot):
@@ -15,54 +15,54 @@ class WhosPlaying:
             return
 
         user = ctx.message.author
-        server = ctx.message.server
-        members = server.members
+        guild = ctx.message.guild
+        members = guild.members
         playing_game = ""
         count_playing = 0
 
         for member in members:
             if not member:
                 continue
-            if not member.game or not member.game.name:
+            if not member.activity or not member.activity.name:
                 continue
             if member.bot:
                 continue
-            if game.lower() in member.game.name.lower():
+            if game.lower() in member.activity.name.lower():
                 count_playing += 1
                 if count_playing <= 15:
-                    playing_game += ">>> {} ({})\n".format(member.name, member.game.name)
+                    playing_game += ":trident: {} ({})\n".format(member.name, member.activity.name)
 
         if playing_game == "":
             await self.bot.say("```Search results:\nNo users are currently playing that game.```")
         else:
             msg = playing_game
-            em = discord.Embed(description=msg, colour=0x3be801)
             if count_playing > 15:
                 showing = "(Showing 15/{})".format(count_playing)
             else:
                 showing = "({})".format(count_playing)
-            text = 'These are the people who are playing "{}":\n{}'.format(game, showing)
-            em.set_author(name=text, icon_url='https://images.discordapp.net/avatars/320590882187247617/138033611e0989895474ac1e8f61cbb8.png?size=512')
-            await self.bot.say(embed=em)
+
+            em = discord.Embed(description=msg, colour=defaultColour)
+            em.set_author(name=f"""Who's playing "{game}"? {showing}""", icon_url='https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif')
+            await ctx.send(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
     async def currentgames(self, ctx):
         """Shows the most played games right now"""
         user = ctx.message.author
-        server = ctx.message.server
-        members = server.members
+        guild = ctx.message.guild
+        members = guild.members
 
         freq_list = {}
         for member in members:
             if not member:
                 continue
-            if not member.game or not member.game.name:
+            if not member.activity or not member.activity.name:
                 continue
             if member.bot:
                 continue
-            if member.game.name not in freq_list:
-                freq_list[member.game.name] = 0
-            freq_list[member.game.name] += 1
+            if member.activity.name not in freq_list:
+                freq_list[member.activity.name] = 0
+            freq_list[member.activity.name] += 1
 
         sorted_list = sorted(freq_list.items(),
                              key=operator.itemgetter(1),
@@ -71,16 +71,22 @@ class WhosPlaying:
         if not freq_list:
             await self.bot.say("```Search results:\nNo users are currently playing any games. Odd...```")
         else:
-            # create display
+            # Create display and embed
             msg = ""
             max_games = min(len(sorted_list), 10)
+
+            em = discord.Embed(description=msg, colour=defaultColour)
             for i in range(max_games):
                 game, freq = sorted_list[i]
-                msg += ">>> {}: __{}__\n".format(game, freq_list[game])
-
-            em = discord.Embed(description=msg, colour=0x3be801)
-            em.set_author(name="Top games being played right now in the server:", icon_url='https://images.discordapp.net/avatars/320590882187247617/138033611e0989895474ac1e8f61cbb8.png?size=512')
-            await self.bot.say(embed=em)
+                if int(freq_list    [game]) < 2:
+                    ammount = "1 person"
+                else:
+                    ammount = f"{int(freq_list[game])} people"
+                em.add_field(name=game, value=ammount)
+            em.set_thumbnail(url=guild.icon_url)
+            em.set_footer(text="Do $whosplaying <game> to see whos playing a specific game")
+            em.set_author(name="Top games being played right now in the server:", icon_url='https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif')
+            await ctx.send(embed=em)
 
 
 
