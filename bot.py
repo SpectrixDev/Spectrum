@@ -4,7 +4,7 @@ from discord.ext.commands import clean_content
 from time import ctime
 
 presenceGame = ":)"
-defaultColor = 0x36393e # Basically a nice color that matches discord's bg in dark mode
+defaultColour = 0x36393e # Basically a nice color that matches discord's bg in dark mode
 typeGame = random.randint(0,3)
 
 startup_extensions = ["cogs.General",
@@ -58,7 +58,7 @@ async def ping(ctx):
         times.append(round(speed * 1000))
 
     # Make embed
-    embed = discord.Embed(title="More information:", description="Pinged 3 times and calculated the average.", colour=discord.Colour(value=defaultColor))
+    embed = discord.Embed(title="More information:", description="Pinged 3 times and calculated the average.", colour=discord.Colour(value=defaultColour))
     embed.set_author(name="Pong!", icon_url="https://cdn.discordapp.com/avatars/320590882187247617/b918479c149c08f033fe0530931cd656.webp?size=1024")
     counter = 0
     for speed in times:

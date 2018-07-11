@@ -39,7 +39,7 @@ class General:
 
     @commands.command()
     async def poll(self, ctx, *, pollInfo):
-        emb = (discord.Embed(description=pollInfo, colour=defaultColor))
+        emb = (discord.Embed(description=pollInfo, colour=defaultColour))
         emb.set_author(name=f"Poll by {ctx.message.author}", icon_url="https://lh3.googleusercontent.com/7ITYJK1YP86NRQqnWEATFWdvcGZ6qmPauJqIEEN7Cw48DZk9ghmEz_bJR2ccRw8aWQA=w300")
         try:
             await ctx.message.delete()

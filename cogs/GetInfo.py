@@ -1,6 +1,6 @@
 import discord, asyncio, random, time, datetime
 from discord.ext import commands
-defaultColor = 0x36393e
+defaultColour = 0x36393e
 
 class GetInfo:
     def __init__(self, bot):
@@ -46,7 +46,7 @@ class GetInfo:
         else:
             roles = "None"
 
-        embed = discord.Embed(description=activity, colour=defaultColor)
+        embed = discord.Embed(description=activity, colour=defaultColour)
         embed.add_field(name="Joined Discord on:", value=created_on, inline=False)
         embed.add_field(name="Joined Server at: ", value=joined_at, inline=False)
         embed.add_field(name="Roles:", value=roles, inline=False)
@@ -84,7 +84,7 @@ class GetInfo:
                       "".format(guild.created_at.strftime("%d %b %Y %H:%M"),
                                 passed))
 
-        embed = discord.Embed(description=created_at, colour=discord.Colour(value=defaultColor))
+        embed = discord.Embed(description=created_at, colour=discord.Colour(value=defaultColour))
         embed.add_field(name="Region", value=str(guild.region))
         embed.add_field(name="Users", value="{}/{}".format(online, total_users))
         embed.add_field(name="Text Channels", value=text_channels)
@@ -107,7 +107,7 @@ class GetInfo:
         servers = str(len(self.bot.guilds))
         users = str(len(set(self.bot.get_all_members())))
         channels = str(len(set(self.bot.get_all_channels())))
-        em = discord.Embed(description="Some current stats for Spectrum", colour=discord.Colour(value=defaultColor))
+        em = discord.Embed(description="Some current stats for Spectrum", colour=discord.Colour(value=defaultColour))
         em.add_field(name="Server count:", value=servers, inline=False)
         em.add_field(name="Users bot can see:", value=users, inline=False)
         em.add_field(name="Channels bot can see:", value=channels, inline=False)

@@ -1,6 +1,6 @@
 import discord, asyncio, random, time, datetime
 from discord.ext import commands
-defaultColor = 0x36393e
+defaultColour = 0x36393e
 
 class Fun:
     def __init__(self, bot):
@@ -11,7 +11,7 @@ class Fun:
         name1letters = name1[:round(len(name1) / 2)]
         name2letters = name2[round(len(name2) / 2):]
         ship = "".join([name1letters, name2letters])
-        emb = (discord.Embed(color=defaultColor, description = f"{ship}"))
+        emb = (discord.Embed(color=defaultColour, description = f"{ship}"))
         emb.set_author(name=f"{name1} + {name2}", icon_url="https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif")
         await ctx.send(embed=emb)
 
