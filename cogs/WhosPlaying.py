@@ -1,13 +1,12 @@
-import discord
+import discord, random, operator
 from discord.ext import commands
-import operator
 defaultColour = 0x36393e
 
 class WhosPlaying:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(no_pm=True)
     async def whosplaying(self, ctx, *, game):
         """Shows who's playing a specific game"""
         if len(game) <= 1:
@@ -30,14 +29,15 @@ class WhosPlaying:
             if game.lower() in member.activity.name.lower():
                 count_playing += 1
                 if count_playing <= 15:
-                    playing_game += ":trident: {} ({})\n".format(member.name, member.activity.name)
+                    emote = random.choice([":trident:", ":high_brightness:", ":low_brightness:", ":beginner:", ":diamond_shape_with_a_dot_inside:"])
+                    playing_game += f"{emote} {member.name} ({member.activity.name})\n"
 
         if playing_game == "":
             await self.bot.say("```Search results:\nNo users are currently playing that game.```")
         else:
             msg = playing_game
             if count_playing > 15:
-                showing = "(Showing 15/{})".format(count_playing)
+                showing = "(Showing 15/{})".format(count_playing)       
             else:
                 showing = "({})".format(count_playing)
 
@@ -45,7 +45,7 @@ class WhosPlaying:
             em.set_author(name=f"""Who's playing "{game}"? {showing}""", icon_url='https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif')
             await ctx.send(embed=em)
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.command(no_pm=True)
     async def currentgames(self, ctx):
         """Shows the most played games right now"""
         user = ctx.message.author
