@@ -8,7 +8,6 @@ class General:
 
     @commands.command()
     async def roast(self, ctx):
-        """Pick a random insult from one of the lines in the txt file"""
         await ctx.send(random.choice(open("databases/RoastList.txt").readlines()))
 
     @commands.command()

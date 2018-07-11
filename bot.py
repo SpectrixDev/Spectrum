@@ -10,7 +10,8 @@ typeGame = random.randint(0,3)
 startup_extensions = ["cogs.General",
                       "cogs.Moderation",
                       "cogs.Fun",
-                      "cogs.GetInfo"]
+                      "cogs.GetInfo",
+                      "cogs.SubredditFetcher"]
 
 with open("databases/token.txt") as f:
     bottoken = f.read()
@@ -37,7 +38,7 @@ bot.remove_command("help")
 async def on_ready():
     print("=========\nConnected\n=========\n") # Confirmation is good
     await bot.change_presence(activity=discord.Game(name=(f"{presenceGame} | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=typeGame))
-
+    
 @bot.command()
 async def ping(ctx):
     """Pings the bot 3 times and calculates the average"""

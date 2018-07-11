@@ -6,8 +6,13 @@ class GetInfo:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    async def userinfo(self, ctx, *, user: discord.Member=None):
+    @commands.group()
+    async def info(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await ctx.send("```Invalid Arguments. Here's what you can do:\n$info user <@user>\n$info server\n$info bot```")
+
+    @info.command(name='user', alias="userinfo")
+    async def _user(self, ctx, *, user: discord.Member=None):
         author = ctx.message.author
         guild = ctx.message.guild
 
@@ -50,17 +55,23 @@ class GetInfo:
         name = str(user)
         name = " ~ ".join((name, user.nick)) if user.nick else name
 
-        if user.avatar_url:
-            embed.set_author(name=name, url=user.avatar_url)
-            embed.set_thumbnail(url=user.avatar_url)
+        if user.bot:
+            embed.set_author(name=f"{name} [Bot]", url=user.avatar_url)
+        elif user.id == 276707898091110400:
+            embed.set_author(name=f"{name} [My creator]", url=user.avatar_url)
+        elif user.id == 320590882187247617:
+            embed.set_author(name=f"{name} [You can also do $botinfo]", url=user.avatar_url)
         else:
-            embed.set_author(name=name)
+            embed.set_author(name=name, url=user.avatar_url)
+
+        if user.avatar_url:
+            embed.set_thumbnail(url=user.avatar_url)
 
         await ctx.send(embed=embed)
 
 
-    @commands.command(no_pm=True)
-    async def serverinfo(self, ctx):
+    @info.command(name='server', alias="serverinfo", no_pm=True)
+    async def _server(self, ctx):
         guild = ctx.message.guild
         online = len([m.status for m in guild.members
                       if m.status == discord.Status.online or
@@ -89,6 +100,20 @@ class GetInfo:
             embed.set_author(name=guild.name)
 
         await ctx.send(embed=embed)
+
+    @info.command(name='bot', alias="botinfo")
+    async def _bot(self, ctx):
+        """Show's Spectrum's current information"""
+        servers = str(len(self.bot.guilds))
+        users = str(len(set(self.bot.get_all_members())))
+        channels = str(len(set(self.bot.get_all_channels())))
+        em = discord.Embed(description="Some current stats for Spectrum", colour=discord.Colour(value=defaultColor))
+        em.add_field(name="Server count:", value=servers, inline=False)
+        em.add_field(name="Users bot can see:", value=users, inline=False)
+        em.add_field(name="Channels bot can see:", value=channels, inline=False)
+        em.set_author(name="Bot Information", icon_url="https://images.discordapp.net/avatars/320590882187247617/138033611e0989895474ac1e8f61cbb8.png?size=512")
+        em.set_thumbnail(url="https://images.discordapp.net/avatars/320590882187247617/138033611e0989895474ac1e8f61cbb8.png?size=512")
+        await ctx.send(embed=em)
 
 def setup(bot):
     bot.add_cog(GetInfo(bot))
