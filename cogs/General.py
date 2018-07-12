@@ -1,6 +1,6 @@
 import discord, asyncio, random, time, datetime
 from discord.ext import commands
-defaultColor = 0x36393e
+defaultColour = 0x36393e
 
 class General:
     def __init__(self, bot):
@@ -17,7 +17,7 @@ class General:
             helpMsg = await ctx.send("**I sent you help in your DMs :mailbox_with_mail:**")
         except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
-        await helpMsg.add_reaction("\N{OK HAND SIGN}")
+        await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
 
     @commands.command()
     async def invite(self, ctx):
@@ -26,7 +26,7 @@ class General:
             helpMsg = await ctx.send("**I sent my invite link in your DMs :mailbox_with_mail:**")
         except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
-        await helpMsg.add_reaction("\N{OK HAND SIGN}")
+        await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
 
     @commands.command(aliases=['support'])
     async def server(self, ctx):
@@ -35,9 +35,12 @@ class General:
             helpMsg = await ctx.send("**I sent you my server invite in your DMs :mailbox_with_mail:**")
         except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
-        await helpMsg.add_reaction("\N{OK HAND SIGN}")        
+        await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")        
 
     @commands.command()
+
+
+    
     async def poll(self, ctx, *, pollInfo):
         emb = (discord.Embed(description=pollInfo, colour=defaultColour))
         emb.set_author(name=f"Poll by {ctx.message.author}", icon_url="https://lh3.googleusercontent.com/7ITYJK1YP86NRQqnWEATFWdvcGZ6qmPauJqIEEN7Cw48DZk9ghmEz_bJR2ccRw8aWQA=w300")

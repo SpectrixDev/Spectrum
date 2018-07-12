@@ -14,7 +14,7 @@ class Moderation:
             await ctx.channel.purge(limit = (int(number) + 1))
             await asyncio.sleep(1)
             clearConfirmation = await ctx.send(f"**Cleared `{number}` messages from this channel**", delete_after=4.0)
-            await clearConfirmation.add_reaction("\N{OK HAND SIGN}")
+            await clearConfirmation.add_reaction("a:SpectrumOkSpin:466480898049835011")
         except discord.Forbidden:
             await ctx.send("```I seem to have missing permissions. I need the manage_message permission to preform this action.```")
 

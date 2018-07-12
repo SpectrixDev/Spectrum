@@ -12,7 +12,8 @@ startup_extensions = ["cogs.General",
                       "cogs.Fun",
                       "cogs.GetInfo",
                       "cogs.SubredditFetcher",
-                      "cogs.WhosPlaying"]
+                      "cogs.WhosPlaying",
+                      "cogs.OwnerCommands"]
 
 with open("databases/token.txt") as f:
     bottoken = f.read()
@@ -34,6 +35,12 @@ def get_prefix(bot, message):
 
 bot = commands.Bot(command_prefix=get_prefix, description="no", case_insensitive=True)
 bot.remove_command("help")
+bot.launch_time = datetime.datetime.utcnow()
+
+def is_owner(ctx):
+        if ctx.message.author.id == "276707898091110400":
+            return True
+        return False
 
 @bot.event
 async def on_ready():
@@ -69,7 +76,16 @@ async def ping(ctx):
     embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
     await msg.edit(content=f":ping_pong: **{round(sum(times) / 3)}ms**", embed=embed)
 
+@bot.command()
+async def uptime(ctx):
+    delta_uptime = datetime.datetime.utcnow() - bot.launch_time
+    hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
+    minutes, seconds = divmod(remainder, 60)
+    days, hours = divmod(hours, 24)
+    await ctx.send(f"{days}d, {hours}h, {minutes}m, {seconds}s")
+    
 if __name__ == '__main__':
     for extension in startup_extensions:
         bot.load_extension(extension)
+
     bot.run(bottoken)

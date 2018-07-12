@@ -33,7 +33,7 @@ class WhosPlaying:
                     playing_game += f"{emote} {member.name} ({member.activity.name})\n"
 
         if playing_game == "":
-            await self.bot.say("```Search results:\nNo users are currently playing that game.```")
+            await ctx.send("```Search results:\nNo users are currently playing that game.```")
         else:
             msg = playing_game
             if count_playing > 15:
@@ -69,7 +69,7 @@ class WhosPlaying:
                              reverse=True)
 
         if not freq_list:
-            await self.bot.say("```Search results:\nNo users are currently playing any games. Odd...```")
+            await ctx.send("```Search results:\nNo users are currently playing any games. Odd...```")
         else:
             # Create display and embed
             msg = ""
