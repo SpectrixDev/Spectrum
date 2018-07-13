@@ -79,10 +79,10 @@ class WhosPlaying:
             for i in range(max_games):
                 game, freq = sorted_list[i]
                 if int(freq_list    [game]) < 2:
-                    ammount = "1 person"
+                    amount = "1 person"
                 else:
-                    ammount = f"{int(freq_list[game])} people"
-                em.add_field(name=game, value=ammount)
+                    amount = f"{int(freq_list[game])} people"
+                em.add_field(name=game, value=amount)
             em.set_thumbnail(url=guild.icon_url)
             em.set_footer(text="Do $whosplaying <game> to see whos playing a specific game")
             em.set_author(name="Top games being played right now in the server:", icon_url='https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif')
