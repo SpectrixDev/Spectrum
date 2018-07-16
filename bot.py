@@ -33,7 +33,7 @@ def get_prefix(bot, message):
         else:
             with open(f"servers/{message.guild.id}/prefix.txt", "r") as f:
                 return f.read()
-
+   
 bot = commands.Bot(command_prefix=get_prefix, description="no", case_insensitive=True)
 bot.remove_command("help")
 bot.launch_time = datetime.datetime.utcnow()
