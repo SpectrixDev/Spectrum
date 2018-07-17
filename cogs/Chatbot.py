@@ -67,7 +67,7 @@ class Chatbot():
             except KeyError:
                 await message.channel.send("```Error: 'KeyError', make sure you gave not too little input and not too much ;)```")
 
-    @commands.command(pass_context=True)
+    @commands.command()
     async def devChat(self, ctx, *, chatMsg):
         if ctx.message.author.id == 276707898091110400:
             request = ai.text_request()
