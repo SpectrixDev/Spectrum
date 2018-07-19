@@ -14,7 +14,8 @@ startup_extensions = ["cogs.General",
                       "cogs.SubredditFetcher",
                       "cogs.WhosPlaying",
                       "cogs.OwnerCommands",
-                      "cogs.Chatbot"]
+                      "cogs.Chatbot",
+                      "cogs.QRcode"]
 
 with open("databases/token.txt") as f:
     bottoken = f.read()
