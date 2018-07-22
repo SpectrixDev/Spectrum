@@ -32,7 +32,7 @@ class OwnerCommands:
             return f'```py\n{e.__class__.__name__}: {e}\n```'
         return f'```py\n{e.text}{"^":>{e.offset}}\n{e.__class__.__name__}: {e}```'
 
-    @commands.command(pass_context=True, hidden=True, name='eval')
+    @commands.command(hidden=True, name='eval')
     async def _eval(self, ctx, *, body: str):
         """Evaluates a code"""
 
@@ -78,6 +78,45 @@ class OwnerCommands:
             else:
                 self._last_result = ret
                 await ctx.send(f'```py\n{value}{ret}\n```')
+
+    @commands.command(hidden=True)
+    async def reload(self, ctx, *, extention):
+        try:
+            self.bot.unload_extension(f"cogs.{extention}")
+            self.bot.load_extension(f"cogs.{extention}")
+            await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
+        except ModuleNotFoundError:
+            try:
+                self.bot.unload_extension(extention)
+                self.bot.load_extension(extention)
+                await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
+            except Exception as e:
+                await ctx.send(f"Couldn't reload extention `{extention}`. Error: ```{e}```")
+    
+    @commands.command(hidden=True)
+    async def load(self, ctx, *, extention):
+        try:
+            self.bot.load_extension(f"cogs.{extention}")
+            await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
+        except ModuleNotFoundError:
+            try:
+                self.bot.load_extension(extention)
+                await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
+            except Exception as e:
+                await ctx.send(f"Couldn't load extention `{extention}`. Error: ```{e}```")
+    
+    @commands.command(hidden=True)
+    async def unload(self, ctx, *, extention):
+        try:
+            self.bot.unload_extension(f"cogs.{extention}")
+            await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
+        except ModuleNotFoundError:
+            try:
+                self.bot.unload_extension(extention)
+                await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
+            except Exception as e:
+                await ctx.send(f"Couldn't unload extention `{extention}`. Error: ```{e}```")
+    
 
 def setup(bot):
     bot.add_cog(OwnerCommands(bot))
