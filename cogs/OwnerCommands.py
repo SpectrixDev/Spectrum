@@ -116,7 +116,6 @@ class OwnerCommands:
                 await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
             except Exception as e:
                 await ctx.send(f"Couldn't unload extention `{extention}`. Error: ```{e}```")
-    
-
+                
 def setup(bot):
     bot.add_cog(OwnerCommands(bot))

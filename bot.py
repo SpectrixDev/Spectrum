@@ -3,9 +3,7 @@ from discord.ext import commands
 from discord.ext.commands import clean_content
 from time import ctime
 
-presenceGame = ":)"
 defaultColour = 0x36393e # Basically a nice color that matches discord's bg in dark mode
-typeGame = random.randint(0,3)
 
 startup_extensions = ["cogs.General",
                       "cogs.Moderation",
@@ -48,7 +46,7 @@ def is_owner(ctx):
 @bot.event
 async def on_ready():
     print("=========\nConnected\n=========\n") # Confirmation is good
-    await bot.change_presence(activity=discord.Game(name=(f"{presenceGame} | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=typeGame))
+    await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=random.randint(0,3)))
     
 @bot.command()
 async def ping(ctx):
@@ -86,7 +84,15 @@ async def uptime(ctx):
     minutes, seconds = divmod(remainder, 60)
     days, hours = divmod(hours, 24)
     await ctx.send(f"{days}d, {hours}h, {minutes}m, {seconds}s")
+
+@bot.event
+async def on_guild_join(guild):
+    await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
     
+@bot.event
+async def on_guild_remove(guild):
+    await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
+
 if __name__ == '__main__':
     for extension in startup_extensions:
         bot.load_extension(extension)
