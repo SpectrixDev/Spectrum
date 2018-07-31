@@ -8,6 +8,6 @@
 <img src=https://img.shields.io/badge/discord-bot-red.svg>
 </p>
 
-<a href="https://spectrix.pythonanywhere.com/spectrum">Website</a><br>
+<a href="https://spectrix.pythonanywhere.com/spectrum">https://spectrixofficial.github.io/Spectrix-Website/spectrum/</a><br>
 <a href="https://discord.gg/ecXdjTD/">Discord Server</a><br>
 <p>more coming soon ok ;)</p>
