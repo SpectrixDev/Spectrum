@@ -1,4 +1,5 @@
 from discord.ext import commands
+import hastebin
 import asyncio, discord
 import traceback
 import inspect
@@ -92,7 +93,7 @@ class OwnerCommands:
                 await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
             except Exception as e:
                 await ctx.send(f"Couldn't reload extention `{extention}`. Error: ```{e}```")
-    
+
     @commands.command(hidden=True)
     async def load(self, ctx, *, extention):
         try:
@@ -104,7 +105,7 @@ class OwnerCommands:
                 await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
             except Exception as e:
                 await ctx.send(f"Couldn't load extention `{extention}`. Error: ```{e}```")
-    
+
     @commands.command(hidden=True)
     async def unload(self, ctx, *, extention):
         try:
@@ -116,6 +117,6 @@ class OwnerCommands:
                 await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
             except Exception as e:
                 await ctx.send(f"Couldn't unload extention `{extention}`. Error: ```{e}```")
-                
+
 def setup(bot):
     bot.add_cog(OwnerCommands(bot))

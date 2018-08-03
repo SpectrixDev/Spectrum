@@ -20,7 +20,7 @@ class Chatbot():
                 if message.content.startswith(("$", "!", "?", "-", "*", "`", "~", "+", "/", ";", "=", "&", ">")): # a bunch of generic checks to see if the bot is not supposed to reply
                     pass
                 else:
-                    async with message.channel.typing(): 
+                    async with message.channel.typing():
                         user_message = message.content.replace(message.guild.me.mention,'') if message.guild else message.content
 
                         request = ai.text_request()
@@ -33,10 +33,10 @@ class Chatbot():
 
                     if action == "user.requests.help":
                         try:
-                            await message.author.send("**https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
+                            await message.author.send("**https://spectrixofficial.github.io/Spectrix-Website/spectrum/**\n*Here's my help page!*")
                             helpMsg = await message.channel.send(f"**{message.author.mention} I sent you help in your DMs :mailbox_with_mail:**")
                         except Exception:
-                            helpMsg = await message.channel.send(f"**{message.author.mention} https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
+                            helpMsg = await message.channel.send(f"**{message.author.mention} https://spectrixofficial.github.io/Spectrix-Website/spectrum/**\n*Here's my help page!*")
                             await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
                     elif action == "user.requests.server":
                         try:
@@ -44,7 +44,7 @@ class Chatbot():
                             helpMsg = await message.channel.send(f"**{message.author.mention} I sent you my server invite in your DMs :mailbox_with_mail:**")
                         except Exception:
                             helpMsg = await message.channel.send(f"**{message.author.mention} https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
-                            await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")  
+                            await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
                     elif action == "user.requests.invite":
                         try:
                            await message.author.send("**https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
@@ -52,7 +52,7 @@ class Chatbot():
                         except Exception:
                             helpMsg = await message.channel.send(f"**{message.author.mention} https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
                             await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
-                            
+
                     elif action == "name.user.get":
                         await message.channel.send(f"{message.author.mention} Your name is {message.author.name}.")
                     elif action == "bot.time":
