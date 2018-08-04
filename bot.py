@@ -1,6 +1,5 @@
 import discord, asyncio, time, datetime, random, json, aiohttp, logging, os
 from discord.ext import commands
-from discord.ext.commands import clean_content
 from time import ctime
 
 defaultColour = 0x36393e # Basically a nice color that matches discord's bg in dark mode
@@ -22,7 +21,7 @@ with open("databases/token.txt") as f:
 def get_prefix(bot, message):
     """Gets a prefix from a server"""
 
-    default_prefix = "*$"
+    default_prefix = "$"
 
     # Default prefix
     if not os.path.exists(f"servers/{message.guild.id}/"):
@@ -33,7 +32,7 @@ def get_prefix(bot, message):
         else:
             with open(f"servers/{message.guild.id}/prefix.txt", "r") as f:
                 return f.read()
-   
+
 bot = commands.Bot(command_prefix=get_prefix, description="no", case_insensitive=True)
 bot.remove_command("help")
 bot.launch_time = datetime.datetime.utcnow()
@@ -47,7 +46,7 @@ def is_owner(ctx):
 async def on_ready():
     print("=========\nConnected\n=========\n") # Confirmation is good
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=random.randint(0,3)))
-    
+
 @bot.command()
 async def ping(ctx):
     """Pings the bot 3 times and calculates the average"""
@@ -88,7 +87,7 @@ async def uptime(ctx):
 @bot.event
 async def on_guild_join(guild):
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
-    
+
 @bot.event
 async def on_guild_remove(guild):
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))

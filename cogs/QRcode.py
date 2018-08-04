@@ -7,8 +7,7 @@ class QRcode:
         self.bot = bot
 
     @commands.command()
-    async def qrcode(self, ctx, *, data):
-        """ UNFINSIHED """
+    async def qr(self, ctx, *, data):
         qr = qrcode.QRCode(
             version=1,
             error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -16,7 +15,7 @@ class QRcode:
             border=2,
         )
         qr.add_data(data)
-        img = qr.make_image(fill_color="black", back_color="white")
+        img = qr.make_image(fill_color="white", back_color="black")
         img.save("databases/qrcodes/QR.png")
         await ctx.send(f"{ctx.author.mention}", file=discord.File("databases/qrcodes/QR.png"))
         os.remove("databases/qrcodes/QR.png")
