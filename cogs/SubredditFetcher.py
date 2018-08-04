@@ -131,6 +131,6 @@ class SubredditFetcher:
                 await ctx.send(memeHistory[len(memeHistory) - 1]) #send the last image
                 return
         await ctx.send("_{}! ({})_".format(str(request['message']), str(request['error'])))
-
+        
 def setup(bot):
     bot.add_cog(SubredditFetcher(bot))

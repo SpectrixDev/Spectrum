@@ -16,7 +16,7 @@ class General:
             await ctx.author.send("**https://spectrixofficial.github.io/Spectrix-Website/spectrum/**\n*Here's my help page!*")
             helpMsg = await ctx.send("**I sent you help in your DMs :mailbox_with_mail:**")
         except Exception:
-            helpMsg = await ctx.send(f"**{ctx.author.mention} https://spectrix.pythonanywhere.com/spectrum**\n*Here's my help page!*")
+            helpMsg = await ctx.send(f"**{ctx.author.mention} https://spectrixofficial.github.io/Spectrix-Website/spectrum/**\n*Here's my help page!*")
         await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
 
     @commands.command()

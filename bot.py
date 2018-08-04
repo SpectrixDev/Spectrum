@@ -23,7 +23,7 @@ with open("databases/token.txt") as f:
 def get_prefix(bot, message):
     """Gets a prefix from a server"""
 
-    default_prefix = "$"
+    default_prefix = "*$"
 
     # Default prefix
     if not os.path.exists(f"servers/{message.guild.id}/"):
