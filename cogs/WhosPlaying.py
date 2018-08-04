@@ -88,8 +88,6 @@ class WhosPlaying:
             em.set_author(name="Top games being played right now in the server:", icon_url='https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif')
             await ctx.send(embed=em)
 
-
-
 def setup(bot):
     n = WhosPlaying(bot)
     bot.add_cog(n)
