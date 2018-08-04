@@ -53,7 +53,7 @@ class Fun:
         
     @commands.command(aliases=['8ball'])
     async def eightball(self, ctx, *, _ballInput):
-        """Ask the magic 8 ball any question!"""
+        """extra generic just the way you like it"""
         choiceType = random.choice(["(Affirmative)", "(Non-committal)", "(Negative)"])
         if choiceType == "(Affirmative)":
             prediction = random.choice(["It is certain :8ball:", "It is decidedly so :8ball:", "Without a doubt :8ball:", "Yes, definitely :8ball:", "You may rely on it :8ball:", "As I see it, yes :8ball:","Most likely :8ball:", "Outlook good :8ball:", "Yes :8ball:", "Signs point to yes :8ball:"])
@@ -65,6 +65,28 @@ class Fun:
             prediction = random.choice(["Don't count on it :8ball:", "My reply is no :8ball:", "My sources say no :8ball:", "Outlook not so good :8ball:", "Very doubtful :8ball:"])
             emb = (discord.Embed(title="Question: {}".format(_ballInput), colour=0xE80303, description=prediction))
         emb.set_author(name='Magic 8 ball', icon_url='https://www.horoscope.com/images-US/games/game-magic-8-ball-no-text.png')
+        await ctx.send(embed=emb)
+
+
+    @commands.command(aliases=['gay-scanner'])
+    async def gay_scanner(self, ctx, user: discord.Member=None):
+        """very mature command yes haha"""
+        if not user:
+            user = ctx.author
+        gayness = random.randint(0,100)
+        if gayness <= 33:
+            gayStatus = random.choice(["No homo", "Wearing socks", '"Only sometimes"', "Straight-ish", "No homo bro", "Girl-kisser", "Hella straight"])
+            gayColor = 0xFFC0CB
+        elif 33 < gayness < 66:
+            gayStatus = random.choice(["Possible homo", "My gay-sensor is picking something up", "I can't tell if the socks are on or off", "Gay-ish", "Looking a bit homo", "lol half  g a y", "safely in between for now"])
+            gayColor = 0xFF69B4
+        else:
+            gayStatus = random.choice(["LOL YOU GAY XDDD FUNNY", "HOMO ALERT", "MY GAY-SESNOR IS OFF THE CHARTS", "STINKY GAY", "BIG GEAY", "THE SOCKS ARE OFF", "HELLA GAY"])
+            gayColor = 0xFF00FF
+        emb = discord.Embed(description=f"Gayness for **{user}**", color=gayColor)
+        emb.add_field(name="Gayness:", value=f"{gayness}% gay")
+        emb.add_field(name="Comment:", value=f"{gayStatus} :kiss_mm:")
+        emb.set_author(name="Gay-Scanner™", icon_url="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/ICA_flag.svg/2000px-ICA_flag.svg.png")
         await ctx.send(embed=emb)
 
 def setup(bot):
