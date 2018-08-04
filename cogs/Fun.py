@@ -1,6 +1,7 @@
 import discord, asyncio, random, time, datetime
 from discord.ext import commands
 defaultColour = 0x36393e
+gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
 
 class Fun:
     def __init__(self, bot):
@@ -12,7 +13,7 @@ class Fun:
         name2letters = name2[round(len(name2) / 2):]
         ship = "".join([name1letters, name2letters])
         emb = (discord.Embed(color=defaultColour, description = f"{ship}"))
-        emb.set_author(name=f"{name1} + {name2}", icon_url="https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif")
+        emb.set_author(name=f"{name1} + {name2}", icon_url=gifLogo)
         await ctx.send(embed=emb)
 
     @commands.command()

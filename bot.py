@@ -3,6 +3,8 @@ from discord.ext import commands
 from time import ctime
 
 defaultColour = 0x36393e # Basically a nice color that matches discord's bg in dark mode
+gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif" # r a i n b o w
+normalLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475200894397579274/Spectrum.png"
 
 startup_extensions = ["cogs.General",
                       "cogs.Moderation",
@@ -66,13 +68,13 @@ async def ping(ctx):
 
     # Make embed
     embed = discord.Embed(title="More information:", description="Pinged 3 times and calculated the average.", colour=discord.Colour(value=defaultColour))
-    embed.set_author(name="Pong!", icon_url="https://cdn.discordapp.com/avatars/320590882187247617/b918479c149c08f033fe0530931cd656.webp?size=1024")
+    embed.set_author(name="Pong!", icon_url=normalLogo)
     counter = 0
     for speed in times:
         counter += 1
         embed.add_field(name=f"Ping {counter}:", value=f"{speed}ms", inline=True)
     embed.add_field(name="Average speed", value=f"{round(sum(times) / 3)}ms")
-    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif")
+    embed.set_thumbnail(url=gifLogo)
     embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
     await msg.edit(content=f":ping_pong: **{round(sum(times) / 3)}ms**", embed=embed)
 

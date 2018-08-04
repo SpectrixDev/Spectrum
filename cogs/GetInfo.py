@@ -1,6 +1,8 @@
 import discord, asyncio, random, time, datetime
 from discord.ext import commands
 defaultColour = 0x36393e
+gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
+normalLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475200894397579274/Spectrum.png"
 
 class GetInfo:
     def __init__(self, bot):
@@ -77,6 +79,8 @@ class GetInfo:
                       if m.status == discord.Status.online or
                       m.status == discord.Status.idle])
         total_users = len(guild.members)
+        total_bots = len([member for member in guild.members if member.bot == True])
+        total_humans = total_users - total_bots
         text_channels = len(ctx.guild.text_channels)
         voice_channels = len(ctx.guild.voice_channels)
         passed = (ctx.message.created_at - guild.created_at).days
@@ -87,6 +91,8 @@ class GetInfo:
         embed = discord.Embed(description=created_at, colour=discord.Colour(value=defaultColour))
         embed.add_field(name="Region", value=str(guild.region))
         embed.add_field(name="Users", value="{}/{}".format(online, total_users))
+        embed.add_field(name="Humans", value=total_humans)
+        embed.add_field(name="Bots", value=total_bots)
         embed.add_field(name="Text Channels", value=text_channels)
         embed.add_field(name="Voice Channels", value=voice_channels)
         embed.add_field(name="Roles", value=len(guild.roles))
@@ -111,8 +117,8 @@ class GetInfo:
         em.add_field(name="Server count:", value=servers, inline=False)
         em.add_field(name="Users bot can see:", value=users, inline=False)
         em.add_field(name="Channels bot can see:", value=channels, inline=False)
-        em.set_author(name="Bot Information", icon_url="https://images.discordapp.net/avatars/320590882187247617/138033611e0989895474ac1e8f61cbb8.png?size=512")
-        em.set_thumbnail(url="https://images.discordapp.net/avatars/320590882187247617/138033611e0989895474ac1e8f61cbb8.png?size=512")
+        em.set_author(name="Bot Information", icon_url=normalLogo)
+        em.set_thumbnail(url=gifLogo)
         await ctx.send(embed=em)
 
 def setup(bot):

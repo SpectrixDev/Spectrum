@@ -7,6 +7,8 @@ with open("databases/dialogflowtoken.txt") as f:
 
 CLIENT_ACCESS_TOKEN = chatbottoken
 ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
+gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
+defaultColour = 0x36393e
 
 class Chatbot():
     """Commands for the Spectrum Chatbot"""
@@ -86,8 +88,8 @@ class Chatbot():
 
             actionIncomplete = result.get('actionIncomplete', False)
 
-            emb = (discord.Embed(colour=0x3be801))
-            emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url="https://images.discordapp.net/avatars/320590882187247617/138033611e0989895474ac1e8f61cbb8.png?size=512")
+            emb = (discord.Embed(colour=defaultColour))
+            emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url=gifLogo)
             emb.add_field(name="resolvedQuery", value=f"```{resolvedQuery}```", inline=False)
             emb.add_field(name="intentName", value=f"`{intentName}`")
             emb.add_field(name="score", value=f"`{score}`")

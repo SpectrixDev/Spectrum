@@ -1,5 +1,4 @@
 from discord.ext import commands
-import hastebin
 import asyncio, discord
 import traceback
 import inspect

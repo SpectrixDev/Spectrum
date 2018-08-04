@@ -1,6 +1,7 @@
 import discord, random, operator
 from discord.ext import commands
 defaultColour = 0x36393e
+gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
 
 class WhosPlaying:
     def __init__(self, bot):
@@ -42,7 +43,7 @@ class WhosPlaying:
                 showing = "({})".format(count_playing)
 
             em = discord.Embed(description=msg, colour=defaultColour)
-            em.set_author(name=f"""Who's playing "{game}"? {showing}""", icon_url='https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif')
+            em.set_author(name=f"""Who's playing "{game}"? {showing}""", icon_url=gifLogo)
             await ctx.send(embed=em)
 
     @commands.command(no_pm=True)
@@ -85,7 +86,7 @@ class WhosPlaying:
                 em.add_field(name=game, value=amount)
             em.set_thumbnail(url=guild.icon_url)
             em.set_footer(text="Do $whosplaying <game> to see whos playing a specific game")
-            em.set_author(name="Top games being played right now in the server:", icon_url='https://cdn.discordapp.com/attachments/323045050453852170/465813711664316417/spectrumRainbow.gif')
+            em.set_author(name="Top games being played right now in the server:", icon_url=gifLogo)
             await ctx.send(embed=em)
 
 def setup(bot):
