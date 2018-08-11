@@ -15,7 +15,8 @@ startup_extensions = ["cogs.General",
                       "cogs.OwnerCommands",
                       "cogs.Chatbot",
                       "cogs.QRcode",
-                      "cogs.Bigemote"]
+                      "cogs.Bigemote",
+                      "cogs.TextConverters"]
 
 with open("databases/token.txt") as f:
     bottoken = f.read()
@@ -48,6 +49,12 @@ def is_owner(ctx):
 async def on_ready():
     print("=========\nConnected\n=========\n") # Confirmation is good
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=random.randint(0,3)))
+
+@bot.event
+async def on_message(message):
+    if message.author.bot:
+        return
+    await bot.process_commands(message)
 
 @bot.command()
 async def ping(ctx):

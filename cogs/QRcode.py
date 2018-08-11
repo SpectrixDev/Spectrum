@@ -15,7 +15,7 @@ class QRcode:
             border=2,
         )
         qr.add_data(data)
-        img = qr.make_image(fill_color="white", back_color="black")
+        img = qr.make_image(fill_color="black", back_color="white")
         img.save("databases/qrcodes/QR.png")
         await ctx.send(f"{ctx.author.mention}", file=discord.File("databases/qrcodes/QR.png"))
         os.remove("databases/qrcodes/QR.png")
