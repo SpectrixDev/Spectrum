@@ -42,7 +42,7 @@ class Chatbot():
                             await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
                     elif action == "user.requests.server":
                         try:
-                            await message.author.send("**https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
+                            await message.author.send("**https://discord.gg/SuN49rm/**\n*Here's my official server!*")
                             helpMsg = await message.channel.send(f"**{message.author.mention} I sent you my server invite in your DMs :mailbox_with_mail:**")
                         except Exception:
                             helpMsg = await message.channel.send(f"**{message.author.mention} https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
