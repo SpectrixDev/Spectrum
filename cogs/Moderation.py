@@ -11,9 +11,9 @@ class Moderation:
     @commands.command()
     async def clear(self, ctx, number: int):
         try:
-            msg = "message"
-            if number <= 2:
-                msg+='s'
+            msg = "messages"
+            if number >= 2:
+                msg-='s'
             amt = await ctx.channel.purge(limit = (int(number) + 1))
             await asyncio.sleep(1)
             clearConfirmation = await ctx.send(f"**Cleared `{len(amt) - 1}` {msg} from this channel**", delete_after=4.0)
