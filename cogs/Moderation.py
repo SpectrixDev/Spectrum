@@ -12,7 +12,7 @@ class Moderation:
     async def clear(self, ctx, number: int):
         try:
             msg = "message"
-            if number <= 2:
+            if number >= 2:
                 msg+='s'
             amt = await ctx.channel.purge(limit = (int(number) + 1))
             await asyncio.sleep(1)

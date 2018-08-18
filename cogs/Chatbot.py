@@ -31,6 +31,8 @@ class Chatbot():
                         response = json.loads(request.getresponse().read())
 
                         result = response['result']
+                        fulfillment = result['fulfillment']
+                        speech = fulfillment['speech']
                         action = result.get('action')
 
                     if action == "user.requests.help":
@@ -62,7 +64,7 @@ class Chatbot():
                     elif action == "prefix.get":
                         await message.channel.send(f"{message.author.mention} My default prefix is `$`")
                     else:
-                        await message.channel.send(f"{message.author.mention} {response['result']['fulfillment']['speech']}")
+                        await message.channel.send(f"{message.author.mention} {speech}")
 
                     print(f"Chatted with a user. Server: {message.guild.name}. Time: {datetime.datetime.now().time()}")
 
