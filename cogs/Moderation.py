@@ -11,7 +11,7 @@ class Moderation:
     @commands.command()
     async def clear(self, ctx, number: int):
         try:
-            msg = "messages"
+            msg = "message"
             if number >= 2:
                 msg+='s'
             amt = await ctx.channel.purge(limit = (int(number) + 1))
