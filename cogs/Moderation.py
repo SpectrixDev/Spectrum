@@ -9,7 +9,7 @@ class Moderation:
 
     @commands.has_permissions(manage_messages=True)
     @commands.command()
-    async def clear(self, ctx, number):
+    async def clear(self, ctx, number: int):
         try:
             msg = "message"
             if number <= 2:
