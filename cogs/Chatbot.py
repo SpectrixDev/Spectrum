@@ -68,9 +68,8 @@ class Chatbot():
 
                     print(f"Chatted with a user. Server: {message.guild.name}. Time: {datetime.datetime.now().time()}")
 
-            except Exception as e:
-                await message.channel.send("```fix\nSpectrum's chatbot is currently under maintenance. Spectrix is working on a fix!```")
-                print(e)
+            except Exception:
+                await message.channel.send(f"{message.author.mention} ```fix\nWhoops! Something went wrong. Make sure you don't have too much or too little input!```")
 
     @commands.command()
     async def devChat(self, ctx, *, chatMsg):
