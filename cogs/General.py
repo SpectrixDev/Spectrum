@@ -45,9 +45,12 @@ class General:
             await ctx.message.delete()
         except discord.Forbidden:
             pass
-        pollMessage = await ctx.send(embed=emb)
-        await pollMessage.add_reaction("\N{THUMBS UP SIGN}")
-        await pollMessage.add_reaction("\N{THUMBS DOWN SIGN}")
+        try:
+            pollMessage = await ctx.send(embed=emb)
+            await pollMessage.add_reaction("\N{THUMBS UP SIGN}")
+            await pollMessage.add_reaction("\N{THUMBS DOWN SIGN}")
+        except Exception as e:
+            await ctx.send(f"Oops, I couldn't react to the poll. Check that I have permission to add reactions! ```py\n{e}```")
 
 def setup(bot):
     bot.add_cog(General(bot))
