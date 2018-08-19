@@ -21,6 +21,9 @@ startup_extensions = ["cogs.General",
 with open("databases/token.txt") as f:
     bottoken = f.read()
 
+with open("databases/dbltoken.txt") as f:
+    dbltoken = f.read()
+
 def get_prefix(bot, message):
     """Gets a prefix from a server"""
 
@@ -39,6 +42,8 @@ def get_prefix(bot, message):
 bot = commands.Bot(command_prefix=get_prefix, description="no", case_insensitive=True)
 bot.remove_command("help")
 bot.launch_time = datetime.datetime.utcnow()
+url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
+headers = {"Authorization" : dbltoken}
 
 def is_owner(ctx):
         if ctx.message.author.id == "276707898091110400":
@@ -49,6 +54,9 @@ def is_owner(ctx):
 async def on_ready():
     print("=========\nConnected\n=========\n") # Confirmation is good
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=random.randint(0,3)))
+    payload = {"server_count"  : len(bot.guilds)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
 
 @bot.event
 async def on_message(message):
@@ -96,10 +104,16 @@ async def uptime(ctx):
 @bot.event
 async def on_guild_join(guild):
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
+    payload = {"server_count"  : len(bot.guilds)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
 
 @bot.event
 async def on_guild_remove(guild):
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
+    payload = {"server_count"  : len(bot.guilds)}
+    async with aiohttp.ClientSession() as aioclient:
+        await aioclient.post(url, data=payload, headers=headers)
 
 if __name__ == '__main__':
     for extension in startup_extensions:
