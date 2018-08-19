@@ -42,7 +42,7 @@ def get_prefix(bot, message):
 bot = commands.Bot(command_prefix=get_prefix, description="no", case_insensitive=True)
 bot.remove_command("help")
 bot.launch_time = datetime.datetime.utcnow()
-url = "https://discordbots.org/api/bots/" + bot.user.id + "/stats"
+url = "https://discordbots.org/api/bots/320590882187247617/stats"
 headers = {"Authorization" : dbltoken}
 
 def is_owner(ctx):
