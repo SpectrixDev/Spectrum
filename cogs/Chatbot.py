@@ -2,16 +2,15 @@ import datetime, time, json, apiai, random, discord, asyncio, os
 from time import ctime
 from discord.ext import commands
 
-with open("databases/dialogflowtoken.txt") as f:
-    chatbottoken = f.read()
+with open("databases/thesacredtexts.json") as f:
+    config = json.load(f)
+    ai = apiai.ApiAI(config["tokens"]["dialogflowtoken"])
 
-CLIENT_ACCESS_TOKEN = chatbottoken
-ai = apiai.ApiAI(CLIENT_ACCESS_TOKEN)
 gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
 defaultColour = 0x36393e
 
 class Chatbot():
-    """Commands for the Spectrum Chatbot"""
+    """No, lurkers, the actual chatbot isn't here. But this is what makes it work"""
 
     def __init__(self, bot):
         self.bot = bot
@@ -19,7 +18,7 @@ class Chatbot():
     async def on_message(self, message):
         if not message.author.bot and self.bot.user in message.mentions:
             try:
-                if message.content.startswith(("$", "!", "?", "-", "*", "`", "~", "+", "/", ";", "=", "&", ">")): # a bunch of generic checks to see if the bot is not supposed to reply
+                if message.content.startswith(("$", "!", "?", "-", "*", "`", "~", "+", "/", ";", "=", "&", ">", ".")): # a bunch of generic checks to see if the bot is not supposed to reply
                     pass
                 else:
                     async with message.channel.typing():
@@ -88,8 +87,6 @@ class Chatbot():
             fulfillment = result.get('fulfillment')
             speech = fulfillment.get('speech')
 
-            actionIncomplete = result.get('actionIncomplete', False)
-
             emb = (discord.Embed(colour=defaultColour))
             emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url=gifLogo)
             emb.add_field(name="resolvedQuery", value=f"```{resolvedQuery}```", inline=False)
@@ -107,7 +104,7 @@ class Chatbot():
             await ctx.send(embed=emb)
 
         else:
-            await ctx.send("Sorry, this command is for my devs only. Please just mention me if you'd like to chat!")
+            await ctx.send("uhh no. This is for Spectrix. Please just mention me if you'd like to chat!")
 
 def setup(bot):
     bot.add_cog(Chatbot(bot))

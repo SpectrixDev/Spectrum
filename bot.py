@@ -18,11 +18,8 @@ startup_extensions = ["cogs.General",
                       "cogs.Bigemote",
                       "cogs.TextConverters"]
 
-with open("databases/token.txt") as f:
-    bottoken = f.read()
-
-with open("databases/dbltoken.txt") as f:
-    dbltoken = f.read()
+with open("databases/thesacredtexts.json") as f: # https://i.kym-cdn.com/entries/icons/original/000/025/082/sacredtexts.jpg
+    config = json.load(f)
 
 def get_prefix(bot, message):
     """Gets a prefix from a server"""
@@ -43,7 +40,7 @@ bot = commands.Bot(command_prefix=get_prefix, description="no", case_insensitive
 bot.remove_command("help")
 bot.launch_time = datetime.datetime.utcnow()
 url = "https://discordbots.org/api/bots/320590882187247617/stats"
-headers = {"Authorization" : dbltoken}
+headers = {"Authorization" : config["tokens"]["dbltoken"]}
 
 def is_owner(ctx):
         if ctx.message.author.id == "276707898091110400":
@@ -111,7 +108,8 @@ async def on_guild_remove(guild):
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
 
 if __name__ == '__main__':
+
     for extension in startup_extensions:
         bot.load_extension(extension)
 
-    bot.run(bottoken)
+    bot.run(config["tokens"]["token"])
