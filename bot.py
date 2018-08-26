@@ -86,10 +86,12 @@ async def ping(ctx):
     for speed in times:
         counter += 1
         embed.add_field(name=f"Ping {counter}:", value=f"{speed}ms", inline=True)
-    embed.add_field(name="Average speed", value=f"{round(sum(times) / 3)}ms")
+
+    embed.add_field(name="Bot latency", value=f"{round(bot.latency * 1000)}ms", inline=True)
+    embed.add_field(name="Average speed", value=f"{round((round(sum(times)) + round(bot.latency * 1000))/4)}ms")
     embed.set_thumbnail(url=gifLogo)
     embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
-    await msg.edit(content=f":ping_pong: **{round(sum(times) / 3)}ms**", embed=embed)
+    await msg.edit(content=f":ping_pong: **{round((round(sum(times)) + round(bot.latency * 1000))/4)}ms**", embed=embed)
 
 @bot.command()
 async def uptime(ctx):
