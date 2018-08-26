@@ -66,7 +66,7 @@ async def on_message(message):
 async def ping(ctx):
     """Pings the bot 3 times and calculates the average"""
     # Prepare things
-    msg = await ctx.send("`Pinging...`")
+    msg = await ctx.send("`Pinging bot latency...`")
     times = []
     counter = 0
 
@@ -80,7 +80,7 @@ async def ping(ctx):
         times.append(round(speed * 1000))
 
     # Make embed
-    embed = discord.Embed(title="More information:", description="Pinged 3 times and calculated the average.", colour=discord.Colour(value=defaultColour))
+    embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=defaultColour))
     embed.set_author(name="Pong!", icon_url=normalLogo)
     counter = 0
     for speed in times:
