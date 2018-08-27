@@ -54,7 +54,7 @@ async def fetch(session, url):
 @bot.event
 async def on_ready():
     print("=========\nConnected\n=========\n") # Confirmation is good
-    await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=random.randint(0,3)))
+    await bot.change_presence(activity=discord.Activity(name=(f"$help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=random.randint(0,3)))
 
 @bot.event
 async def on_message(message):
