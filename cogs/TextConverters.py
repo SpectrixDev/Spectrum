@@ -8,7 +8,7 @@ class TextConverters:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases=['mock'])
     async def drunkify(self, ctx, *, s):
         lst = [str.upper, str.lower]
         newText = await commands.clean_content().convert(ctx, ''.join(random.choice(lst)(c) for c in s))
