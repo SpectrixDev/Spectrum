@@ -53,7 +53,7 @@ async def fetch(session, url):
 
 @bot.event
 async def on_ready():
-    print("=========\nConnected\n=========\n") # Confirmation is good
+    print("=========\nConnected\n=========\n")
     await bot.change_presence(activity=discord.Activity(name=(f"$help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=random.randint(0,3)))
     payload = {"server_count"  : len(bot.guilds)}
     async with aiohttp.ClientSession() as aioclient:
@@ -67,12 +67,12 @@ async def on_message(message):
 @bot.command()
 async def ping(ctx):
     """Pings the bot 3 times and calculates the average"""
-    # Prepare things
+    
     msg = await ctx.send("`Pinging bot latency...`")
     times = []
     counter = 0
 
-    # Ping
+   
     for _ in range(3):
         counter += 1
         start = time.perf_counter()
@@ -81,7 +81,7 @@ async def ping(ctx):
         speed = end - start
         times.append(round(speed * 1000))
 
-    # Make embed
+    
     embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=defaultColour))
     embed.set_author(name="Pong!", icon_url=normalLogo)
     counter = 0
