@@ -55,7 +55,9 @@ async def fetch(session, url):
 async def on_ready():
     print("=========\nConnected\n=========\n") # Confirmation is good
     await bot.change_presence(activity=discord.Activity(name=(f"$help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=random.randint(0,3)))
-
+    payload = {"server_count"  : len(bot.guilds)}
+    async with aiohttp.ClientSession() as aioclient:
+            await aioclient.post(url, data=payload, headers=headers)
 @bot.event
 async def on_message(message):
     if message.author.bot:
@@ -104,11 +106,17 @@ async def uptime(ctx):
 @bot.event
 async def on_guild_join(guild):
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
+    payload = {"server_count"  : len(bot.guilds)} 
 
+    async with aiohttp.ClientSession() as aioclient:
+            await aioclient.post(url, data=payload, headers=headers)
 @bot.event
 async def on_guild_remove(guild):
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
-
+    payload = {"server_count"  : len(bot.guilds)}
+    async with aiohttp.ClientSession() as aioclient:
+            await aioclient.post(url, data=payload, headers=headers)
+        
 if __name__ == '__main__':
 
     for extension in startup_extensions:
