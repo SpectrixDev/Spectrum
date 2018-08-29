@@ -21,22 +21,7 @@ startup_extensions = ["cogs.General",
 with open("databases/thesacredtexts.json") as f: # https://i.kym-cdn.com/entries/icons/original/000/025/082/sacredtexts.jpg
     config = json.load(f)
 
-def get_prefix(bot, message):
-    """Gets a prefix from a server"""
-
-    default_prefix = "$"
-
-    # Default prefix
-    if not os.path.exists(f"servers/{message.guild.id}/"):
-        return default_prefix
-    else:
-        if not os.path.isfile(f"servers/{message.guild.id}/prefix.txt"):
-            return default_prefix
-        else:
-            with open(f"servers/{message.guild.id}/prefix.txt", "r") as f:
-                return f.read()
-
-bot = commands.Bot(command_prefix=get_prefix, description="no", case_insensitive=True)
+bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or("$"), description="no", case_insensitive=True)
 bot.remove_command("help")
 bot.launch_time = datetime.datetime.utcnow()
 url = "https://discordbots.org/api/bots/320590882187247617/stats"
@@ -66,12 +51,9 @@ async def on_message(message):
 
 @bot.command()
 async def ping(ctx):
-    """Pings the bot 3 times and calculates the average"""
-    
     msg = await ctx.send("`Pinging bot latency...`")
     times = []
     counter = 0
-
    
     for _ in range(3):
         counter += 1
@@ -81,7 +63,6 @@ async def ping(ctx):
         speed = end - start
         times.append(round(speed * 1000))
 
-    
     embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=defaultColour))
     embed.set_author(name="Pong!", icon_url=normalLogo)
     counter = 0
@@ -107,7 +88,6 @@ async def uptime(ctx):
 async def on_guild_join(guild):
     await bot.change_presence(activity=discord.Game(name=(f"$help | {len(bot.guilds)} guilds!")))
     payload = {"server_count"  : len(bot.guilds)} 
-
     async with aiohttp.ClientSession() as aioclient:
             await aioclient.post(url, data=payload, headers=headers)
 @bot.event
