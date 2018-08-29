@@ -65,7 +65,7 @@ class Chatbot():
                         elif action == "bot.time":
                             await message.channel.send(f"{message.author.mention} The time for me is currently {ctime()}")
                         elif action == "prefix.get":
-                            await message.channel.send(f"{message.author.mention} My default prefix is `$`")
+                            await message.channel.send(f"{message.author.mention} My default prefix is `$`. But that's so 1983. Just **mention me with any command** ;)")
                         else:
                             await message.channel.send(f"{message.author.mention} {speech}")
 
