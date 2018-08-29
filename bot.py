@@ -39,7 +39,7 @@ async def fetch(session, url):
 @bot.event
 async def on_ready():
     print("=========\nConnected\n=========\n")
-    await bot.change_presence(activity=discord.Activity(name=(f"@Spectrum help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=1))
+    await bot.change_presence(activity=discord.Activity(name=f"@Spectrum help | {len(bot.guilds)} guilds!", type=1, url="https://www.twitch.tv/SpectrixYT"))
     payload = {"server_count"  : len(bot.guilds)}
     async with aiohttp.ClientSession() as aioclient:
             await aioclient.post(url, data=payload, headers=headers)
@@ -86,13 +86,13 @@ async def uptime(ctx):
 
 @bot.event
 async def on_guild_join(guild):
-    await bot.change_presence(activity=discord.Activity(name=(f"@Spectrum help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=1))
+    await bot.change_presence(activity=discord.Activity(name=f"@Spectrum help | {len(bot.guilds)} guilds!", type=1, url="https://www.twitch.tv/SpectrixYT"))
     payload = {"server_count"  : len(bot.guilds)} 
     async with aiohttp.ClientSession() as aioclient:
             await aioclient.post(url, data=payload, headers=headers)
 @bot.event
 async def on_guild_remove(guild):
-    await bot.change_presence(activity=discord.Activity(name=(f"@Spectrum help | {len(bot.guilds)} guilds!"), url=("https://go.twitch.tv/SpectrixYT"), type=1))
+    await bot.change_presence(activity=discord.Activity(name=f"@Spectrum help | {len(bot.guilds)} guilds!", type=1, url="https://www.twitch.tv/SpectrixYT"))
     payload = {"server_count"  : len(bot.guilds)}
     async with aiohttp.ClientSession() as aioclient:
             await aioclient.post(url, data=payload, headers=headers)
