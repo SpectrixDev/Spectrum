@@ -8,7 +8,7 @@ class Moderation:
         self.bot = bot
 
     @commands.has_permissions(manage_messages=True)
-    @commands.command()
+    @commands.command(aliases=["c"])
     async def clear(self, ctx, number: int):
         try:
             msg = "message"
