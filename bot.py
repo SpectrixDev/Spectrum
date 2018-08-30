@@ -1,5 +1,6 @@
 import discord, asyncio, time, datetime, random, json, aiohttp, logging, os
 from discord.ext import commands
+from discord.ext.commands.cooldowns import BucketType
 from time import ctime
 
 defaultColour = 0x36393e # Basically a nice color that matches discord's bg in dark mode
@@ -49,32 +50,34 @@ async def on_message(message):
         return
     await bot.process_commands(message)
 
+@commands.cooldown(1, 5, BucketType.user)
 @bot.command()
 async def ping(ctx):
-    msg = await ctx.send("`Pinging bot latency...`")
-    times = []
-    counter = 0
+    try:
+        msg = await ctx.send("`Pinging bot latency...`")
+        times = []
+        counter = 0
    
-    for _ in range(3):
-        counter += 1
-        start = time.perf_counter()
-        await msg.edit(content=f"Pinging... {counter}/3")
-        end = time.perf_counter()
-        speed = end - start
-        times.append(round(speed * 1000))
+        for _ in range(3):
+            counter += 1
+            start = time.perf_counter()
+            await msg.edit(content=f"Pinging... {counter}/3")
+            end = time.perf_counter()
+            speed = end - start
+            times.append(round(speed * 1000))
 
-    embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=defaultColour))
-    embed.set_author(name="Pong!", icon_url=normalLogo)
-    counter = 0
-    for speed in times:
-        counter += 1
-        embed.add_field(name=f"Ping {counter}:", value=f"{speed}ms", inline=True)
+        embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=defaultColour))
+        embed.set_author(name="Pong!", icon_url=normalLogo)
+        counter = 0
+        for speed in times:
+            counter += 1
+            embed.add_field(name=f"Ping {counter}:", value=f"{speed}ms", inline=True)
 
-    embed.add_field(name="Bot latency", value=f"{round(bot.latency * 1000)}ms", inline=True)
-    embed.add_field(name="Average speed", value=f"{round((round(sum(times)) + round(bot.latency * 1000))/4)}ms")
-    embed.set_thumbnail(url=gifLogo)
-    embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
-    await msg.edit(content=f":ping_pong: **{round((round(sum(times)) + round(bot.latency * 1000))/4)}ms**", embed=embed)
+        embed.add_field(name="Bot latency", value=f"{round(bot.latency * 1000)}ms", inline=True)
+        embed.add_field(name="Average speed", value=f"{round((round(sum(times)) + round(bot.latency * 1000))/4)}ms")
+        embed.set_thumbnail(url=gifLogo)
+        embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
+        await msg.edit(content=f":ping_pong: **{round((round(sum(times)) + round(bot.latency * 1000))/4)}ms**", embed=embed)
 
 @bot.command()
 async def uptime(ctx):

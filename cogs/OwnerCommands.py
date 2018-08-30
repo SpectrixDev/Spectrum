@@ -34,7 +34,7 @@ class OwnerCommands:
 
     @commands.command(hidden=True, name='eval')
     async def _eval(self, ctx, *, body: str):
-        """Evaluates a code"""
+        """Evaluates code"""
 
         env = {
             'bot': self.bot,
