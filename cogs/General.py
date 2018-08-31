@@ -1,9 +1,7 @@
+from config import *
 import discord, asyncio, random, time, datetime
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
-defaultColour = 0x36393e
-gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
-normalLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475200894397579274/Spectrum.png"
 
 class General:
     def __init__(self, bot):

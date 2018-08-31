@@ -25,7 +25,7 @@ class TextConverters:
     async def expand(self, ctx,  num: int, *, s: clean_content):
         spacing = ""
         if num > 0 and num <= 5:
-            for i in range(num):
+            for spectrix in range(num):
                 spacing+=" "
             result = spacing.join(s)
             if len(result) <= 200:

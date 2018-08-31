@@ -22,20 +22,23 @@ class CommandErrorHandler:
             return
 
         elif isinstance(error, commands.DisabledCommand):
-            return await ctx.send(f'**`{ctx.command}` has been disabled.**')
+            return await ctx.send(f'**:no_entry: `{ctx.command}` has been disabled.**')
 
         elif isinstance(error, commands.NoPrivateMessage):
             try:
-                return await ctx.author.send(f'**`{ctx.command}` can not be used in Private Messages.**')
+                return await ctx.author.send(f'**:no_entry: `{ctx.command}` can not be used in Private Messages.**')
             except:
                 pass
 
         elif isinstance(error, commands.BadArgument):
             if ctx.command.qualified_name == 'tag list':
-                return await ctx.send('**I could not find that member. Please try again.**')
+                return await ctx.send('**:no_entry: I could not find that member. Please try again.**')
 
         elif isinstance(error, commands.NotOwner):
-            return await ctx.send('**Only my owner can run this command.**')
+            return await ctx.send('**:no_entry: Only my owner can run this command.**')
+
+        elif isinstance(error, commands.CheckFailure):
+            return await ctx.send('**:no_entry: You have insufficiant permissions to run this command.**', delete_after=4.0)
             
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)

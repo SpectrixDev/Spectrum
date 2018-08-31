@@ -1,8 +1,6 @@
+from config import *
 import discord, asyncio, random, time, datetime
 from discord.ext import commands
-defaultColour = 0x36393e
-gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
-normalLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475200894397579274/Spectrum.png"
 
 class GetInfo:
     def __init__(self, bot):
@@ -59,9 +57,9 @@ class GetInfo:
 
         if user.bot:
             embed.set_author(name=f"{name} [Bot]", url=user.avatar_url)
-        elif user.id == 276707898091110400:
+        elif user.id == ownerid:
             embed.set_author(name=f"{name} [My creator]", url=user.avatar_url)
-        elif user.id == 320590882187247617:
+        elif user.id == self.bot.id:
             embed.set_author(name=f"{name} [You can also do $botinfo]", url=user.avatar_url)
         else:
             embed.set_author(name=name, url=user.avatar_url)
@@ -115,7 +113,7 @@ class GetInfo:
         channels = str(len(set(self.bot.get_all_channels())))
         em = discord.Embed(description="Some current stats for Spectrum", colour=discord.Colour(value=defaultColour))
         em.add_field(name="Server count:", value=servers, inline=False)
-        em.add_field(name="Users bot can see:", value=users, inline=False)
+        em.add_field(name="Users bot can see (incorrect rn?):", value=users, inline=False)
         em.add_field(name="Channels bot can see:", value=channels, inline=False)
         em.set_author(name="Bot Information", icon_url=normalLogo)
         em.set_thumbnail(url=gifLogo)
