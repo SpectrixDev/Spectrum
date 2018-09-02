@@ -67,8 +67,6 @@ class Chatbot():
                         else:
                             await message.channel.send(f"{message.author.mention} {speech}")
 
-                        print(f"Chatted with a user. Server: {message.guild.name}. Time: {datetime.datetime.now().time()}")
-
             except Exception as e:
                 await message.channel.send(f"{message.author.mention} ```fix\nWhoops! Something went wrong. Make sure you don't have too much or too little input!```")
                 print(e)

@@ -113,7 +113,7 @@ class GetInfo:
         channels = str(len(set(self.bot.get_all_channels())))
         em = discord.Embed(description="Some current stats for Spectrum", colour=discord.Colour(value=defaultColour))
         em.add_field(name="Server count:", value=servers, inline=False)
-        em.add_field(name="Users bot can see (incorrect rn?):", value=users, inline=False)
+        em.add_field(name="Users bot can see (incorrect:", value=users, inline=False)
         em.add_field(name="Channels bot can see:", value=channels, inline=False)
         em.set_author(name="Bot Information", icon_url=normalLogo)
         em.set_thumbnail(url=gifLogo)
