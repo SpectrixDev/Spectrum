@@ -119,6 +119,8 @@ class SubredditFetcher:
                         accepted = False
                         if url == "What Is A Showerthought?":
                             accepted = False
+                        elif url == "Showerthoughts is looking for new moderators!":
+                            accepted = False
                         else:
                             accepted = True
                         if accepted:
