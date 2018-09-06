@@ -21,7 +21,7 @@ startup_extensions = ["cogs.General",
 with open("databases/thesacredtexts.json") as f: # https://i.kym-cdn.com/entries/icons/original/000/025/082/sacredtexts.jpg
     config = json.load(f)
 
-bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or("$"), description="no", case_insensitive=True)
+bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or("$"), description="no", case_insensitive=True, owner_id=276707898091110400)
 bot.remove_command("help")
 bot.launch_time = datetime.datetime.utcnow()
 url = "https://discordbots.org/api/bots/320590882187247617/stats"
