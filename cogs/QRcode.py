@@ -1,6 +1,5 @@
-import discord, asyncio, random, time, datetime, qrcode, os
+import discord, asyncio, qrcode, os
 from discord.ext import commands
-defaultColour = 0x36393e
 
 class QRcode:
     def __init__(self, bot):
