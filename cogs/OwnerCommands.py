@@ -7,7 +7,6 @@ from contextlib import redirect_stdout
 import io
 import datetime
 from collections import Counter
-ownerid = "276707898091110400"
 
 class OwnerCommands:
     def __init__(self, bot):
