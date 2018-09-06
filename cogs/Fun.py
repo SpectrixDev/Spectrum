@@ -1,8 +1,7 @@
-import discord, asyncio, random, time, datetime
+from config import *
+import discord, asyncio, random
 from discord.ext import commands
 from discord.ext.commands import clean_content
-defaultColour = 0x36393e
-gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
 
 class Fun:
     def __init__(self, bot):

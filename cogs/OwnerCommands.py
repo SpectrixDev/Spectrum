@@ -1,13 +1,18 @@
-from discord.ext import commands
-import asyncio, discord
 import traceback
 import inspect
 import textwrap
 from contextlib import redirect_stdout
 import io
-import datetime
 from collections import Counter
-ownerid = "276707898091110400"
+from os import listdir
+from os.path import isfile, join
+import asyncio, discord
+from discord.ext import commands
+
+
+lst = [f for f in listdir("cogs/") if isfile(join("cogs/", f))]
+no_py = [s.replace('.py', '') for s in lst]
+startup_extensions = ["cogs." + no_py for no_py in no_py]
 
 class OwnerCommands:
     def __init__(self, bot):
@@ -34,7 +39,7 @@ class OwnerCommands:
 
     @commands.command(hidden=True, name='eval')
     async def _eval(self, ctx, *, body: str):
-        """Evaluates a code"""
+        """Evaluates code"""
 
         env = {
             'bot': self.bot,
@@ -82,10 +87,14 @@ class OwnerCommands:
     @commands.command(hidden=True)
     async def reload(self, ctx, *, extention):
         try:
-            self.bot.unload_extension(f"cogs.{extention}")
-            self.bot.load_extension(f"cogs.{extention}")
+            if extention == 'all':
+                for extension in startup_extensions:
+                    self.bot.load_extension(extension)
+            else:
+                self.bot.unload_extension(f"cogs.{extention}")
+                self.bot.load_extension(f"cogs.{extention}")
             await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
-        except ModuleNotFoundError:
+        except Exception:
             try:
                 self.bot.unload_extension(extention)
                 self.bot.load_extension(extention)
@@ -98,7 +107,7 @@ class OwnerCommands:
         try:
             self.bot.load_extension(f"cogs.{extention}")
             await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
-        except ModuleNotFoundError:
+        except Exception:
             try:
                 self.bot.load_extension(extention)
                 await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
@@ -110,7 +119,7 @@ class OwnerCommands:
         try:
             self.bot.unload_extension(f"cogs.{extention}")
             await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
-        except ModuleNotFoundError:
+        except Exception:
             try:
                 self.bot.unload_extension(extention)
                 await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')

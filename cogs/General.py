@@ -1,10 +1,39 @@
+from config import *
 import discord, asyncio, random, time, datetime
 from discord.ext import commands
-defaultColour = 0x36393e
+from discord.ext.commands.cooldowns import BucketType
 
 class General:
     def __init__(self, bot):
         self.bot = bot
+
+    @commands.cooldown(1, 5, BucketType.user)
+    @commands.command()
+    async def ping(self, ctx):
+        msg = await ctx.send("`Pinging bot latency...`")
+        times = []
+        counter = 0
+   
+        for _ in range(3):
+            counter += 1
+            start = time.perf_counter()
+            await msg.edit(content=f"Pinging... {counter}/3")
+            end = time.perf_counter()
+            speed = end - start
+            times.append(round(speed * 1000))
+
+        embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=defaultColour))
+        embed.set_author(name="Pong!", icon_url=normalLogo)
+        counter = 0
+        for speed in times:
+            counter += 1
+            embed.add_field(name=f"Ping {counter}:", value=f"{speed}ms", inline=True)
+        
+        embed.add_field(name="Bot latency", value=f"{round(self.bot.latency * 1000)}ms", inline=True)
+        embed.add_field(name="Average speed", value=f"{round((round(sum(times)) + round(self.bot.latency * 1000))/4)}ms")
+        embed.set_thumbnail(url=gifLogo)
+        embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
+        await msg.edit(content=f":ping_pong: **{round((round(sum(times)) + round(self.bot.latency * 1000))/4)}ms**", embed=embed)
 
     @commands.command()
     async def roast(self, ctx):

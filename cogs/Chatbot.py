@@ -1,3 +1,4 @@
+from config import *
 import datetime, time, json, apiai, random, discord, asyncio, os
 from time import ctime
 from discord.ext import commands
@@ -5,9 +6,6 @@ from discord.ext import commands
 with open("databases/thesacredtexts.json") as f:
     config = json.load(f)
     ai = apiai.ApiAI(config["tokens"]["dialogflowtoken"])
-
-gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
-defaultColour = 0x36393e
 
 class Chatbot():
     """Very important part of Spectrum. Also lets the users run commands by mentioning the bot. The whole chatbot isn't here obviously lol"""
@@ -75,7 +73,7 @@ class Chatbot():
 
     @commands.command()
     async def devChat(self, ctx, *, chatMsg):
-        if ctx.message.author.id == 276707898091110400:
+        if ctx.message.author.id == ownerid:
             request = ai.text_request()
             request.query = chatMsg
             response = json.loads(request.getresponse().read())
