@@ -38,7 +38,7 @@ class Chatbot():
 
                         if action == "user.requests.help":
                             try:
-                                await message.author.send("**https://spectrixofficial.github.io/spectrum/**\n*Here's my help page!*")
+                                await message.author.send("**http://spectrix.me/spectrum/**\n*Here's my help page!*")
                                 helpMsg = await message.channel.send(f"**{message.author.mention} I sent you help in your DMs :mailbox_with_mail:**")
                             except Exception:
                                 helpMsg = await message.channel.send(f"**{message.author.mention} https://spectrixofficial.github.io/spectrum/**\n*Here's my help page!*")
