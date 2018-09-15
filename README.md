@@ -1,4 +1,4 @@
-<center>
+<div align="center">
 
 # Spectrum
 
@@ -15,7 +15,7 @@ Spectrum is a **Discord** Bot made *with **Python*** for fun.
 
 
 
-</center>
+</div>
 
 # Commands:
 ## To use Spectrum, you can either mention it, or you can simply use its prefix, which is `$` 
