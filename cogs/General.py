@@ -42,10 +42,10 @@ class General:
     @commands.command()
     async def help(self, ctx):
         try:
-            await ctx.author.send("**https://spectrixofficial.github.io/spectrum/**\n*Here's my help page!*")
+            await ctx.author.send("**http://spectrix.me/spectrum/**\n*Here's my help page!*")
             helpMsg = await ctx.send("**I sent you help in your DMs :mailbox_with_mail:**")
         except Exception:
-            helpMsg = await ctx.send(f"**{ctx.author.mention} https://spectrixofficial.github.io/spectrum/**\n*Here's my help page!*")
+            helpMsg = await ctx.send(f"**{ctx.author.mention} http://spectrix.me/spectrum/**\n*Here's my help page!*")
         await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
 
     @commands.command()
