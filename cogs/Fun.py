@@ -131,7 +131,7 @@ class Fun:
 
 
     @commands.command(aliases=['gay-scanner', 'gayscanner', 'gay'])
-    async def gay_scanner(self, ctx, user: clean_content=None):
+    async def gay_scanner(self, ctx, *, user: clean_content=None):
         """very mature command yes haha"""
         if not user:
             user = ctx.author.name
