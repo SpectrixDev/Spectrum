@@ -1,6 +1,5 @@
-import discord, asyncio, random, time, datetime, qrcode, os
+import discord, asyncio, qrcode, os
 from discord.ext import commands
-defaultColour = 0x36393e
 
 class QRcode:
     def __init__(self, bot):
@@ -15,7 +14,7 @@ class QRcode:
             border=2,
         )
         qr.add_data(data)
-        img = qr.make_image(fill_color="black", back_color="white")
+        img = qr.make_image(fill_color="white", back_color="black")
         img.save("databases/qrcodes/QR.png")
         await ctx.send(f"{ctx.author.mention}", file=discord.File("databases/qrcodes/QR.png"))
         os.remove("databases/qrcodes/QR.png")

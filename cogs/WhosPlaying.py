@@ -1,7 +1,6 @@
+from config import *
 import discord, random, operator
 from discord.ext import commands
-defaultColour = 0x36393e
-gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
 
 class WhosPlaying:
     def __init__(self, bot):
@@ -14,7 +13,6 @@ class WhosPlaying:
             await ctx.send("```The game should be at least 2 characters long...```", delete_after=5.0)
             return
 
-        user = ctx.message.author
         guild = ctx.message.guild
         members = guild.members
         playing_game = ""
@@ -49,7 +47,6 @@ class WhosPlaying:
     @commands.command(no_pm=True)
     async def currentgames(self, ctx):
         """Shows the most played games right now"""
-        user = ctx.message.author
         guild = ctx.message.guild
         members = guild.members
 

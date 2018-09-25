@@ -34,7 +34,7 @@ class bigEmote:
                     print(e)
                     async with self.session.get(url) as resp:
                         if resp.status != 200:
-                            await self.bot.say('```Error: Emote not found.```')
+                            await ctx.send('```Error: Emote not found.```')
                             return
                         img = await resp.read()
 
@@ -45,7 +45,7 @@ class bigEmote:
                     try:
                         img = await asyncio.wait_for(task, timeout=15)
                     except asyncio.TimeoutError:
-                        await self.bot.say("```Error: Timed Out. Try again in a few seconds")
+                        await ctx.send("```Error: Timed Out. Try again in a few seconds")
                         return
                     await ctx.send(file=discord.File(img, filename=name + '.png'))
             

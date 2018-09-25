@@ -1,3 +1,4 @@
+from config import *
 import datetime, time, json, apiai, random, discord, asyncio, os
 from time import ctime
 from discord.ext import commands
@@ -5,9 +6,6 @@ from discord.ext import commands
 with open("databases/thesacredtexts.json") as f:
     config = json.load(f)
     ai = apiai.ApiAI(config["tokens"]["dialogflowtoken"])
-
-gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
-defaultColour = 0x36393e
 
 class Chatbot():
     """Very important part of Spectrum. Also lets the users run commands by mentioning the bot. The whole chatbot isn't here obviously lol"""
@@ -40,7 +38,7 @@ class Chatbot():
 
                         if action == "user.requests.help":
                             try:
-                                await message.author.send("**https://spectrixofficial.github.io/spectrum/**\n*Here's my help page!*")
+                                await message.author.send("**http://spectrix.me/spectrum/**\n*Here's my help page!*")
                                 helpMsg = await message.channel.send(f"**{message.author.mention} I sent you help in your DMs :mailbox_with_mail:**")
                             except Exception:
                                 helpMsg = await message.channel.send(f"**{message.author.mention} https://spectrixofficial.github.io/spectrum/**\n*Here's my help page!*")
@@ -69,15 +67,13 @@ class Chatbot():
                         else:
                             await message.channel.send(f"{message.author.mention} {speech}")
 
-                        print(f"Chatted with a user. Server: {message.guild.name}. Time: {datetime.datetime.now().time()}")
-
             except Exception as e:
                 await message.channel.send(f"{message.author.mention} ```fix\nWhoops! Something went wrong. Make sure you don't have too much or too little input!```")
                 print(e)
 
     @commands.command()
     async def devChat(self, ctx, *, chatMsg):
-        if ctx.message.author.id == 276707898091110400:
+        if ctx.author.id == self.bot.owner_id:
             request = ai.text_request()
             request.query = chatMsg
             response = json.loads(request.getresponse().read())

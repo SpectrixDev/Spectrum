@@ -25,7 +25,7 @@ class TextConverters:
     async def expand(self, ctx,  num: int, *, s: clean_content):
         spacing = ""
         if num > 0 and num <= 5:
-            for i in range(num):
+            for spectrix in range(num):
                 spacing+=" "
             result = spacing.join(s)
             if len(result) <= 200:
@@ -43,10 +43,10 @@ class TextConverters:
     async def reverse(self, ctx, *, s: clean_content):
         result = await commands.clean_content().convert(ctx, s[::-1])
         if len(result) <= 350:
-            await ctx.send(f"```{result}```")
+            await ctx.send(f"{result}")
         else:
             try:
-                await ctx.author.send(f"```{result}```")
+                await ctx.author.send(f"{result}")
                 await ctx.send(f"**{ctx.author.mention} The output too was too large, so I sent it to your DMs! :mailbox_with_mail:**")
             except Exception:
                 await ctx.send(f"**{ctx.author.mention} There was a problem, and I could not send the output. It may be too large or malformed**")

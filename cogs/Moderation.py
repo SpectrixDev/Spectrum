@@ -1,6 +1,5 @@
-import discord, asyncio, random, time, datetime
+import asyncio, discord
 from discord.ext import commands
-defaultColor = 0x36393e
 
 class Moderation:
     """Very small cog, as I don't exactly plan for any actual moderation commands. Maybe in the future"""
