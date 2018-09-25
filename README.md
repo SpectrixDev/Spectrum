@@ -47,6 +47,10 @@ Posts stuff from subreddits to your discord chat
 | meme | Collects fresh memes from different subreddits |
 | showerthought | Random and interesting thoughts |
 | me_irl | Fresh memes from only the best subreddit |
+| hmmm | Cursed images thank make you say "hmmm..!?" |
+| programmerhumor | Humor for programmers |
+| surrealmemes | S u r r e a l  (not for mortals) |
+
 
 ## Utility
 Useful commands I guess
