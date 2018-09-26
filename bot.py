@@ -53,13 +53,20 @@ async def update_activity():
 @bot.event
 async def on_ready():
     print("=========\nConnected\n=========\n")
-    await update_activity()
+    while True:
+        await update_activity()
+        await asyncio.sleep(15)
+        # ensure that you wont have an api spam to dbl and discord
 
 @bot.event
 async def on_message(message):
     if message.author.bot:
         return
     await bot.process_commands(message)
+
+@bot.event
+async def on_message_edit(old, new):
+    await bot.process_commands(new)
 
 @bot.command()
 async def uptime(ctx):
@@ -68,14 +75,6 @@ async def uptime(ctx):
     minutes, seconds = divmod(remainder, 60)
     days, hours = divmod(hours, 24)
     await ctx.send(f"{days}d, {hours}h, {minutes}m, {seconds}s")
-
-@bot.event
-async def on_guild_join(guild):
-    await update_activity()
-
-@bot.event
-async def on_guild_remove(guild):
-    await update_activity()
 
 if __name__ == '__main__':
 
