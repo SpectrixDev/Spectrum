@@ -38,7 +38,7 @@ class CommandErrorHandler:
             return await ctx.send('**:no_entry: Only my owner can run this command.**')
 
         elif isinstance(error, commands.CheckFailure):
-            return await ctx.send('**:no_entry: You have insufficiant permissions to run this command.**', delete_after=4.0)
+            return await ctx.send('**:no_entry: You have insufficiant permissions to run this command.**')
             
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)

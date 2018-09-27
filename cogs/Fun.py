@@ -1,7 +1,9 @@
-from config import *
-import discord, asyncio, random
+import discord, asyncio, random, json
 from discord.ext import commands
 from discord.ext.commands import clean_content
+
+with open("databases/thesacredtexts.json") as f:
+    config = json.load(f)
 
 class Fun:
     def __init__(self, bot):
@@ -12,8 +14,8 @@ class Fun:
         name1letters = name1[:round(len(name1) / 2)]
         name2letters = name2[round(len(name2) / 2):]
         ship = "".join([name1letters, name2letters])
-        emb = (discord.Embed(color=defaultColour, description = f"{ship}"))
-        emb.set_author(name=f"{name1} + {name2}", icon_url=gifLogo)
+        emb = (discord.Embed(color=0x36393e, description = f"{ship}"))
+        emb.set_author(name=f"{name1} + {name2}", icon_url=config["styling"]["gifLogo"])
         await ctx.send(embed=emb)
 
     @commands.command()

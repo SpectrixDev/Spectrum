@@ -89,7 +89,8 @@ class OwnerCommands:
         try:
             if extention == 'all':
                 for extension in startup_extensions:
-                    self.bot.load_extension(extension)
+                    self.bot.unload_extension(extention)
+                    self.bot.load_extension(extention)
             else:
                 self.bot.unload_extension(f"cogs.{extention}")
                 self.bot.load_extension(f"cogs.{extention}")

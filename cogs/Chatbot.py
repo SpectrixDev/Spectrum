@@ -1,4 +1,3 @@
-from config import *
 import datetime, time, json, apiai, random, discord, asyncio, os
 from time import ctime
 from discord.ext import commands
@@ -88,16 +87,16 @@ class Chatbot():
             fulfillment = result.get('fulfillment')
             speech = fulfillment.get('speech')
 
-            emb = (discord.Embed(colour=defaultColour))
-            emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url=gifLogo)
+            emb = (discord.Embed(colour=0x36393e))
+            emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url=config["styling"]["gifLogo"])
             emb.add_field(name="resolvedQuery", value=f"```{resolvedQuery}```", inline=False)
             emb.add_field(name="intentName", value=f"`{intentName}`")
             emb.add_field(name="score", value=f"`{score}`")
-            if action == "":
+            if action == None:
                 emb.add_field(name="action", value="`None assigned`")
             else:
                 emb.add_field(name="action", value=f"`{action}`")
-            if speech == "":
+            if speech == None:
                 emb.add_field(name="speech", value='```Somehow nothing. Spectrix, please fix.```', inline=False)
             else:
                 emb.add_field(name="speech", value=f'```{speech}```', inline=False)

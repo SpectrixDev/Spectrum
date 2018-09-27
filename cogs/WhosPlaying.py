@@ -1,6 +1,8 @@
-from config import *
-import discord, random, operator
+import discord, random, operator, json
 from discord.ext import commands
+
+with open("databases/thesacredtexts.json") as f:
+    config = json.load(f)
 
 class WhosPlaying:
     def __init__(self, bot):
@@ -40,8 +42,8 @@ class WhosPlaying:
             else:
                 showing = "({})".format(count_playing)
 
-            em = discord.Embed(description=msg, colour=defaultColour)
-            em.set_author(name=f"""Who's playing "{game}"? {showing}""", icon_url=gifLogo)
+            em = discord.Embed(description=msg, colour=config["styling"]["gifLogo"])
+            em.set_author(name=f"""Who's playing "{game}"? {showing}""", icon_url=config["styling"]["gifLogo"])
             await ctx.send(embed=em)
 
     @commands.command(no_pm=True)
@@ -73,9 +75,9 @@ class WhosPlaying:
             msg = ""
             max_games = min(len(sorted_list), 10)
 
-            em = discord.Embed(description=msg, colour=defaultColour)
+            em = discord.Embed(description=msg, colour=config["styling"]["gifLogo"])
             for i in range(max_games):
-                game, freq = sorted_list[i]
+                game = sorted_list[i]
                 if int(freq_list    [game]) < 2:
                     amount = "1 person"
                 else:
@@ -83,7 +85,7 @@ class WhosPlaying:
                 em.add_field(name=game, value=amount)
             em.set_thumbnail(url=guild.icon_url)
             em.set_footer(text="Do $whosplaying <game> to see whos playing a specific game")
-            em.set_author(name="Top games being played right now in the server:", icon_url=gifLogo)
+            em.set_author(name="Top games being played right now in the server:", icon_url=config["styling"]["gifLogo"])
             await ctx.send(embed=em)
 
 def setup(bot):

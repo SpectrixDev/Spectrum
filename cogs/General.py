@@ -1,7 +1,9 @@
-from config import *
-import discord, asyncio, random, time, datetime
+import discord, asyncio, random, time, datetime, json
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
+
+with open("databases/thesacredtexts.json") as f:
+    config = json.load(f)
 
 class General:
     def __init__(self, bot):
@@ -22,8 +24,8 @@ class General:
             speed = end - start
             times.append(round(speed * 1000))
 
-        embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=defaultColour))
-        embed.set_author(name="Pong!", icon_url=normalLogo)
+        embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=0x36393e))
+        embed.set_author(name="Pong!", icon_url=config["styling"]["normalLogo"])
         counter = 0
         for speed in times:
             counter += 1
@@ -31,7 +33,7 @@ class General:
         
         embed.add_field(name="Bot latency", value=f"{round(self.bot.latency * 1000)}ms", inline=True)
         embed.add_field(name="Average speed", value=f"{round((round(sum(times)) + round(self.bot.latency * 1000))/4)}ms")
-        embed.set_thumbnail(url=gifLogo)
+        embed.set_thumbnail(url=config["styling"]["gifLogo"])
         embed.set_footer(text=f"Estimated total time elapsed: {round(sum(times))}ms")
         await msg.edit(content=f":ping_pong: **{round((round(sum(times)) + round(self.bot.latency * 1000))/4)}ms**", embed=embed)
 
@@ -68,7 +70,7 @@ class General:
 
     @commands.command()
     async def poll(self, ctx, *, pollInfo):
-        emb = (discord.Embed(description=pollInfo, colour=defaultColour))
+        emb = (discord.Embed(description=pollInfo, colour=0x36393e))
         emb.set_author(name=f"Poll by {ctx.message.author}", icon_url="https://lh3.googleusercontent.com/7ITYJK1YP86NRQqnWEATFWdvcGZ6qmPauJqIEEN7Cw48DZk9ghmEz_bJR2ccRw8aWQA=w300")
         try:
             await ctx.message.delete()

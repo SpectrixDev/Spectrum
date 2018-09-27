@@ -1,13 +1,8 @@
-import discord
+import discord, datetime, time, aiohttp, asyncio, random
 from discord.ext import commands
 from random import randint
 from random import choice
 from urllib.parse import quote_plus
-import datetime
-import time
-import aiohttp
-import asyncio
-import random
 from collections import deque
 
 acceptableImageFormats = [".png",".jpg",".jpeg",".gif",".gifv",".webm",".mp4","imgur.com"]

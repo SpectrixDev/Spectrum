@@ -4,11 +4,6 @@ from time import ctime
 from os import listdir
 from os.path import isfile, join
 
-defaultColour = 0x36393e
-gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
-normalLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475200894397579274/Spectrum.png"
-
-
 lst = [f for f in listdir("cogs/") if isfile(join("cogs/", f))]
 no_py = [s.replace('.py', '') for s in lst]
 startup_extensions = ["cogs." + no_py for no_py in no_py]
@@ -27,7 +22,7 @@ url = "https://discordbots.org/api/bots/320590882187247617/stats"
 headers = {"Authorization" : config["tokens"]["dbltoken"]}
 
 def is_owner(ctx):
-        if ctx.message.author.id == "276707898091110400":
+        if ctx.message.author.id == bot.owner_id:
             return True
         return False
 

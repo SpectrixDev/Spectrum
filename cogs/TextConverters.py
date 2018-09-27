@@ -1,8 +1,6 @@
 import discord, asyncio, random, time, datetime, binascii
 from discord.ext import commands
 from discord.ext.commands import clean_content
-defaultColour = 0x36393e
-gifLogo = "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif"
 
 class TextConverters:
     def __init__(self, bot):
@@ -25,7 +23,7 @@ class TextConverters:
     async def expand(self, ctx,  num: int, *, s: clean_content):
         spacing = ""
         if num > 0 and num <= 5:
-            for spectrix in range(num):
+            for _ in range(num):
                 spacing+=" "
             result = spacing.join(s)
             if len(result) <= 200:
