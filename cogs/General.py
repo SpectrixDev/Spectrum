@@ -1,6 +1,7 @@
 import discord, asyncio, random, time, datetime, json
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
+from discord.ext.commands import clean_content
 
 with open("databases/thesacredtexts.json") as f:
     config = json.load(f)
@@ -69,7 +70,7 @@ class General:
         await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
 
     @commands.command()
-    async def poll(self, ctx, *, pollInfo):
+    async def poll(self, ctx, *, pollInfo : clean_content):
         emb = (discord.Embed(description=pollInfo, colour=0x36393e))
         emb.set_author(name=f"Poll by {ctx.message.author}", icon_url="https://lh3.googleusercontent.com/7ITYJK1YP86NRQqnWEATFWdvcGZ6qmPauJqIEEN7Cw48DZk9ghmEz_bJR2ccRw8aWQA=w300")
         try:
