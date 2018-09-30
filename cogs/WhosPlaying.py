@@ -42,7 +42,7 @@ class WhosPlaying:
             else:
                 showing = "({})".format(count_playing)
 
-            em = discord.Embed(description=msg, colour=config["styling"]["gifLogo"])
+            em = discord.Embed(description=msg, colour=discord.Colour(value=0x36393e))
             em.set_author(name=f"""Who's playing "{game}"? {showing}""", icon_url=config["styling"]["gifLogo"])
             await ctx.send(embed=em)
 
@@ -75,7 +75,7 @@ class WhosPlaying:
             msg = ""
             max_games = min(len(sorted_list), 10)
 
-            em = discord.Embed(description=msg, colour=config["styling"]["gifLogo"])
+            em = discord.Embed(description=msg, colour=discord.Colour(value=0x36393e))
             for i in range(max_games):
                 game = sorted_list[i]
                 if int(freq_list    [game]) < 2:
