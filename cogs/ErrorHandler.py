@@ -2,6 +2,7 @@ import traceback
 import sys
 from discord.ext import commands
 import discord
+import math
 
 class CommandErrorHandler:
     def __init__(self, bot):
@@ -37,7 +38,7 @@ class CommandErrorHandler:
         elif isinstance(error, commands.NotOwner):
             return await ctx.send('**:no_entry: Only my owner can run this command.**')
         elif isinstance(error, commands.CommandOnCooldown):
-            return await ctx.send("**:no_entry: This command is on a cooldown for {} seconds**".format(error.retry_after))
+            return await ctx.send(f"**:no_entry: This command is on a cooldown for {math.ceil(error.retry_after)} seconds**")
         elif isinstance(error, commands.CheckFailure):
             return await ctx.send('**:no_entry: You have insufficiant permissions to run this command.**')
             
