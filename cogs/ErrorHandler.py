@@ -36,7 +36,8 @@ class CommandErrorHandler:
 
         elif isinstance(error, commands.NotOwner):
             return await ctx.send('**:no_entry: Only my owner can run this command.**')
-
+        elif isinstance(error, commands.CommandOnCooldown):
+            return await ctx.send("**:no_entry: Hey, This Command Is On A Cooldown For {} Seconds**".format(error.retry_after))
         elif isinstance(error, commands.CheckFailure):
             return await ctx.send('**:no_entry: You have insufficiant permissions to run this command.**')
             
