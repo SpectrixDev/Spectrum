@@ -77,8 +77,8 @@ class WhosPlaying:
 
             em = discord.Embed(description=msg, colour=discord.Colour(value=0x36393e))
             for i in range(max_games):
-                game = sorted_list[i]
-                if int(freq_list    [game]) < 2:
+                game, freq = sorted_list[i]
+                if int(freq_list[game]) < 2:
                     amount = "1 person"
                 else:
                     amount = f"{int(freq_list[game])} people"
