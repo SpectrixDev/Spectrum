@@ -15,7 +15,11 @@ class RoleCommands:
     async def giverole(self, ctx, user : discord.Member, *, role : discord.Role):
         if ctx.author.top_role > user.top_role:
             if ctx.author == user:
-                return await ctx.send("**:no_entry: You can't give Yourself Roles**")            
+                if ctx.author == ctx.guild.owner:
+                    await user.add_roles(role)
+                    msg = await ctx.send(f"**Gave {user.mention} Role: `{role}`**")
+                    await msg.add_reaction("a:SpectrumOkSpin:466480898049835011")
+                return await ctx.send("**:no_entry: You can't give yourself roles**")            
             await user.add_roles(role)
             msg = await ctx.send(f"**Gave {user.mention} Role: `{role}`**")
             await msg.add_reaction("a:SpectrumOkSpin:466480898049835011")
@@ -31,7 +35,11 @@ class RoleCommands:
     async def removerole(self, ctx, user : discord.Member, *, role : discord.Role):
         if ctx.author.top_role >= user.top_role:
             if ctx.author == user:
-                return await ctx.send("**:no_entry:You can't Remove Your Own Roles**")
+                if ctx.author == ctx.guild.owner:
+                    await user.remove_roles(role)
+                    msg = await ctx.send(f"**Removed {user.mention} From role: `{role}`**")
+                    await msg.add_reaction("a:SpectrumOkSpin:466480898049835011")
+                return await ctx.send("**:no_entry:You can't remove Your own roles**")
             await user.remove_roles(role)
             msg = await ctx.send(f"**Removed {user.mention} From role: `{role}`**")
             await msg.add_reaction("a:SpectrumOkSpin:466480898049835011")
