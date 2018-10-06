@@ -15,22 +15,17 @@ class General:
         msg = await ctx.send("`Pinging bot latency...`")
         times = []
         counter = 0
-   
+        embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=0x36393e))
         for _ in range(3):
             counter += 1
             start = time.perf_counter()
             await msg.edit(content=f"Pinging... {counter}/3")
             end = time.perf_counter()
-            speed = end - start
-            times.append(round(speed * 1000))
-
-        embed = discord.Embed(title="More information:", description="Pinged 4 times and calculated the average.", colour=discord.Colour(value=0x36393e))
-        embed.set_author(name="Pong!", icon_url=config["styling"]["normalLogo"])
-        counter = 0
-        for speed in times:
-            counter += 1
+            speed = round((end - start) * 1000)
+            times.append(speed)
             embed.add_field(name=f"Ping {counter}:", value=f"{speed}ms", inline=True)
-        
+
+        embed.set_author(name="Pong!", icon_url=config["styling"]["normalLogo"])
         embed.add_field(name="Bot latency", value=f"{round(self.bot.latency * 1000)}ms", inline=True)
         embed.add_field(name="Average speed", value=f"{round((round(sum(times)) + round(self.bot.latency * 1000))/4)}ms")
         embed.set_thumbnail(url=config["styling"]["gifLogo"])
