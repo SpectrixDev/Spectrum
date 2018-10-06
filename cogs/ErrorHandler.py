@@ -38,9 +38,11 @@ class CommandErrorHandler:
         elif isinstance(error, commands.NotOwner):
             return await ctx.send('**:no_entry: Only my owner can run this command.**')
         elif isinstance(error, commands.CommandOnCooldown):
-            return await ctx.send(f"**:no_entry: This command is on a cooldown for {math.ceil(error.retry_after)} seconds**")
+            return await ctx.send(f"**:no_entry: Woah There, That Command is on a cooldown for {math.ceil(error.retry_after)} seconds**")
         elif isinstance(error, commands.CheckFailure):
             return await ctx.send('**:no_entry: You have insufficiant permissions to run this command.**')
+        elif isinstance(error, commands.MissingPermissions):
+            return await ctx.send(f"**:no_entry: You Seem To Be Missing The {error.missing_perms[0]} Permission(s)**")
             
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
