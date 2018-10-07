@@ -1,10 +1,7 @@
-import traceback
-import sys
+import traceback, sys, discord, math, asyncio
 from discord.ext import commands
-import discord
-import math
 
-class CommandErrorHandler:
+class ErrorHandler:
     def __init__(self, bot):
         self.bot = bot
 
@@ -38,16 +35,16 @@ class CommandErrorHandler:
         elif isinstance(error, commands.NotOwner):
             return await ctx.send('**:no_entry: Only my owner can run this command.**')
         elif isinstance(error, commands.CommandOnCooldown):
-            return await ctx.send(f"**:no_entry: Woah There, That Command is on a cooldown for {math.ceil(error.retry_after)} seconds**")
+            return await ctx.send(f"**:no_entry: Woah there, that command is on a cooldown for {math.ceil(error.retry_after)} seconds**")
         elif isinstance(error, commands.CheckFailure):
             return await ctx.send('**:no_entry: You have insufficiant permissions to run this command.**')
         elif isinstance(error, commands.MissingPermissions):
-            return await ctx.send(f"**:no_entry: You Seem To Be Missing {error.missing_perms[0]} Permission(s)**")
+            return await ctx.send(f"**:no_entry: Whoops, you need {error.missing_perms[0]} permission(s)**")
         elif isinstance(error, commands.BotMissingPermissions):
-            return await ctx.send(f"**:no_entry: Seems Like I Am Missing {error.missing_perms[0]} Permission(s)**")
-            
+            return await ctx.send(f"**:no_entry: Oops, I need {error.missing_perms[0]} permission(s) to run this command**")
+
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
                 
 def setup(bot):
-    bot.add_cog(CommandErrorHandler(bot))
+    bot.add_cog(ErrorHandler(bot))

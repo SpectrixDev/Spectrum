@@ -14,7 +14,7 @@ with open("databases/thesacredtexts.json") as f:
 bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or("$"),
                               owner_id=276707898091110400,
                               case_insensitive=True)
-
+    
 bot.remove_command("help")
 bot.launch_time = datetime.datetime.utcnow()
 
