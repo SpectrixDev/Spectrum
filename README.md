@@ -97,6 +97,11 @@ Extra generic just the way you like it. more coming soon maybe probably
 | **Name** | **Description** |
 |:---:|---|
 | clear {amount} | Purges/deletes an amount of messages from the channel |
+| kick {user} {reason} | Kicks the user obviously |
+| ban {user} {reason} | Bans the user obviously |
+| softban {user} {reason} | Bans and unbans the user, so their messages are deleted |
+| giverole {user} {role} | Gives the user a role |
+| removerole {user} {role} | Removes a role from a user |
 
 ## Others
 Other boring generic commands
