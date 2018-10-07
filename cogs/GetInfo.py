@@ -42,8 +42,7 @@ class GetInfo:
                 activity = f"Playing {user.activity}"
 
         if roles:
-            roles = sorted(roles, key=[x.name for x in guild.roles
-                                       if x.name != "@everyone"].index)
+            roles = list(reversed(sorted([x.name for x in ctx.guild.roles if x])))
             roles = "\n".join(roles)
         else:
             roles = "None"
