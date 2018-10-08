@@ -5,6 +5,7 @@ class MsgModeration:
     def __init__(self, bot):
         self.bot = bot
 
+    @commands.guild_only()
     @commands.has_permissions(manage_messages=True)
     @commands.command(aliases=["purge"])
     async def clear(self, ctx, number: int):
