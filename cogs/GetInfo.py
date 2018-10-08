@@ -21,8 +21,6 @@ class GetInfo:
         if not user:
             user = author
 
-        roles = [x.name for x in user.roles if x.name != "@everyone"]
-
         since_created = (ctx.message.created_at - user.created_at).days
         since_joined = (ctx.message.created_at - user.joined_at).days
         user_created = user.created_at.strftime("%d %b %Y %H:%M")
@@ -32,6 +30,7 @@ class GetInfo:
         joined_at = f"{user_joined}\n({since_joined} days ago)"
 
         activity = f"Currently in {user.status} status"
+        roles = list(reversed(sorted([x.name for x in user.roles if x.name != "@everyone"])))
 
         if user.activity is None:
             pass
@@ -42,7 +41,6 @@ class GetInfo:
                 activity = f"Playing {user.activity}"
 
         if roles:
-            roles = list(reversed(sorted([x.name for x in ctx.guild.roles if x])))
             roles = "\n".join(roles)
         else:
             roles = "None"
