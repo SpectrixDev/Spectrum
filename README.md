@@ -18,7 +18,7 @@ Spectrum is a **Discord** Bot made *with **Python*** for fun.
 </div>
 
 # Commands:
-## To use Spectrum, you can either mention it, or you can simply use its prefix, which is `$` 
+## To use Spectrum, you can either mention it, or you can simply use it's prefix, which is `$` 
 
 
 ## Chatbot
@@ -97,6 +97,7 @@ Extra generic just the way you like it. more coming soon maybe probably
 | **Name** | **Description** |
 |:---:|---|
 | clear {amount} | Purges/deletes an amount of messages from the channel |
+| slowmode {amount} | Puts channel in slowmode with the ammount as an interval |
 | kick {user} {reason} | Kicks the user obviously |
 | ban {user} {reason} | Bans the user obviously |
 | softban {user} {reason} | Bans and unbans the user, so their messages are deleted |
