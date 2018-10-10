@@ -85,23 +85,23 @@ class OwnerCommands:
                 await ctx.send(f'```py\n{value}{ret}\n```')
 
     @commands.command(hidden=True)
-    async def reload(self, ctx, *, extention):
+    async def reload(self, ctx, *, ext):
         try:
-            if extention == 'all':
+            if ext == 'all':
                 for extension in startup_extensions:
-                    self.bot.unload_extension(extention)
-                    self.bot.load_extension(extention)
+                    self.bot.unload_extension(extension)
+                    self.bot.load_extension(extension)
             else:
-                self.bot.unload_extension(f"cogs.{extention}")
-                self.bot.load_extension(f"cogs.{extention}")
+                self.bot.unload_extension(f"cogs.{ext}")
+                self.bot.load_extension(f"cogs.{ext}")
             await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
         except Exception:
             try:
-                self.bot.unload_extension(extention)
-                self.bot.load_extension(extention)
+                self.bot.unload_extension(f"{ext}")
+                self.bot.load_extension(f"ext")
                 await ctx.message.add_reaction('a:SpectrumOkSpin:466480898049835011')
             except Exception as e:
-                await ctx.send(f"Couldn't reload extention `{extention}`. Error: ```{e}```")
+                await ctx.send(f"Couldn't reload extension `{ext}`. Error: ```{e}```")
 
     @commands.command(hidden=True)
     async def load(self, ctx, *, extention):
