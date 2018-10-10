@@ -31,18 +31,16 @@ class ErrorHandler:
         elif isinstance(error, commands.BadArgument):
             if ctx.command.qualified_name == 'tag list':
                 return await ctx.send('**:no_entry: I could not find that member. Please try again.**')
-
+        elif isinstance(error, commands.MissingPermissions):
+            return await ctx.send(f"**:no_entry: Whoops, you need {error.missing_perms[0]} permission(s)**")
+        elif isinstance(error, commands.BotMissingPermissions):
+            return await ctx.send(f"**:no_entry: Oops, I need {error.missing_perms[0]} permission(s) to run this command**")
         elif isinstance(error, commands.NotOwner):
             return await ctx.send('**:no_entry: Only my owner can run this command.**')
         elif isinstance(error, commands.CommandOnCooldown):
             return await ctx.send(f"**:no_entry: Woah there, that command is on a cooldown for {math.ceil(error.retry_after)} seconds**")
         elif isinstance(error, commands.CheckFailure):
             return await ctx.send('**:no_entry: You have insufficiant permissions to run this command.**')
-        elif isinstance(error, commands.MissingPermissions):
-            return await ctx.send(f"**:no_entry: Whoops, you need {error.missing_perms[0]} permission(s)**")
-        elif isinstance(error, commands.BotMissingPermissions):
-            return await ctx.send(f"**:no_entry: Oops, I need {error.missing_perms[0]} permission(s) to run this command**")
-
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
                 
