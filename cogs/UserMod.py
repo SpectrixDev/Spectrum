@@ -31,7 +31,7 @@ class UserMod:
     async def ban(self, ctx, user : discord.Member, *, reason=None):
         if ctx.author.top_role > user.top_role or ctx.author == ctx.guild.owner:
             if user == ctx.author:
-                return await ctx.send(f"***:no_entry: {user.mentiom} You can't ban yourself... just, uninstall Discord?***")
+                return await ctx.send(f"***:no_entry: {user.mention} You can't ban yourself... just, uninstall Discord?***")
             await user.ban(reason=reason)
             if not reason:
                 msg = await ctx.send(f"**{user} was banned :hammer:**")                
