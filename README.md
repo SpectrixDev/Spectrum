@@ -39,12 +39,13 @@ Fun to use commands made for fun ¯\\\_(ツ)_/¯
 | combine {word1} {word2} | Makes two words one. For sentances: $combine "a sentance" "cuz y not" |
 | 8ball | Generic. But mine looks better |
 
-## Subreddits
+## Subreddits (Reddit)
 Posts stuff from subreddits to your discord chat
 
 | **Name** | **Description** |
 |:---:|---|
 | meme | Collects fresh memes from different subreddits |
+| dankmemes | The finest memes on Reddit |
 | showerthought | Random and interesting thoughts |
 | me_irl | Fresh memes from only the best subreddit |
 | hmmm | Cursed images thank make you say "hmmm..!?" |
