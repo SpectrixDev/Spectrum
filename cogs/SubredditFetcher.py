@@ -7,7 +7,7 @@ from collections import deque
 
 acceptableImageFormats = [".png",".jpg",".jpeg",".gif",".gifv",".webm",".mp4","imgur.com"]
 memeHistory = deque()
-memeSubreddits = ["dankmemes", "BikiniBottomTwitter", "memes", "2meirl4meirl", "deepfriedmemes", "MemeEconomy", "greentext"]
+memeSubreddits = ["BikiniBottomTwitter", "memes", "2meirl4meirl", "deepfriedmemes", "MemeEconomy"]
 
 async def getSub(self, ctx, sub):
         """Get stuff from requested sub"""
@@ -128,6 +128,11 @@ class SubredditFetcher:
                 return
         await ctx.send("_{}! ({})_".format(str(request['message']), str(request['error'])))
 
+    
+    @commands.command(aliases=['dankmeme', 'dank'])
+    async def dankmemes(self, ctx):
+        await getSub(self, ctx, 'dankmemes')
+        
     @commands.command()
     async def me_irl(self, ctx):
         await getSub(self, ctx, 'me_irl')
