@@ -31,9 +31,9 @@ class ErrorHandler:
             if ctx.command.qualified_name == 'tag list':
                 return await ctx.send('**:no_entry: I could not find that member. Please try again.**')
         elif isinstance(error, commands.MissingPermissions):
-            return await ctx.send(f"**:no_entry: Hey, you need {error.missing_perms[0].replace('_', ' ')} permission**")
+            return await ctx.send(f"**:no_entry: Hey, you need `{error.missing_perms[0].replace('_', ' ')}` permission**")
         elif isinstance(error, commands.BotMissingPermissions):
-            return await ctx.send(f"**:no_entry: Oops, I need {error.missing_perms[0].replace('_', ' ')} permission to run this command**")
+            return await ctx.send(f"**:no_entry: Oops, I need `{error.missing_perms[0].replace('_', ' ')}` permission to run this command**")
         elif isinstance(error, commands.NotOwner):
             return await ctx.send('**:no_entry: Only my owner can run this command.**')
         elif isinstance(error, commands.CommandOnCooldown):
