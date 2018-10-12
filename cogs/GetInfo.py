@@ -49,7 +49,7 @@ class GetInfo:
         embed.add_field(name="Joined Discord on:", value=created_on, inline=False)
         embed.add_field(name="Joined Server at: ", value=joined_at, inline=False)
         embed.add_field(name="Roles:", value=roles, inline=False)
-        embed.set_footer(text=f"User ID: {author.id}")
+        embed.set_footer(text=f"User ID: {user.id}")
 
         name = str(user)
         name = " ~ ".join((name, user.nick)) if user.nick else name

@@ -32,7 +32,7 @@ class MsgModeration:
                 numofsecs = "second"
             else:    
                 numofsecs = "seconds"
-            await ctx.channel.edit(slowmode_delay=(seconds))
+            await ctx.channel.edit(slowmode_delay=seconds)
             confirm = await ctx.send(f"**Set the channel slow mode delay to `{seconds}` {numofsecs}\nTo turn this off, do $slowmode**")
             await confirm.add_reaction("a:SpectrumOkSpin:466480898049835011")
 

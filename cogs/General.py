@@ -53,7 +53,7 @@ class General:
         except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
         await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
-
+         
     @commands.command(aliases=['support'])
     async def server(self, ctx):
         try:
