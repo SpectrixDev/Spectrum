@@ -19,7 +19,7 @@ class GetInfo:
         guild = ctx.message.guild
 
         if not user:
-            user = author
+            user = author 
 
         since_created = (ctx.message.created_at - user.created_at).days
         since_joined = (ctx.message.created_at - user.joined_at).days

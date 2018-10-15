@@ -57,7 +57,7 @@ class General:
     @commands.command(aliases=['support'])
     async def server(self, ctx):
         try:
-            await ctx.author.send("**https://discord.gg/SuN49rm/**\n*Here's my official server!*")
+            await ctx.author.send("**https://discord.gg/BbuAQZw**\n*Here's my official server!*")
             helpMsg = await ctx.send("**I sent you my server invite in your DMs :mailbox_with_mail:**")
         except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://discord.gg/ecXdjTD/**\n*Here's my official server!*")
