@@ -17,6 +17,13 @@ Spectrum is a **Discord** Bot made *with **Python*** for fun.
 
 </div>
 
+<center><a href="https://discordbots.org/bot/320590882187247617" >
+   <img src="https://discordbots.org/api/widget/320590882187247617.svg" alt="Spectrum" />
+ </a></center>
+ 
+## Read more [here](https://spectrixofficial.github.io/spectrum-a-discord-bot/)
+
+
 # Commands:
 ## To use Spectrum, you can either mention it, or you can simply use it's prefix, which is `$` 
 
@@ -80,9 +87,9 @@ Get information about stuff
 
 | **Name** | **Description** | **Usage** |
 |:---:|---|---|
-| user | Get information about a user | $info user @someone |
-| server | Get information about the current server | $info server |
-| bot | Shows a bit of infomation for Spectrum | $info bot |
+| user | Get information about a user | info user @someone |
+| server | Get information about the current server | info server |
+| bot | Shows a bit of infomation for Spectrum | info bot |
 
 ## Game Info
 Shows what the most popular games are in the server and who's playing them
@@ -104,6 +111,14 @@ Extra generic just the way you like it. more coming soon maybe probably
 | softban {user} {reason} | Bans and unbans the user, so their messages are deleted |
 | giverole {user} {role} | Gives the user a role |
 | removerole {user} {role} | Removes a role from a user |
+
+## Specrypt
+My own, very lightweight form of encryption (secret "language") I made because I was bored.
+
+| **Name** | **Description** | **Usage** |
+|:---:|---|---|
+| encrypt (e) | Encrypts plaintext to specrypt | specrypt e Hello world! |
+| decrypt (d) | Decrypts specrypted text into plaintext | specrypt d Tqxx{,c{~xp- |
 
 ## Others
 Other boring generic commands
