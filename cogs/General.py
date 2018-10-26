@@ -9,6 +9,11 @@ class General:
     def __init__(self, bot):
         self.bot = bot
 
+    async def on_ready(self):
+        with open("databases/uptime.json", 'w+') as uptime:
+            json.dump({"uptimestats" : str(datetime.datetime.utcnow())}, uptime)
+        print("Uptime Posted!")
+
     @commands.cooldown(1, 5, BucketType.user)
     @commands.command()
     async def ping(self, ctx):
