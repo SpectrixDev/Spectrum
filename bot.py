@@ -4,89 +4,73 @@ from time import ctime
 from os import listdir
 from os.path import isfile, join
 
-lst = [f for f in listdir("cogs/") if isfile(join("cogs/", f))]
-no_py = [s.replace('.py', '') for s in lst]
-startup_extensions = ["cogs." + no_py for no_py in no_py]
-
 with open("databases/thesacredtexts.json") as f:
     config = json.load(f)
 
-bot = commands.AutoShardedBot(command_prefix=commands.when_mentioned_or("$"),
-                              owner_id=276707898091110400,
-                              case_insensitive=True)
+class Spectrum_Bot(commands.AutoShardedBot):
+    def __init__(self):
+        super().__init__(command_prefix=commands.when_mentioned_or("$"),
+                         owner_id=276707898091110400,
+                         case_insensitive=True)
 
-bot.remove_command("help")
-bot.launch_time = datetime.datetime.utcnow()
+    async def update_activity(self):
+        await self.change_presence(
+            activity=discord.Activity(
+                name=f"@Spectrum help | {len(self.guilds)} guilds!",
+                type=1,
+                url="https://www.twitch.tv/SpectrixYT"))
+        print("Updated presence")
+        payload = {"server_count"  : len(self.guilds)}
+        url = "https://discordbots.org/api/bots/320590882187247617/stats"
+        headers = {"Authorization" : config["tokens"]["dbltoken"]}
+        async with aiohttp.ClientSession() as aioclient:
+                await aioclient.post(
+                    url,
+                    data=payload,
+                    headers=headers)
+        print(f"Posted payload to Discord Bot List:\n{payload}")
 
-url = "https://discordbots.org/api/bots/320590882187247617/stats"
-headers = {"Authorization" : config["tokens"]["dbltoken"]}
+    async def on_ready(self):
+        print("=======================\nConnected\n=========")
+        await self.update_activity()
 
-def is_owner(ctx):
-        if ctx.message.author.id == bot.owner_id:
-            return True
-        return False
+    async def on_message(self, message):
+        if message.author.bot:
+            return
+        await self.process_commands(message)
 
-async def fetch(session, url):
-    async with session.get(url) as response:
-        return await response.text()
+    async def on_guild_join(self, guild):
+        await self.update_activity()
+        try:
+            embed = discord.Embed(color=discord.Color(value=0x36393e))
+            embed.set_author(name="Here's some stuff to get you started:")
+            embed.add_field(name="Prefix", value="`$`, or **just mention me!**")
+            embed.add_field(name="Command help", value="[Documentation](https://spectrix.me/spectrum/)")
+            embed.add_field(name="Support Server", value="[Join, it's quite fun here](https://discord.gg/SuN49rm)")
+            embed.add_field(name="Upvote", value="[Click here](https://discordbots.org/bot/320590882187247617/vote)")
+            embed.set_thumbnail(url=config["styling"]["gifLogo"])
+            embed.set_footer(text=f"Thanks to you, Spectrum is now on {len(self.guilds)} servers! <3", icon_url=config["styling"]["normalLogo"])
+            await guild.system_channel.send(content="**Hello World! Thanks for inviting me! :wave: **", embed=embed)
+        except:
+            pass
 
-async def update_activity():
-    await bot.change_presence(
-        activity=discord.Activity(
-            name=f"@Spectrum help | {len(bot.guilds)} guilds!",
-            type=1,
-            url="https://www.twitch.tv/SpectrixYT"))
+    async def on_guild_remove(self):
+        await self.update_activity()
 
-    payload = {"server_count"  : len(bot.guilds)}
-
-    async with aiohttp.ClientSession() as aioclient:
-            await aioclient.post(
-                url,
-                data=payload,
-                headers=headers)
-
-@bot.event
-async def on_ready():
-    print("=========\nConnected\n=========\n")
-    await update_activity()
-
-@bot.event
-async def on_message(message):
-    if message.author.bot:
-        return
-    await bot.process_commands(message)
-
-@bot.command()
-async def uptime(ctx):
-    delta_uptime = datetime.datetime.utcnow() - bot.launch_time
-    hours, remainder = divmod(int(delta_uptime.total_seconds()), 3600)
-    minutes, seconds = divmod(remainder, 60)
-    days, hours = divmod(hours, 24)
-    await ctx.send(f"{days}d, {hours}h, {minutes}m, {seconds}s")
-
-@bot.event
-async def on_guild_join(guild):
-    await update_activity()
-    try:
-        embed = discord.Embed(color=discord.Color(value=0x36393e))
-        embed.set_author(name="Here's some stuff to get you started:")
-        embed.add_field(name="Prefix", value="`$`, or **just mention me!**")
-        embed.add_field(name="Command help", value="[Documentation](https://spectrix.me/spectrum/)")
-        embed.add_field(name="Support Server", value="[Join, it's quite fun here](https://discord.gg/SuN49rm)")
-        embed.add_field(name="Upvote", value="[Click here](https://discordbots.org/bot/320590882187247617/vote)")
-        embed.set_thumbnail(url=config["styling"]["gifLogo"])
-        embed.set_footer(text=f"Thanks to you, Spectrum is now on {len(bot.guilds)} servers! <3", icon_url=config["styling"]["normalLogo"])
-        await guild.system_channel.send(content="**Hello World! Thanks for inviting me! :wave: **", embed=embed)
-    except Exception:
-        pass
-
-@bot.event
-async def on_guild_remove(guild):
-    await update_activity()
+    def initiate_start(self):
+        self.remove_command("help")
+        lst = [f for f in listdir("cogs/") if isfile(join("cogs/", f))]
+        no_py = [s.replace('.py', '') for s in lst]
+        startup_extensions = ["cogs." + no_py for no_py in no_py]
+        try:
+            for cogs in startup_extensions:
+                self.load_extension(cogs)
+                print(f"Loaded {cogs}")
+            print("\nAll Cogs Loaded\n===============\nLogging into Discord...")
+            super().run(config['tokens']['token'])
+        except Exception as e:
+            print(f"\n###################\nPOSSIBLE FATAL ERROR:\n{e}\n\n\
+                    THIS MEANS THE BOT HAS NOT STARTED CORRECTLY!")
 
 if __name__ == '__main__':
-
-    for extension in startup_extensions:
-        bot.load_extension(extension)
-
-    bot.run(config["tokens"]["token"])
+    Spectrum_Bot().initiate_start()
