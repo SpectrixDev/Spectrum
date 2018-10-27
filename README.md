@@ -16,10 +16,6 @@ Spectrum is a **Discord** Bot made *with **Python*** for fun.
 
 
 </div>
-
-<center><a href="https://discordbots.org/bot/320590882187247617" >
-   <img src="https://discordbots.org/api/widget/320590882187247617.svg" alt="Spectrum" />
- </a></center>
  
 ## Read more [here](https://spectrixofficial.github.io/spectrum-a-discord-bot/)
 
