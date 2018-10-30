@@ -23,12 +23,12 @@ class MsgModeration:
     async def slowmode(self, ctx, seconds: int=0):
         if seconds > 120:
             return await ctx.send(":no_entry: Amount can't be over 120 seconds")
-        if seconds == 0:
+        if seconds is 0:
             await ctx.channel.edit(slowmode_delay=seconds)
             a = await ctx.send("**Slowmode is off for this channel**")
             await a.add_reaction("a:SpectrumOkSpin:466480898049835011")
         else:
-            if seconds == 1:
+            if seconds is 1:
                 numofsecs = "second"
             else:    
                 numofsecs = "seconds"
