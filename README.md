@@ -113,8 +113,8 @@ My own, very lightweight form of encryption (secret "language") I made because I
 
 | **Name** | **Description** | **Usage** |
 |:---:|---|---|
-| encrypt (e) | Encrypts plaintext to specrypt | specrypt e Hello world! |
-| decrypt (d) | Decrypts specrypted text into plaintext | specrypt d Tqxx{,c{~xp- |
+| encrypt (e) | Encrypts plaintext to specrypt | specrypt e `Hello world!` |
+| decrypt (d) | Decrypts specrypted text into plaintext | specrypt d `Tqxx{,c{~xp-` |
 
 ## Others
 Other boring generic commands
