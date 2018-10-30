@@ -89,5 +89,4 @@ class WhosPlaying:
             await ctx.send(embed=em)
 
 def setup(bot):
-    n = WhosPlaying(bot)
-    bot.add_cog(n)
+    bot.add_cog(WhosPlaying(bot))
