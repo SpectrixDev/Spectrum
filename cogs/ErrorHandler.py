@@ -39,7 +39,10 @@ class ErrorHandler:
         elif isinstance(error, commands.CommandOnCooldown):
             return await ctx.send(f"**:no_entry: Woah there, that command is on a cooldown for {math.ceil(error.retry_after)} seconds**")
         elif isinstance(error, commands.CheckFailure):
-            return await ctx.send('**:no_entry: You have insufficient permissions to run this command.**')
+            if ctx.cog.__class__.__name__ == "OwnerCommands":
+                return await ctx.send("**:no_entry: Only Spectrix Can Use This >:(**")
+            else:
+                return await ctx.send('**:no_entry: You have insufficient permissions to run this command.**')
         print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
         traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
                 
