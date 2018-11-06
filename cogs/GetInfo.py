@@ -16,7 +16,6 @@ class GetInfo:
     @info.command(name='user', alias="userinfo")
     async def _user(self, ctx, *, user: discord.Member=None):
         author = ctx.message.author
-        guild = ctx.message.guild
 
         if not user:
             user = author 
@@ -69,7 +68,7 @@ class GetInfo:
         await ctx.send(embed=embed)
 
 
-    @info.command(name='server', alias="serverinfo", no_pm=True)
+    @info.command(name='server', aliases=["serverinfo"], no_pm=True)
     async def _server(self, ctx):
         guild = ctx.message.guild
         online = len([m.status for m in guild.members
