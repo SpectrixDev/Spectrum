@@ -1,10 +1,15 @@
-import discord, asyncio, random, time, datetime, json
+import discord, asyncio, random, time, datetime, json, aiohttp
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 
 with open("databases/thesacredtexts.json") as f:
     config = json.load(f)
 
+async def get(url):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as roastJson:
+            return await roastJson.read()
+            
 class General:
     def __init__(self, bot):
         self.bot = bot
@@ -50,47 +55,40 @@ class General:
 
     @commands.command()
     async def roast(self, ctx):
-        await ctx.send(random.choice(open("databases/RoastList.txt").readlines()))
+        if random.randint(1, 10) >= 5:
+            await ctx.send(random.choice(open("databases/RoastList.txt").readlines()))
+        else:
+            roast = await get("https://evilinsult.com/generate_insult.php?lang=en&type=json")
+            a = json.loads(roast)
+            await ctx.send(a['insult'])
+
 
     @commands.command()
     async def help(self, ctx):
-        if ctx.guild:
-            try:
-                await ctx.author.send("**https://spectrix.me/spectrum/**\n*Here's my help page!*")
-                helpMsg = await ctx.send("**I sent you help in your DMs :mailbox_with_mail:**")
-            except Exception:
-                helpMsg = await ctx.send(f"**{ctx.author.mention} https://spectrix.me/spectrum/**\n*Here's my help page!*")
-            await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
-        else:
+        try:
+            await ctx.author.send("**https://spectrix.me/spectrum/**\n*Here's my help page!*")
+            helpMsg = await ctx.send("**I sent you help in your DMs :mailbox_with_mail:**")
+        except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://spectrix.me/spectrum/**\n*Here's my help page!*")
-            await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
-
+        await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
 
     @commands.command()
     async def invite(self, ctx):
-        if ctx.guild:
-            try:
-                await ctx.author.send("**https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
-                helpMsg = await ctx.send("**I sent my invite link in your DMs :mailbox_with_mail:**")
-            except Exception:
-                helpMsg = await ctx.send(f"**{ctx.author.mention} https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
-            await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
-        else:
+        try:
+            await ctx.author.send("**https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
+            helpMsg = await ctx.send("**I sent my invite link in your DMs :mailbox_with_mail:**")
+        except Exception:
             helpMsg = await ctx.send(f"**{ctx.author.mention} https://bit.ly/SpectrumDiscord**\n*Here's my invite link!*")
-            await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
+        await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
          
     @commands.command(aliases=['support'])
     async def server(self, ctx):
-        if ctx.guild:
-            try:
-                await ctx.author.send("**https://discord.gg/SRq7Rx2**\n*Here's my official server!*")
-                helpMsg = await ctx.send("**I sent you my server invite in your DMs :mailbox_with_mail:**")
-            except Exception:
-                helpMsg = await ctx.send(f"**{ctx.author.mention} https://discord.gg/SRq7Rx2/**\n*Here's my official server!*")
-            await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
-        else:
-            helpMsg = await ctx.send(f"**{ctx.author.mention} https://discord.gg/SRq7Rx2/**\n*Here's my official server!*")
-            await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
+        try:
+            await ctx.author.send("**https://discord.gg/Kghqehz**\n*Here's my official server!*")
+            helpMsg = await ctx.send("**I sent you my server invite in your DMs :mailbox_with_mail:**")
+        except Exception:
+            helpMsg = await ctx.send(f"**{ctx.author.mention} https://discord.gg/Kghqehz/**\n*Here's my official server!*")
+        await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
 
     @commands.command()
     async def poll(self, ctx, *, pollInfo):
