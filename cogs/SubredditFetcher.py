@@ -54,7 +54,7 @@ class SubredditFetcher:
         self.bot = bot
 
     async def __local_check(self, ctx):
-        if ctx.author in self.bot.get_guild(323045050453852170).members and self.bot.get_guild(323045050453852170).get_role(509425034452926464) in ctx.author.roles:
+        if ctx.author in self.bot.get_guild(323045050453852170).members:
             return True
         else:
             emb = discord.Embed(color=0x36393e, description="__This doesn't mean that you can only run the command there, you just need to be in the server (and verify yourself)__, as my bot master is currently improving the `Reddit` commands (memes etc). *It's not going to be like this forever*. **__Do `$server` to run this command and join.__ Sorry to bother you!**")
