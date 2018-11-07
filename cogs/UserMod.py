@@ -22,7 +22,7 @@ class UserMod:
             else:
                 msg = await ctx.send(f"**{user} was kicked :wave: Reason:** {reason}")                
                 await msg.add_reaction("a:SpectrumOkSpin:466480898049835011")
-                await user.send(f"**You were kicked from {ctx.guild.name}. Reason:** {reason}**")
+                await user.send(f"**You were kicked from {ctx.guild.name}. Reason:** {reason}")
 
     @commands.guild_only()
     @commands.has_permissions(ban_members=True)
