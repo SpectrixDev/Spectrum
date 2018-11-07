@@ -1,4 +1,4 @@
-import discord, datetime, time, aiohttp, asyncio, random, json
+import discord, datetime, time, aiohttp, asyncio, random
 from discord.ext import commands
 from random import randint
 from random import choice
@@ -8,9 +8,6 @@ from collections import deque
 acceptableImageFormats = [".png",".jpg",".jpeg",".gif",".gifv",".webm",".mp4","imgur.com"]
 memeHistory = deque()
 memeSubreddits = ["BikiniBottomTwitter", "memes", "2meirl4meirl", "deepfriedmemes", "MemeEconomy"]
-
-with open("databases/thesacredtexts.json") as f:
-    config = json.load(f)
 
 async def getSub(self, ctx, sub):
         """Get stuff from requested sub"""
@@ -52,14 +49,6 @@ async def getSub(self, ctx, sub):
 class SubredditFetcher:
     def __init__(self, bot):
         self.bot = bot
-
-    async def __local_check(self, ctx):
-        if ctx.author in self.bot.get_guild(323045050453852170).members:
-            return True
-        else:
-            emb = discord.Embed(color=0x36393e, description="__This doesn't mean that you can only run the command there, you just need to be in the server (and verify yourself)__, as my bot master is currently improving the `Reddit` commands (memes etc). *It's not going to be like this forever*. **__Do `$server` to run this command and join.__ Sorry to bother you!**")
-            emb.set_author(name="Warning: You need to be in my support server to run this command ", icon_url=config["styling"]["gifLogo"])
-            await ctx.send(embed=emb)
 
     @commands.command()
     async def meme(self, ctx):
