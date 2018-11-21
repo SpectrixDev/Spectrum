@@ -8,7 +8,7 @@ with open("databases/thesacredtexts.json") as f:
 async def get(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as roastJson:
-            return await roastJson.read()
+            return await roastJson.json()
             
 class General:
     def __init__(self, bot):
@@ -59,8 +59,7 @@ class General:
             await ctx.send(random.choice(open("databases/RoastList.txt").readlines()))
         else:
             roast = await get("https://evilinsult.com/generate_insult.php?lang=en&type=json")
-            a = json.loads(roast)
-            await ctx.send(a['insult'])
+            await ctx.send(roast['insult'])
 
 
     @commands.command()
