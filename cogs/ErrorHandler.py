@@ -33,7 +33,10 @@ class ErrorHandler:
         elif isinstance(error, commands.BotMissingPermissions):
             return await ctx.send(f"**:no_entry: Oops, I need `{error.missing_perms[0].replace('_', ' ')}` permission to run this command**")
         elif isinstance(error, commands.NotOwner):
-            return await ctx.send('**:no_entry: Only my owner can run this command.**')
+            if ctx.command.name.lower() == "devchat":
+                 return await ctx.send("uhh no. This is for Spectrix. Please just mention me if you'd like to chat!")
+            else:
+                 return await ctx.send('**:no_entry: Only my owner can run this command.**')
         elif isinstance(error, commands.CommandOnCooldown):
             return await ctx.send(f"**:no_entry: Woah there, that command is on a cooldown for {math.ceil(error.retry_after)} seconds**")
         elif isinstance(error, commands.CheckFailure) or isinstance(error, commands.MissingPermissions):
