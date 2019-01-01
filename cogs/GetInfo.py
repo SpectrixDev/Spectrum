@@ -29,7 +29,7 @@ class GetInfo:
         joined_at = f"{user_joined}\n({since_joined} days ago)"
 
         activity = f"Currently in {user.status} status"
-        roles = list(reversed(sorted([x.name for x in user.roles if x.name != "@everyone"])))
+        roles = list(reversed([x.name for x in user.roles if x.name != "@everyone"]))
 
         if user.activity is None:
             pass
