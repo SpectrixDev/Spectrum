@@ -70,41 +70,38 @@ class Chatbot():
                 await message.channel.send(f"{message.author.mention} ```fix\nWhoops! Something went wrong. Make sure you don't have too much or too little input!```")
                 print(e)
 
+    @commands.is_owner()
     @commands.command()
     async def devChat(self, ctx, *, chatMsg):
-        if ctx.author.id == self.bot.owner_id:
-            request = ai.text_request()
-            request.query = chatMsg
-            response = json.loads(request.getresponse().read())
-
-            result = response['result']
-            timestamp = response['timestamp']
-
-            action = result.get('action')
-            resolvedQuery = result.get('resolvedQuery')
-            intentName = result.get('intentName')
-            score = result.get('score')
-            fulfillment = result.get('fulfillment')
-            speech = fulfillment.get('speech')
-
-            emb = (discord.Embed(colour=0x36393e))
-            emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url=config["styling"]["gifLogo"])
-            emb.add_field(name="resolvedQuery", value=f"```{resolvedQuery}```", inline=False)
-            emb.add_field(name="intentName", value=f"`{intentName}`")
-            emb.add_field(name="score", value=f"`{score}`")
-            if action == None:
-                emb.add_field(name="action", value="`None assigned`")
-            else:
-                emb.add_field(name="action", value=f"`{action}`")
-            if speech == None:
-                emb.add_field(name="speech", value='```Somehow nothing. Spectrix, please fix.```', inline=False)
-            else:
-                emb.add_field(name="speech", value=f'```{speech}```', inline=False)
+  
+        request = ai.text_request()
+        request.query = chatMsg
+        response = json.loads(request.getresponse().read())
+        result = response['result']
+        timestamp = response['timestamp']
+        action = result.get('action')
+        resolvedQuery = result.get('resolvedQuery')
+        intentName = result.get('intentName')
+        score = result.get('score')
+        fulfillment = result.get('fulfillment')
+        speech = fulfillment.get('speech')
+        emb = (discord.Embed(colour=0x36393e))
+        emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url=config["styling"]["gifLogo"])
+        emb.add_field(name="resolvedQuery", value=f"```{resolvedQuery}```", inline=False)
+        emb.add_field(name="intentName", value=f"`{intentName}`")
+        emb.add_field(name="score", value=f"`{score}`")
+        if action == None:
+            emb.add_field(name="action", value="`None assigned`")
+        else:
+            emb.add_field(name="action", value=f"`{action}`")
+        if speech == None:
+            emb.add_field(name="speech", value='```Somehow nothing. Spectrix, please fix.```', inline=False)
+        else:
+            emb.add_field(name="speech", value=f'```{speech}```', inline=False)
             emb.set_footer(text=f"Timestamp: {timestamp}")
             await ctx.send(embed=emb)
 
-        else:
-            await ctx.send("uhh no. This is for Spectrix. Please just mention me if you'd like to chat!")
+   
 
 def setup(bot):
     bot.add_cog(Chatbot(bot))
