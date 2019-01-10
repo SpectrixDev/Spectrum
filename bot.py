@@ -46,7 +46,7 @@ class Spectrum_Bot(commands.AutoShardedBot):
             embed.set_author(name="Here's some stuff to get you started:")
             embed.add_field(name="Prefix", value="`$`, or **just mention me!**")
             embed.add_field(name="Command help", value="[Documentation](https://spectrix.me/spectrum/)")
-            embed.add_field(name="Support Server", value="[Join, it's quite fun here](https://discord.gg/SuN49rm)")
+            embed.add_field(name="Support Server", value="[Join, it's quite fun here](https://discord.gg/Kghqehz)")
             embed.add_field(name="Upvote", value="[Click here](https://discordbots.org/bot/320590882187247617/vote)")
             embed.set_thumbnail(url=config["styling"]["gifLogo"])
             embed.set_footer(text=f"Thanks to you, Spectrum is now on {len(self.guilds)} servers! <3", icon_url=config["styling"]["normalLogo"])
