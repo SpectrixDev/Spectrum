@@ -143,11 +143,11 @@ class SubredditFetcher:
 
     @commands.command()
     async def surrealmemes(self, ctx):
-        await getSub(self, ctx, 'surrealmemes')
+        await ctx.send("**This command has been moved to another bot due to popular demand. You can find that bot here:** https://discordbots.org/bot/532917889926299648")
     
     @commands.command(aliases=['hm', 'hmm', 'hmmmm', 'hmmmmm'])
     async def hmmm(self, ctx):
-        await getSub(self, ctx, 'hmmm')
+        await ctx.send("**This command has been moved to another bot due to popular demand. You can find that bot here:** https://discordbots.org/bot/532917889926299648")
 
 def setup(bot):
     bot.add_cog(SubredditFetcher(bot))
