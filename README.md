@@ -13,12 +13,7 @@ Spectrum is a **Discord** Bot made *with **Python*** for fun.
 
 [![1,300+ servers](https://discordbots.org/api/widget/320590882187247617.svg)](https://discordbots.org/bot/320590882187247617)
 
-
-
 </div>
- 
-## Read more [here](https://spectrixofficial.github.io/spectrum-a-discord-bot/)
-
 
 # Commands:
 ## To use Spectrum, you can either mention it, or you can simply use it's prefix, which is `$` 
