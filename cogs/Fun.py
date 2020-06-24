@@ -159,7 +159,7 @@ class Fun(commands.Cog):
         else:
             gayStatus = random.choice(["LOL YOU GAY XDDD FUNNY", 
                                        "HOMO ALERT", 
-                                       "MY GAY-SESNOR IS OFF THE CHARTS", 
+                                       "MY GAY-SENSOR IS OFF THE CHARTS", 
                                        "STINKY GAY", 
                                        "BIG GEAY", 
                                        "THE SOCKS ARE OFF", 
