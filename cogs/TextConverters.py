@@ -2,7 +2,7 @@ import discord, asyncio, random, time, datetime, binascii
 from discord.ext import commands
 from discord.ext.commands import clean_content
 
-class TextConverters:
+class TextConverters(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

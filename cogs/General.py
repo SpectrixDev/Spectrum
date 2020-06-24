@@ -10,7 +10,7 @@ async def get(url):
         async with session.get(url) as roastJson:
             return await roastJson.json()
             
-class General:
+class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
@@ -65,10 +65,10 @@ class General:
     @commands.command()
     async def help(self, ctx):
         try:
-            await ctx.author.send("**https://spectrix.me/spectrum/**\n*Here's my help page!*")
+            await ctx.author.send("**https://github.com/SpectrixOfficial/Spectrum**\n*Here's my help page!*")
             helpMsg = await ctx.send("**I sent you help in your DMs :mailbox_with_mail:**")
         except Exception:
-            helpMsg = await ctx.send(f"**{ctx.author.mention} https://spectrix.me/spectrum/**\n*Here's my help page!*")
+            helpMsg = await ctx.send(f"**{ctx.author.mention} https://github.com/SpectrixOfficial/Spectrum**\n*Here's my help page!*")
         await helpMsg.add_reaction("a:SpectrumOkSpin:466480898049835011")
 
     @commands.command()

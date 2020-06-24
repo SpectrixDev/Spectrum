@@ -4,7 +4,7 @@ from discord.ext import commands
 with open("databases/thesacredtexts.json") as f:
     config = json.load(f)
 
-class WhosPlaying:
+class WhosPlaying(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

@@ -2,7 +2,7 @@ import discord, asyncio, time
 from time import ctime
 from discord.ext import commands
 
-class UserMod:
+class UserMod(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
    

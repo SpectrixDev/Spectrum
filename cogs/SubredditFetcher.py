@@ -46,7 +46,7 @@ async def getSub(self, ctx, sub):
                 return
         await ctx.send("_{}! ({})_".format(str(request['message']), str(request['error'])))
 
-class SubredditFetcher:
+class SubredditFetcher(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

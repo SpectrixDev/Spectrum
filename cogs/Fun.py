@@ -5,7 +5,7 @@ from discord.ext.commands import clean_content
 with open("databases/thesacredtexts.json") as f:
     config = json.load(f)
 
-class Fun:
+class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 

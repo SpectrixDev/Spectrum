@@ -8,7 +8,7 @@ import aiohttp
 from discord.ext import commands
 
 
-class bigEmote:
+class bigEmote(commands.Cog):
 
     """Makes your emotes bigger. Half stolen oof"""
 

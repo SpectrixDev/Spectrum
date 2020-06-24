@@ -14,7 +14,7 @@ lst = [f for f in listdir("cogs/") if isfile(join("cogs/", f))]
 no_py = [s.replace('.py', '') for s in lst]
 startup_extensions = ["cogs." + no_py for no_py in no_py]
 
-class OwnerCommands:
+class OwnerCommands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_result = None
