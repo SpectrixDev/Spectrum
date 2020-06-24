@@ -1,4 +1,4 @@
-import discord, asyncio, random, time, datetime, json, aiohttp
+import discord, asyncio, random, time, datetime, json, aiohttp, requests
 from discord.ext import commands
 from discord.ext.commands.cooldowns import BucketType
 
@@ -55,11 +55,9 @@ class General(commands.Cog):
 
     @commands.command()
     async def roast(self, ctx):
-        if random.randint(1, 10) >= 5:
-            await ctx.send(random.choice(open("databases/RoastList.txt").readlines()))
-        else:
-            roast = await get("https://evilinsult.com/generate_insult.php?lang=en&type=json")
-            await ctx.send(roast['insult'])
+        response = requests.get(url="https://evilinsult.com/generate_insult.php?lang=en&type=json")
+        roast = json.loads(response.text)
+        await ctx.send(roast['insult'])
 
 
     @commands.command()

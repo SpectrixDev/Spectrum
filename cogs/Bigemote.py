@@ -16,7 +16,7 @@ class bigEmote(commands.Cog):
         self.bot = bot
         self.session = aiohttp.ClientSession()
 
-    @commands.command(pass_context=True)
+    @commands.command(pass_context=True, aliases=['bigemoji/'])
     async def bigemote(self, ctx, emoji):
         """Make a certain emote bigger"""
         try:

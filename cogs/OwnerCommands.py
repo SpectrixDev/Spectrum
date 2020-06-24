@@ -29,7 +29,7 @@ class OwnerCommands(commands.Cog):
         # remove `foo`
         return content.strip('` \n')
 
-    async def __local_check(self, ctx):
+    async def cog_check(self, ctx):
         return await self.bot.is_owner(ctx.author)
 
     def get_syntax_error(self, e):
@@ -40,7 +40,6 @@ class OwnerCommands(commands.Cog):
     @commands.command(hidden=True, name='eval')
     async def _eval(self, ctx, *, body: str):
         """Evaluates code"""
-
         env = {
             'bot': self.bot,
             'ctx': ctx,

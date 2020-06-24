@@ -5,7 +5,7 @@ class QRcode(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(aliases=['qrcode'])
     async def qr(self, ctx, *, data):
         qr = qrcode.QRCode(
             version=1,
