@@ -5,3 +5,4 @@ asyncio==3.4.3
 discord.py==1.4.1
 qrcode==6.1
 requests==2.20.0
+httplib2==0.18.1
