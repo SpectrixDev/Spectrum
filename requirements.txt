@@ -2,6 +2,6 @@ aiohttp==3.6.2
 apiai==1.2.3
 async-timeout==3.0.1
 asyncio==3.4.3
-discord.py==1.3.3
+discord.py==1.4.1
 qrcode==6.1
 requests==2.20.0
