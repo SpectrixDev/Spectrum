@@ -92,6 +92,8 @@ Shows what the most popular games are in the server and who's playing them
 
 ## Load Shedding
 For South African's that have to deal with loadshedding
+
+| **Name** | **Description** |
 |:---:|---|
 | loadshedding | Gives loadshedding statistics |
 
