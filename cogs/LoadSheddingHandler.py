@@ -41,7 +41,7 @@ class LoadSheddingHandler(commands.Cog):
         embed.set_author(name="LoadShedding Info", url="http://loadshedding.eskom.co.za/", icon_url="https://cisp.cachefly.net/assets/articles/images/resized/0000585954_resized_eskomnew.jpg")
 
         embed.add_field(name="LoadShedding Status:", value=loadsheddingnow)
-        embed.add_field(name="Stage:", value=(response['stage'] if response['stage'] > 0 else "None"), inline=False)
+        embed.add_field(name="Stage:", value=(response['stage'] if response['stage'] != 0 else "None"), inline=False)
         embed.set_footer(text="Info from http://loadshedding.eskom.co.za/")
         await ctx.send(embed=embed)
 
