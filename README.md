@@ -90,6 +90,13 @@ Shows what the most popular games are in the server and who's playing them
 | currentgames | Shows the most popular games in order from your server |
 | whosplaying {game} | Check who's playing a specific game in your server |
 
+## Load Shedding
+For South African's that have to deal with loadshedding
+
+| **Name** | **Description** |
+|:---:|---|
+| loadshedding | Gives loadshedding statistics |
+
 ## Moderation
 Extra generic just the way you like it. more coming soon maybe probably
 
