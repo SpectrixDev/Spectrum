@@ -52,6 +52,7 @@ class SubredditFetcher(commands.Cog):
 
     @commands.command()
     async def meme(self, ctx):
+      async with ctx.typing(): #loading the meme takes a couple moments, this lets the user know the bot is working on it
         """Memes from various subreddits (excluding r/me_irl. some don't understand those memes)"""
         async with aiohttp.ClientSession() as session:
             async with session.get("https://www.reddit.com/r/{0}/hot.json?limit=100".format(random.choice(memeSubreddits))) as response:
@@ -90,6 +91,7 @@ class SubredditFetcher(commands.Cog):
     
     @commands.command()
     async def showerthought(self, ctx):
+      async with ctx.typing():
         async with aiohttp.ClientSession() as session:
             async with session.get("https://www.reddit.com/r/showerthoughts/hot.json?limit=100") as response:
                 request = await response.json()
@@ -131,22 +133,27 @@ class SubredditFetcher(commands.Cog):
     
     @commands.command(aliases=['dankmeme', 'dank'])
     async def dankmemes(self, ctx):
+      async with ctx.typing():
         await getSub(self, ctx, 'dankmemes')
         
     @commands.command()
     async def me_irl(self, ctx):
+      async with ctx.typing():
         await getSub(self, ctx, 'me_irl')
 
     @commands.command()
     async def programmerhumor(self, ctx):
+      async with ctx.typing():
         await getSub(self, ctx, 'ProgrammerHumor')
 
     @commands.command()
     async def surrealmemes(self, ctx):
+      async with ctx.typing():
         await ctx.send("**This command has been moved to another bot due to popular demand. You can find that bot here:** https://discordbots.org/bot/532917889926299648")
     
     @commands.command(aliases=['hm', 'hmm', 'hmmmm', 'hmmmmm'])
     async def hmmm(self, ctx):
+      async with ctx.typing():
         await ctx.send("**This command has been moved to another bot due to popular demand. You can find that bot here:** https://discordbots.org/bot/532917889926299648")
 
 def setup(bot):
