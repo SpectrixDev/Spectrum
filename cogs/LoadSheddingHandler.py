@@ -37,7 +37,7 @@ class LoadSheddingHandler(commands.Cog):
             loadsheddingnow = 'Currently load shedding 😭'
 
         embed = discord.Embed(color=discord.Color(value=0x7628F1))
-        embed.set_image(url="https://turntable.kagiso.io/images/SheddingSchedule2018English-2.original.jpg")
+        embed.set_image(url="https://i.imgur.com/BhennnW.png")
         embed.set_author(name="LoadShedding Info", url="http://loadshedding.eskom.co.za/", icon_url="https://cisp.cachefly.net/assets/articles/images/resized/0000585954_resized_eskomnew.jpg")
 
         embed.add_field(name="LoadShedding Status:", value=loadsheddingnow)
