@@ -42,7 +42,7 @@ class LoadSheddingHandler(commands.Cog):
 
         embed.add_field(name="LoadShedding Status:", value=loadsheddingnow)
         embed.add_field(name="Stage:", value=(response['stage'] if response['stage'] != 0 else "None"), inline=False)
-        embed.set_footer(text="Info from http://loadshedding.eskom.co.za/")
+        embed.set_footer(text="Info from http://loadshedding.eskom.co.za/ | Click on the image and say 'Open Original' for higher quality")
         await ctx.send(embed=embed)
 
 def setup(bot):
