@@ -1,4 +1,4 @@
-import datetime, time, json, apiai, random, discord, asyncio, os
+import datetime, time, json, apiai, random, discord, asyncio, os, logging
 from time import ctime
 from discord.ext import commands
 
@@ -7,7 +7,7 @@ with open("databases/thesacredtexts.json") as f:
     ai = apiai.ApiAI(config["tokens"]["dialogflowtoken"])
 
 class Chatbot(commands.Cog):
-    """Very important part of Spectrum. Also lets the users run commands by mentioning the bot. The whole chatbot isn't here obviously lol"""
+    """Kinda old, outdated, scuffed. Too lazy to update it honestly, it still works, its just nobody uses it. Was made for fun while initially learning py"""
 
     def __init__(self, bot):
         self.bot = bot
@@ -85,7 +85,7 @@ class Chatbot(commands.Cog):
         fulfillment = result.get('fulfillment')
         speech = fulfillment.get('speech')
         emb = (discord.Embed(colour=0x36393e))
-        emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url=config["styling"]["gifLogo"])
+        emb.set_author(name="DevChat for SpectrumV2 Chatbot", icon_url=config["styling"]["logo"])
         emb.add_field(name="resolvedQuery", value=f"```{resolvedQuery}```", inline=False)
         emb.add_field(name="intentName", value=f"`{intentName}`")
         emb.add_field(name="score", value=f"`{score}`")

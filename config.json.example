@@ -1,0 +1,17 @@
+{
+    "owners": [],
+    "bot_token": "",
+    "dbl_token": null,
+    "webhook_url": "https://discord.com/api/webhooks/{yourstuff}",
+    "prefix": "",
+
+    "debug_mode": true,
+    "dev_id": "",
+    "dev_token": "",
+    "dev_prefix": "",
+    
+    "styling": {
+        "logo": "https://cdn.discordapp.com/attachments/323045050453852170/475197666716811275/SpectrumGIF.gif",
+    }
+
+}

@@ -1,4 +1,4 @@
-import discord, json, asyncio
+import discord, json, asyncio, logging
 from discord.ext import commands
 
 class RoleCommands(commands.Cog):

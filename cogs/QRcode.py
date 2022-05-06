@@ -1,4 +1,4 @@
-import discord, asyncio, qrcode, os
+import discord, asyncio, qrcode, os, logging
 from discord.ext import commands
 
 class QRcode(commands.Cog):
@@ -14,10 +14,10 @@ class QRcode(commands.Cog):
             border=2,
         )
         qr.add_data(data)
-        img = qr.make_image(fill_color="white", back_color="black")
-        img.save("databases/qrcodes/QR.png")
-        await ctx.send(f"{ctx.author.mention}", file=discord.File("databases/qrcodes/QR.png"))
-        os.remove("databases/qrcodes/QR.png")
+        img = qr.make_image(fill_color="black", back_color="white")
+        img.save("temp/QR.png")
+        await ctx.send(f"{ctx.author.mention}", file=discord.File("temp/QR.png"))
+        os.remove("temp/QR.png")
 
 def setup(bot):
     bot.add_cog(QRcode(bot))

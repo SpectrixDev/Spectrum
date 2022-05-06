@@ -1,4 +1,4 @@
-import asyncio, discord
+import asyncio, discord, logging
 from discord.ext import commands
 
 class MsgModeration(commands.Cog):

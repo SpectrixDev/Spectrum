@@ -1,4 +1,4 @@
-import discord, asyncio, time
+import discord, asyncio, time, logging
 from time import ctime
 from discord.ext import commands
 
