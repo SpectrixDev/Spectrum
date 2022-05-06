@@ -1,7 +1,7 @@
-import discord, asyncio, random, time, datetime, json
+import discord, asyncio, random, time, datetime, json, logging, psutil, humanize, platform
 from discord.ext import commands
 
-with open("databases/thesacredtexts.json") as f:
+with open("config.json") as f:
     config = json.load(f)
 
 class GetInfo(commands.Cog):
@@ -106,18 +106,38 @@ class GetInfo(commands.Cog):
     @info.command(name='bot', alias="botinfo")
     async def _bot(self, ctx):
         """Show's Spectrum's current information"""
-        servers = str(len(self.bot.guilds))
-        users = 0
-        for guild in self.bot.guilds:
-            users += len(guild.members)
-        channels = str(len(set(self.bot.get_all_channels())))
-        em = discord.Embed(description="Some current stats for Spectrum", colour=discord.Colour(value=0x36393e))
-        em.add_field(name="Server count:", value=servers, inline=False)
-        em.add_field(name="Users bot can see:", value=str(users), inline=False)
-        em.add_field(name="Channels bot can see:", value=channels, inline=False)
-        em.set_author(name="Bot Information", icon_url=config["styling"]["normalLogo"])
-        em.set_thumbnail(url=config["styling"]["gifLogo"])
-        await ctx.send(embed=em)
+        embed = discord.Embed(title=str("⚡ Spectrum Info"), color=discord.Color(value=0xc904e2))
+        proc = psutil.Process()
+        usage = sum(v for k, v in self.bot.command_usage.items())
+
+        embed.description = "\n".join([
+            self.bot.description,
+            f'\n🚀 **{usage:,d}** commands has been executed since last boot\n',
+            f'[Upvote](https://top.gg/bot/{self.bot.user.id}/vote)',
+            f'[Support](https://discord.gg/ehR2Qw4GgN)',
+            f'[GitHub](https://github.com/SpectrixOfficial/Spectrum)'
+        ])
+
+        counts = (
+            f"I'm in {len(self.bot.guilds):,d} guilds",
+            f'Seeing {len(set(self.bot.get_all_channels())):,d} channels',
+            f'Listening to {len(set(self.bot.get_all_members())):,d} users'
+        )
+        os_info = (
+            f'OS: `{platform.platform()}`',
+            f'CPU Usage: {psutil.cpu_percent()}%',
+            f'CPU Cores: {psutil.cpu_count()}',
+        )
+        stats = (
+            f'Been running since {humanize.naturaltime(self.bot.uptime)}',
+            f'Using {humanize.naturalsize(proc.memory_full_info().rss)} physical memory',
+            f'Using discord.py {discord.__version__} and Python {platform.python_version()}',
+        )
+        embed.add_field(name="Runtime", value="\n".join(stats), inline=False)
+        embed.add_field(name="Host", value="\n".join(os_info))
+        embed.add_field(name="Counts", value="\n".join(counts))
+        embed.set_footer(text="Made by Spectrix#7745 with love ❤", icon_url=config['styling']['logo'])
+        await ctx.send(embed=embed)
 
 def setup(bot):
     bot.add_cog(GetInfo(bot))

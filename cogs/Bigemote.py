@@ -3,6 +3,7 @@ import functools
 import io
 import os
 import unicodedata
+import logging
 
 import aiohttp
 from discord.ext import commands

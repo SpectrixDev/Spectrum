@@ -1,4 +1,4 @@
-import discord, asyncio, random, time, datetime, binascii
+import discord, asyncio, random, time, datetime, binascii, logging
 from discord.ext import commands
 from discord.ext.commands import clean_content
 

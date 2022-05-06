@@ -1,5 +1,6 @@
 # why are you reading the stupid gitignore rather just star the repo smh
 *.json
+config.json
 /databases
 /servers
 *.vs
