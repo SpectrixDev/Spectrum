@@ -5,26 +5,21 @@
 
 Spectrum is a **Discord** Bot made *with **Python*** for fun.
 
-[![discord.py](https://img.shields.io/badge/discord-py-blue.svg)](https://github.com/Rapptz/discord.py/tree/rewrite)
-[![python 3.6](https://img.shields.io/badge/python-3.6-orange.svg)](https://www.python.org/)
+[![discord.py](https://img.shields.io/badge/Discord.py-Latest-9cf?style=for-the-badge&logo=discord)](https://github.com/Rapptz/discord.py/tree/rewrite)
+[![python 3.6+ rlly](https://img.shields.io/badge/Python-3.10%2B-yellowgreen?style=for-the-badge&logo=python)](https://www.python.org/)
+[![GitHub stars](https://img.shields.io/github/stars/spectrixdev/spectrum?color=gold&logo=github&style=for-the-badge)](https://github.com/spectrixdev/spectrum/stargazers)
+![GitHub repo size](https://img.shields.io/github/repo-size/spectrixdev/spectrum?style=for-the-badge)
 
-
-[Website](http://spectrix.me/spectrum/)
+#### ✨ [Invite the bot, give it a try!](https://discord.com/oauth2/authorize?client_id=320590882187247617&scope=bot&permissions=201649223)
 
 [![1,300+ servers](https://discordbots.org/api/widget/320590882187247617.svg)](https://discordbots.org/bot/320590882187247617)
 
 </div>
 
-# Commands:
-## To use Spectrum, you can either mention it, or you can simply use it's prefix, which is `$` 
+> Originally my first coding project, Spectrum is a bot that does a wide variety of fun commands. Over the years I have added many features useful for myself, but at the end of the day it is just a fun project.
 
-
-## Chatbot
-A smart-enough chat bot, made completely by me
-
-| **Name** | **Description** |
-|:---:|---|
-| @Spectrum#4109 {input} | Mention the bot to chat to it! The input must not be a command (anything below)|
+## Usage 💡
+> To use Spectrum, you can either mention it, or you can simply use it's prefix, which is `$` 
 
 ## Fun
 Fun to use commands made for fun ¯\\\_(ツ)_/¯
@@ -111,7 +106,7 @@ Extra generic just the way you like it. more coming soon maybe probably
 | removerole {user} {role} | Removes a role from a user |
 
 ## Specrypt
-My own, very lightweight form of encryption (secret "language") I made because I was bored.
+Low effort "text encryption" thing made for fun
 
 | **Name** | **Description** | **Usage** |
 |:---:|---|---|
@@ -127,3 +122,10 @@ Other boring generic commands
 | invite | Sends the link that allows you to add Spectrum to your server |
 | server / support | Sends you to Spectrix's super cool server!!! |
 | help | Sends your here. You should know that tho |
+
+## Chatbot
+A smart-enough chat bot, made completely by me
+
+| **Name** | **Description** |
+|:---:|---|
+| @Spectrum#4109 {input} | Mention the bot to chat to it! The input must not be a command (anything below)|
