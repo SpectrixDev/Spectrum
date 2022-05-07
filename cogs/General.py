@@ -154,7 +154,7 @@ class General(commands.Cog):
             embed.add_field(name=":information_source: More info:", inline=False, value="- **Type `"+config["prefix"]+"help command` for more info on a command.**\n"+
                                                     "- **You can also type `"+config["prefix"]+"help category` for more info on a category.**\n\n"+
                                                     "🥰 **Like what you see? Vote for me on [top.gg](https://top.gg/bot/753289892007510017/vote)!\n\n"+
-                                                    "🔰 [[Add me to your server]](https://discord.com/oauth2/authorize?client_id=753289892007510017&scope=bot&permissions=74837056)\n\n"+
+                                                    "🔰 [[Add me to your server]](https://discord.com/oauth2/authorize?client_id=320590882187247617&scope=bot&permissions=201649223)\n\n"+
                                                     "❓ [[Support server]](https://discord.gg/ehR2Qw4GgN)\n\n🛠 [[GitHub]](https://github.com/SpectrixDev/Spectrum)**")
         elif len(commands) == 1:
             # Try to see if it is a cog name
