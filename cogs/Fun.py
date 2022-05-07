@@ -95,7 +95,7 @@ class Fun(commands.Cog):
                                                                                                         ":two_hearts:"]))))
         emb.add_field(name="Results:", value=f"{shipnumber}%", inline=True)
         emb.add_field(name="Status:", value=(status), inline=False)
-        emb.set_author(name="Shipping", icon_url="http://moziru.com/images/kopel-clipart-heart-6.png")
+        emb.set_author(name="Shipping", icon_url="https://thumbs.gfycat.com/ClearcutLastingAmethystsunbird.webp")
         await ctx.send(embed=emb)
         
     @commands.command(aliases=['8ball'])
