@@ -155,7 +155,7 @@ class General(commands.Cog):
                                                     "- **You can also type `"+config["prefix"]+"help category` for more info on a category.**\n\n"+
                                                     "🥰 **Like what you see? Vote for me on [top.gg](https://top.gg/bot/753289892007510017/vote)!\n\n"+
                                                     "🔰 [[Add me to your server]](https://discord.com/oauth2/authorize?client_id=753289892007510017&scope=bot&permissions=74837056)\n\n"+
-                                                    "❓ [[Support server]](https://discord.gg/ehR2Qw4GgN)\n\n🛠 [[GitHub]](https://github.com/SpectrixDev/bot-saber)**")
+                                                    "❓ [[Support server]](https://discord.gg/ehR2Qw4GgN)\n\n🛠 [[GitHub]](https://github.com/SpectrixDev/Spectrum)**")
         elif len(commands) == 1:
             # Try to see if it is a cog name
             name = commands[0].capitalize()
