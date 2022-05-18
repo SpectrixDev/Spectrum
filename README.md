@@ -129,3 +129,20 @@ A smart-enough chat bot, made completely by me
 | **Name** | **Description** |
 |:---:|---|
 | @Spectrum#4109 {input} | Mention the bot to chat to it! The input must not be a command (anything below)|
+
+## Author & Lisence
+
+👤 **SpectrixDev**
+
+📜 Using lisence GNU General Public License v3.0
+
+
+## 🤝 Contributing
+
+Open a pull req or go to the [issues page](https://github.com/SpectrixDev/bot-saber/issues) and I'll have a look lol 
+
+
+
+## Show your support
+
+Gimme a ⭐️ or [vote](https://top.gg/bot/320590882187247617) for the bot on top.gg
